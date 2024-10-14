@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Isabelle John</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <header>
+        <div>
+            <h1><a href="index.html" style="color:#d9d2e9">Isabelle John</a> <br> </h1>
+
+            <div style="margin: 10px">
+
+                <i class="fa_header fa-house"></i>
+                <a href="index.html" class="link_header">
+                    <span class="text">Home</span>
+                </a>&nbsp;&nbsp;
+
+                <i class="fa_header fa-atom "></i>
+                <a href="research.html" class="link_header">
+                    <span class="text">Research</span>
+                </a>&nbsp;&nbsp;
+
+                <i class="fa_header fa-chalkboard-teacher"></i>
+                <a href="presentations.html" class="link_header">
+                    <span class="text">Presentations</span>
+                </a>&nbsp;&nbsp;
+
+                <i class="fa_header fa-scroll"></i>
+                <a href="cv.html" class="link_header">
+                    <span class="text">CV</span>
+                </a>&nbsp;&nbsp;
+
+                <i class="fa_header fa-photo-film"></i>
+                <a href="media_outreach.html" class="link_header">
+                    <span class="text">Media & Outreach</span>
+                </a>&nbsp;&nbsp;
+
+                <i class="fa_header fa-person"></i>
+                <a href="about.html" class="link_header">
+                    <span class="text">About</span>
+                </a>&nbsp;&nbsp;
+
+            </div>
+        </div>
+    </header>
+
+    <br>
+    <h2>CV</h2>
+    <p>
+        In the future, you can find my past here.
+    </p>
+
+
+    <footer>
+
+        <!-- Add Font Awesome icons -->
+        <!-- <a class="fa fa-linkedin" href="https://www.linkedin.com/in/isabelle-john"></a> -->
+
+        <section class="copyright">
+            Website &copy; <span id="copyright-date"></span>
+        </section>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var currentDate = new Date();
+                var year = currentDate.getFullYear();
+                var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+                var month = months[currentDate.getMonth()];
+                document.getElementById('copyright-date').textContent = `Isabelle John ${month} ${year}`;
+            });
+        </script>
+    </footer>
+
+
+</body>
+
+</html>

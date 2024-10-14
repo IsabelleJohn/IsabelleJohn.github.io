@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Isabelle John</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <header>
+        <div>
+            <h1><a href="index.html" style="color:#d9d2e9">Isabelle John</a> <br> </h1>
+
+            <div style="margin: 10px">
+
+                <i class="fa_header fa-house"></i>
+                <a href="index.html" class="link_header">
+                    <span class="text">Home</span>
+                </a>&nbsp;&nbsp;
+
+                <i class="fa_header fa-atom "></i>
+                <a href="research.html" class="link_header">
+                    <span class="text">Research</span>
+                </a>&nbsp;&nbsp;
+
+                <i class="fa_header fa-chalkboard-teacher"></i>
+                <a href="presentations.html" class="link_header">
+                    <span class="text">Presentations</span>
+                </a>&nbsp;&nbsp;
+
+                <i class="fa_header fa-scroll"></i>
+                <a href="cv.html" class="link_header">
+                    <span class="text">CV</span>
+                </a>&nbsp;&nbsp;
+
+                <i class="fa_header fa-photo-film"></i>
+                <a href="media_outreach.html" class="link_header">
+                    <span class="text">Media & Outreach</span>
+                </a>&nbsp;&nbsp;
+
+                <i class="fa_header fa-person"></i>
+                <a href="about.html" class="link_header">
+                    <span class="text">About</span>
+                </a>&nbsp;&nbsp;
+
+            </div>
+        </div>
+    </header>
+
+    <figure style="margin-right:100px; padding: 50px; float: right; max-width: 300px;">
+        <img src="images/isabelle.JPG"
+            class="rounded"
+            title="Photo of Isabelle."
+            style="border-radius: 40px; max-width: 100%; display: block; float: right; margin-bottom: 10px;">
+        <figcaption style="font-size: small; text-align: center;">
+            Photo of Isabelle.
+        </figcaption>
+    </figure>
+
+    <p>
+        <br><br>
+        Hi! I am Isabelle and this is my website. So far it is quite ugly and has no real content. I have to learn HTML and CSS first.
+
+        <br><br>
+
+        I am (still) a PhD student in theoretical and computational Astroparticle Physics at Stockholm University and The Oskar Klein Center, supervised by Tim Linden.
+
+        <br><br>
+
+        In November 2024, I will start a postdoc position at the University of Turin.
+
+        <br><br>
+
+        In September 2024, I defended my <a class="link_text" href="https://isabellejohn.github.io/research.html#phd_thesis">PhD thesis "How The Positron Became Cool: A Study of Cosmic-Ray Positrons From Pulsars and Dark Matter"</a>.
+    </p>
+
+
+
+    <footer>
+        <section class="copyright">
+            Website &copy; <span id="copyright-date"></span>
+        </section>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var currentDate = new Date();
+                var year = currentDate.getFullYear();
+                var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+                var month = months[currentDate.getMonth()];
+                document.getElementById('copyright-date').textContent = `Isabelle John ${month} ${year}`;
+            });
+        </script>
+    </footer>
+
+</body>
+</html>
