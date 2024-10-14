@@ -57,7 +57,8 @@ footer {
     font-variant: normal;
     text-rendering: auto;
     line-height: 0.8;
-    font-size: 1.5vw;
+    /* font-size: 1.5vw; */
+    font-size: 1.5em;
     padding: 0;
     color: #8e7cc3;
     margin-right: 0; /* Space between icon and text */
@@ -80,7 +81,8 @@ footer {
     font-variant: normal;
     text-rendering: auto;
     line-height: 1.6;
-    font-size: 1.3vw;
+    /* font-size: 1.3vw; */
+    font-size: 0.9em;
     padding: 0;
     color: #d9d2e9; /* Set the icon color */
     margin-right: 0.03em; /* Space between icon and text */
@@ -126,7 +128,8 @@ a.link_text:link
 	text-decoration: none;
 	font-weight: normal;
     font-family: monospace;
-    font-size: 1.1vw;
+    /* font-size: 1.1vw; */
+    font-size: 1.1em;
     vertical-align: middle;
 }
 a.link_text:visited
@@ -135,7 +138,8 @@ a.link_text:visited
 	text-decoration: none;
 	font-weight: normal;
     font-family: monospace;
-    font-size: 1.1vw;
+    /* font-size: 1.1vw; */
+    font-size: 1.1em;
     vertical-align: middle;
 }
 a.link_text:hover
@@ -144,7 +148,8 @@ a.link_text:hover
 	font-weight: normal;
     color: #b4a7d6;
     font-family: monospace;
-    font-size: 1.1vw;
+    /* font-size: 1.1vw; */
+    font-size: 1.1em;
     vertical-align: middle;
 }
 
@@ -161,7 +166,8 @@ a.link1:link
 	text-decoration: none;
 	font-weight: normal;
     font-family: monospace;
-    font-size: 1.25vw;
+    /* font-size: 1.25vw; */
+    font-size: 1.25em;
     vertical-align: middle;
 }
 a.link1:visited
@@ -170,7 +176,8 @@ a.link1:visited
 	text-decoration: none;
 	font-weight: normal;
     font-family: monospace;
-    font-size: 1.25vw;
+    /* font-size: 1.25vw; */
+    font-size: 1.25em;
     vertical-align: middle;
 }
 a.link1:hover
@@ -179,7 +186,8 @@ a.link1:hover
 	font-weight: normal;
     color: #b4a7d6;
     font-family: monospace;
-    font-size: 1.25vw;
+    /* font-size: 1.25vw; */
+    font-size: 1.25em;
     vertical-align: middle;
 }
 
@@ -215,8 +223,8 @@ a.link3:link
 	text-decoration: none;
 	font-weight: bold;
     font-family: monospace;
-    font-size: 1.1vw;
-
+    /* font-size: 1.1vw; */
+    font-size: 1.1em;
 }
 a.link3:visited
 {
@@ -224,9 +232,8 @@ a.link3:visited
 	text-decoration: none;
 	font-weight: bold;
     font-family: monospace;
-    font-size: 1.1vw;
-
-
+    /* font-size: 1.1vw; */
+    font-size: 1.1em;
 }
 a.link3:hover
 {
@@ -234,8 +241,8 @@ a.link3:hover
 	font-weight: bold;
     font-family: monospace;
     color: #8e7cc3;
-    font-size: 1.1vw;
-
+    /* font-size: 1.1vw; */
+    font-size: 1.1em;
 }
 
 /* Heading and paragraph styling */
@@ -245,20 +252,22 @@ h1, h2, h3 {
 }
 
 h1 {
-    font-size: 4.5vw;
+    /* font-size: 4.5vw; */
+    font-size: 2.8em;
     color: #d9d2e9;
     padding-bottom: 20px;
 }
 
 h2 {
-    font-size: 2.1vw;
+    /* font-size: 2.1vw; */
+    font-size: 1.6em;
     padding-left: 60px;
     padding-bottom: 20px;
     padding-top: 10px;
 }
 
 h3 {
-    font-size: 2.0vw;
+    font-size: 1.6em;
     padding-left: 60px;
     margin-bottom: 10px;
 }
@@ -271,7 +280,7 @@ p {
     margin-right: 100px;
     margin-bottom: 20px;
     line-height: 1.6;
-    font-size: 1.15vw;
+    font-size: 1.0em;
 }
 
 /* Flex container styling */
@@ -293,7 +302,7 @@ p {
     padding: 15px;
     text-align: justify;
     line-height: 1.4;
-    font-size: 1.15vw;
+    font-size: 1.0em;
 }
 
 div.flexcontainer2 {
@@ -317,7 +326,7 @@ div.columns_wide {
 
 p.p_narrow {
     font-family: monospace;
-    font-size: 1.2vw;
+    font-size: 1.2em;
     text-align:left;
     margin-left: 50px;
     padding-top: 20px;
@@ -325,7 +334,7 @@ p.p_narrow {
 }
 
 p.p_wide {
-    font-size: 1.15vw;
+    font-size: 1.0em;
     /* width: auto; */
     font-family: Georgia;
     text-align: justify;
@@ -340,12 +349,12 @@ p.p_wide {
 /* Miscellaneous box and button styling */
 .box_text, .box_linktext {
     font-family: Georgia;
-    font-size: 1.15vw;
+    font-size: 1.0em;
 }
 
 .box_title {
     font-family: monospace;
-    font-size: 1.5vw;
+    font-size: 1.5em;
     font-weight: bold;
     color: #341c4f;
     text-align: left;
