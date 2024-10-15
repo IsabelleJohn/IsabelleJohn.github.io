@@ -8,8 +8,7 @@
 /* Body styling */
 body {
     font-family: monospace;
-    font-size: 1.0em;
-    position: absolute;
+    font-size: 16px;
     top: 0;
     left: 0;
     right: 0;
@@ -35,7 +34,7 @@ body::before {
 /* Header styling */
 header {
     background-color: #341c4f;
-    font-size: 1.8em;
+    font-size: 29px;
     width: 1.0;
     padding: 30px 0 20px 50px;
 }
@@ -65,9 +64,7 @@ footer {
     font-weight: normal;
     font-variant: normal;
     text-rendering: auto;
-    line-height: 0.8;
-    /* font-size: 1.5vw; */
-    font-size: 1.5em;
+    font-size: 24px;
     padding: 0;
     color: #8e7cc3;
     margin-right: 0; /* Space between icon and text */
@@ -89,13 +86,11 @@ footer {
     font-weight: normal;
     font-variant: normal;
     text-rendering: auto;
-    line-height: 1.6;
-    /* font-size: 1.3vw; */
-    font-size: 0.8em;
     padding: 0;
     color: #d9d2e9; /* Set the icon color */
-    margin-right: 0.03em; /* Space between icon and text */
-    padding-bottom: 0.2em; /* Space between icon and text */
+    font-size: 18px;
+    margin-right: -5px; /* Space between icon and text */
+    padding-bottom: 2px; /* Space between icon and text */
     vertical-align: middle; /* Aligns icon with text */
 }
 
@@ -108,7 +103,7 @@ footer {
 
     .link_header .text {
         font-family: monospace;
-        font-size: 1.0em;
+        font-size: 24px;
         color: #8e7cc3;
     }
 
@@ -138,8 +133,7 @@ a.link_text:link
 	text-decoration: none;
 	font-weight: normal;
     font-family: monospace;
-    /* font-size: 1.1vw; */
-    font-size: 1.1em;
+    font-size: 16px;
     vertical-align: middle;
 }
 a.link_text:visited
@@ -148,8 +142,7 @@ a.link_text:visited
 	text-decoration: none;
 	font-weight: normal;
     font-family: monospace;
-    /* font-size: 1.1vw; */
-    font-size: 1.1em;
+    font-size: 16px;
     vertical-align: middle;
 }
 a.link_text:hover
@@ -158,8 +151,7 @@ a.link_text:hover
 	font-weight: normal;
     color: #b4a7d6;
     font-family: monospace;
-    /* font-size: 1.1vw; */
-    font-size: 1.1em;
+    font-size: 16px;
     vertical-align: middle;
 }
 
@@ -177,7 +169,7 @@ a.link1:link
 	font-weight: normal;
     font-family: monospace;
     /* font-size: 1.25vw; */
-    font-size: 1.25em;
+    font-size: 18px;
     vertical-align: middle;
 }
 a.link1:visited
@@ -186,8 +178,7 @@ a.link1:visited
 	text-decoration: none;
 	font-weight: normal;
     font-family: monospace;
-    /* font-size: 1.25vw; */
-    font-size: 1.25em;
+    font-size: 18px;
     vertical-align: middle;
 }
 a.link1:hover
@@ -196,8 +187,7 @@ a.link1:hover
 	font-weight: normal;
     color: #b4a7d6;
     font-family: monospace;
-    /* font-size: 1.25vw; */
-    font-size: 1.25em;
+    font-size: 18px;
     vertical-align: middle;
 }
 
@@ -212,18 +202,21 @@ a.link2:link
     color: #444444;
 	text-decoration: none;
 	font-weight: normal;
+    font-size: 18px;
 }
 a.link2:visited
 {
     color: #444444;
 	text-decoration: none;
 	font-weight: normal;
+    font-size: 18px;
 }
 a.link2:hover
 {
 	text-decoration: none;
 	font-weight: normal;
     color: #716f6f;
+    font-size: 18px;
 }
 
 
@@ -233,8 +226,7 @@ a.link3:link
 	text-decoration: none;
 	font-weight: bold;
     font-family: monospace;
-    /* font-size: 1.1vw; */
-    font-size: 1.1em;
+    font-size: 16px;
 }
 a.link3:visited
 {
@@ -242,8 +234,7 @@ a.link3:visited
 	text-decoration: none;
 	font-weight: bold;
     font-family: monospace;
-    /* font-size: 1.1vw; */
-    font-size: 1.1em;
+    font-size: 16px;
 }
 a.link3:hover
 {
@@ -251,8 +242,7 @@ a.link3:hover
 	font-weight: bold;
     font-family: monospace;
     color: #8e7cc3;
-    /* font-size: 1.1vw; */
-    font-size: 1.1em;
+    font-size: 16px;
 }
 
 /* Heading and paragraph styling */
@@ -263,14 +253,14 @@ h1, h2, h3 {
 
 h1 {
     /* font-size: 4.5vw; */
-    font-size: 2.8em;
+    font-size: 50px;
     color: #d9d2e9;
     padding-bottom: 20px;
 }
 
 h2 {
     /* font-size: 2.1vw; */
-    font-size: 2.0em;
+    font-size: 32px;
     /* margin-left: 80px;
     margin-right: 100px; */
     padding-bottom: 20px;
@@ -278,7 +268,7 @@ h2 {
 }
 
 h3 {
-    font-size: 1.6em;
+    font-size: 20px;
     padding-left: 60px;
     margin-bottom: 10px;
 }
@@ -302,7 +292,7 @@ h3 {
     padding: 15px;
     text-align: justify;
     line-height: 1.4;
-    font-size: 1.0em;
+    font-size: 16px;
 }
 
 
@@ -435,8 +425,8 @@ p {
     font-family: Georgia;
     text-align: justify;
     text-justify: inter-word;
-    line-height: 1.6;
-    font-size: 1.0em;
+    line-height: 24px;
+    font-size: 16px;
     margin-left: 20px;
     margin-right: 20px;
 }
@@ -444,37 +434,35 @@ p {
 
 p.p_narrow {
     font-family: monospace;
-    font-size: 1.2em;
+    font-size: 20px;
     text-align:left;
     margin-left: 40px;
-    line-height: 2.5;
+    line-height: 40px;
 }
 
 p.p_wide {
-    font-size: 1.0em;
+    font-size: 16px;
     font-family: Georgia;
     text-align: justify;
     text-justify: inter-word;
     padding-right: 40px;
     padding-top: 20px;
-    line-height: 1.6;
 }
 
 p.p_list {
     padding-top: 10px;
     padding-bottom: 10px;
-    /* font-size: 1.0em; */
 }
 
 /* Miscellaneous box and button styling */
 .box_text, .box_linktext {
     font-family: Georgia;
-    font-size: 1.0em;
+    font-size: 16px;
 }
 
 .box_title {
     font-family: monospace;
-    font-size: 1.5em;
+    font-size: 24px;
     font-weight: bold;
     color: #341c4f;
     text-align: left;
@@ -484,7 +472,7 @@ p.p_list {
 .box_authors {
     font-family: Verdana;
     /* font-size: 0.9vw; */
-    font-size: 0.9em;
+    font-size: 14px;
     font-weight: bold;
     padding-bottom: 5px;
 }
