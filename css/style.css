@@ -287,7 +287,7 @@ h3 {
     flex-direction: row;
     background-color: #f8ebeb;
     border-radius: 10px;
-    width: 300px;
+    width: 305px;
     margin: 10px;
     padding: 15px;
     text-align: justify;
@@ -485,7 +485,7 @@ p.p_list {
 
 .publication-image {
     /* width: 100% */; /* Adjust as necessary */
-    width: 270px;
+    width: 275px;
     height: auto;
     border-radius: 8px;
     align-self: center;
