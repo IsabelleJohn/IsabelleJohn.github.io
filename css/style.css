@@ -286,8 +286,7 @@ h3 {
 .flex-container_papers > div {
     background-color: #f8ebeb;
     border-radius: 10px;
-    /* width: 30%; */
-    width: 350px;
+    width: 330px;
     margin: 10px;
     padding: 15px;
     text-align: justify;
@@ -481,9 +480,8 @@ p.p_list {
 
 .publication-image {
     /* width: 100% */; /* Adjust as necessary */
-    width: 320px;
+    width: 300px;
     height: auto;
-    /* margin-right: 15px; */
     border-radius: 8px;
     align-self: center;
 }
