@@ -33,7 +33,7 @@ body::before {
 
 /* Header styling */
 header {
-    background-color: #4b0c02;
+    background-color: #341c4f;
     font-size: 29px;
     padding: 30px 0 20px 50px;
 }
@@ -48,8 +48,8 @@ footer {
     padding: 5px;
     margin-top: 30px;
     margin-bottom: 0px;
-    background-color: #4b0c02;
-    color: #dac8c2;
+    background-color: #341c4f;
+    color: #d9d2e9;
     clear: both;
     position: relative;
     height: 100px;
@@ -66,17 +66,17 @@ footer {
     text-rendering: auto;
     font-size: 24px;
     padding: 0;
-    color: #ca755b;
+    color: #8e7cc3;
     margin-right: 0; /* Space between icon and text */
     vertical-align: middle;
 }
 
 .fa:hover {
-    color: #ca755b;
+    color: #8e7cc3;
 }
 
 .fa:active {
-    color: #ca755b;
+    color: #8e7cc3;
     text-decoration: none;
 }
 
@@ -87,7 +87,7 @@ footer {
     font-variant: normal;
     text-rendering: auto;
     padding: 0;
-    color: #f4cccc; /* Set the icon color */
+    color: #d9d2e9; /* Set the icon color */
     font-size: 18px;
     margin-right: -5px; /* Space between icon and text */
     padding-bottom: 2px; /* Space between icon and text */
@@ -97,19 +97,19 @@ footer {
 
 .link_header {
         text-decoration: none;
-        color: #ca755b;
+        color: #8e7cc3;
         align-items: center;
     }
 
     .link_header .text {
         font-family: monospace;
         font-size: 24px;
-        color: #ca755b;
+        color: #8e7cc3;
     }
 
     /* Hover effect: changes text color */
     .link_header:hover .text {
-        color: #f4cccc;
+        color: #b4a7d6;
     }
 
 
@@ -117,31 +117,31 @@ footer {
 
 /* Anchor styling */
 a:link, a:visited {
-    color: #ca755b;
+    color: #8e7cc3;
     text-decoration: none;
     font-weight: normal;
 }
 
 a:active {
     text-decoration: underline;
-    color: #ca755b;
+    color: #b4a7d6;
 }
 
 a.link_text:link
 {
-    color: #ca755b;
+    color: #8e7cc3;
 	text-decoration: none;
 	font-weight: normal;
-    /* font-family: monospace; */
+    font-family: monospace;
     font-size: 16px;
     vertical-align: middle;
 }
 a.link_text:visited
 {
-    color: #ca755b;
+    color: #8e7cc3;
 	text-decoration: none;
 	font-weight: normal;
-    /* font-family: monospace; */
+    font-family: monospace;
     font-size: 16px;
     vertical-align: middle;
 }
@@ -149,35 +149,35 @@ a.link_text:hover
 {
 	text-decoration: none;
 	font-weight: normal;
-    color: #d0a497;
-    /* font-family: monospace; */
+    color: #b4a7d6;
+    font-family: monospace;
     font-size: 16px;
     vertical-align: middle;
 }
 
 a.link_text:active {
     text-decoration: underline;
-    color:#ca755b;
+    color: #b4a7d6;
     vertical-align: middle;
 }
 
 
 a.link1:link
 {
-    color: #ca755b;
+    color: #8e7cc3;
 	text-decoration: none;
 	font-weight: normal;
-    /* font-family: monospace; */
+    font-family: monospace;
     /* font-size: 1.25vw; */
     font-size: 18px;
     vertical-align: middle;
 }
 a.link1:visited
 {
-    color: #ca755b;
+    color: #8e7cc3;
 	text-decoration: none;
 	font-weight: normal;
-    /* font-family: monospace; */
+    font-family: monospace;
     font-size: 18px;
     vertical-align: middle;
 }
@@ -185,15 +185,15 @@ a.link1:hover
 {
 	text-decoration: none;
 	font-weight: normal;
-    color: #d0a497;
-    /* font-family: monospace; */
+    color: #b4a7d6;
+    font-family: monospace;
     font-size: 18px;
     vertical-align: middle;
 }
 
 a.link1:active {
     text-decoration: underline;
-    color: #ca755b;
+    color: #b4a7d6;
     vertical-align: middle;
 }
 
@@ -222,7 +222,7 @@ a.link2:hover
 
 a.link3:link
 {
-    color: #4b0c02;
+    color: #341c4f;
 	text-decoration: none;
 	font-weight: bold;
     font-family: monospace;
@@ -230,7 +230,7 @@ a.link3:link
 }
 a.link3:visited
 {
-    color: #4b0c02;
+    color: #341c4f;
 	text-decoration: none;
 	font-weight: bold;
     font-family: monospace;
@@ -241,23 +241,22 @@ a.link3:hover
 	text-decoration: none;
 	font-weight: bold;
     font-family: monospace;
-    color: #ca755b;
+    color: #8e7cc3;
     font-size: 16px;
 }
 
 /* Heading and paragraph styling */
 h1, h2, h3 {
     font-family: monospace;
-    color: #4b0c02;
+    color: #341c4f;
 }
 
 h1 {
     /* font-size: 4.5vw; */
     font-size: 50px;
-    color: #f4cccc;
+    color: #d9d2e9;
     padding-bottom: 20px;
 }
-
 
 h2 {
     /* font-size: 2.1vw; */
@@ -285,7 +284,7 @@ h3 {
 }
 
 .flex-container_papers > div {
-    background-color: #f8ebeb;
+    background-color: #f7f5fb;
     border-radius: 10px;
     /* width: 30%; */
     width: 350px;
@@ -327,7 +326,7 @@ div.flexcontainer2 {
 div.columns_narrow {
     width: 400px;
     text-align: left;
-    border-left: 3px solid #4b0c02;
+    border-left: 3px solid #341c4f;
 }
 
 div.columns_wide {
@@ -465,7 +464,7 @@ p.p_list {
     font-family: monospace;
     font-size: 24px;
     font-weight: bold;
-    color: #4b0c02;
+    color: #341c4f;
     text-align: left;
     padding-bottom: 5px;
 }
@@ -493,16 +492,16 @@ p.p_list {
     display: inline-block;
     padding: 10px 15px;
     margin-top: 10px;
-    background-color: #f8ebeb;
-    color: #4b0c02;
+    background-color: #f5f2fb;
+    color: #341c4f;
     text-decoration: none;
     border-radius: 20px;
-    border: 2px solid #4b0c02;
+    border: 2px solid #341c4f;
     transition: background-color 0.3s, border-color 0.3s, color 0.3s;
 }
 
 
 hr {
-    border-top: 1.5px solid #4b0c02;
+    border-top: 0.6px solid #341c4f;
     margin: 20px 60px;
 }
