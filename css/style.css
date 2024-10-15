@@ -35,17 +35,6 @@ header {
     padding: 30px 0 20px 50px;
 }
 
-/* Media query for responsiveness */
-@media screen and (max-width: 500px) {
-    .header a {
-        float: none;
-        display: block;
-        text-align: left;
-    }
-    .header-right {
-        float: none;
-    }
-}
 
 /* Footer styling */
 footer {
@@ -297,15 +286,12 @@ h3 {
     justify-content: center;
     align-items: flex-start;
     border-radius: 10px;
-    /* margin: 0 0px;
-    padding: 15px; */
 }
-
 
 .flex-container_papers > div {
     background-color: #f7f5fb;
     border-radius: 10px;
-    width: 350px;
+    width: 30%;
     margin: 10px;
     padding: 15px;
     text-align: justify;
@@ -384,8 +370,20 @@ div.columns_wide {
 }
 
 
+/* Media query for responsiveness */
+/* @media screen and (max-width: 500px) {
+    .header a {
+        float: none;
+        display: block;
+        text-align: left;
+    }
+    .header-right {
+        float: none;
+    }
+} */
+
 /* Responsive layout - makes a one column layout instead of a two-column layout */
-@media (max-width: 600px) {
+/* @media (max-width: 600px) {
     .columns_wide figure {
         margin-left: 0;
     }
@@ -406,9 +404,9 @@ div.columns_wide {
 
     .flex-container {
       flex-direction: column;
-      padding: 10px; /* Reduces padding slightly for smaller screens */
+      padding: 10px;
     }
-}
+} */
 
 /* section to make transparent background */
 section {
@@ -483,7 +481,7 @@ p.p_list {
 
 
 .publication-image {
-    width: 320px; /* Adjust as necessary */
+    width: 100%; /* Adjust as necessary */
     height: auto;
     margin-right: 15px;
     border-radius: 8px;
