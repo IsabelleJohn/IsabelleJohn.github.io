@@ -418,6 +418,7 @@ div.columns_wide {
 /* section to make transparent background */
 section {
     background-color: rgba(255, 255, 255, 0.7); /* White overlay with 50% opacity */
+    width: 1250px;
     margin-left: 100px;
     margin-right: 100px;
     margin-top: 20px;
@@ -448,20 +449,19 @@ p.p_narrow {
 
 p.p_wide {
     font-size: 1.0em;
-    /* width: auto; */
     font-family: Georgia;
     text-align: justify;
     text-justify: inter-word;
     padding-right: 40px;
     padding-top: 20px;
     line-height: 1.6;
-    font-size: 1.0em;
+    /* font-size: 1.0em; */
 }
 
 p.p_list {
     padding-top: 10px;
     padding-bottom: 10px;
-    font-size: 1.0em;
+    /* font-size: 1.0em; */
 }
 
 /* Miscellaneous box and button styling */
