@@ -350,12 +350,11 @@ div.columns_wide {
     justify-content: center;
     align-items: center; /* Centers image and caption within each figure */
     text-align: center;
-    max-width: 320px; /* Adjust the width to make figures larger */
 }
 
 .columns_wide figure img {
     /* width: 100% */; /* Makes the image fill the figure’s width */
-    width: 200px;
+    width: 300px;
     border-radius: 10px;
 }
 
@@ -363,7 +362,7 @@ div.columns_wide {
     font-size: small;
     text-align: center;
     /* width: 100%; */
-    width: 250px;
+    width: 320px;
     margin-top: 10px; /* Adds space between the image and the caption */
 }
 
