@@ -284,9 +284,10 @@ h3 {
 }
 
 .flex-container_papers > div {
+    flex-direction: row;
     background-color: #f8ebeb;
     border-radius: 10px;
-    width: 330px;
+    width: 310px;
     margin: 10px;
     padding: 15px;
     text-align: justify;
@@ -459,6 +460,10 @@ p.p_list {
     font-size: 16px;
 }
 
+.box_linktext {
+     margin-bottom:5px;
+}
+
 .box_title {
     font-family: monospace;
     font-size: 24px;
@@ -480,7 +485,7 @@ p.p_list {
 
 .publication-image {
     /* width: 100% */; /* Adjust as necessary */
-    width: 300px;
+    width: 280px;
     height: auto;
     border-radius: 8px;
     align-self: center;
