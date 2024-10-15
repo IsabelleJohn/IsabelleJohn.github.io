@@ -11,12 +11,27 @@ body {
     margin: 0;
     width: 100%;
     height: 100%;
+    background: url(../images/jwst_ngc_604.png) no-repeat center center fixed;
+    background-size: cover; /* Ensures the image covers the whole viewport */
+}
+
+
+/* make background image more transparent */
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.0); /* White overlay with 50% opacity */
+    z-index: -1;
 }
 
 /* Header styling */
 header {
     background-color: #341c4f;
-    font-size: 1.8vw;
+    font-size: 1.8em;
     padding: 30px 0 20px 50px;
 }
 
@@ -82,11 +97,12 @@ footer {
     text-rendering: auto;
     line-height: 1.6;
     /* font-size: 1.3vw; */
-    font-size: 0.9em;
+    font-size: 0.8em;
     padding: 0;
     color: #d9d2e9; /* Set the icon color */
     margin-right: 0.03em; /* Space between icon and text */
-    vertical-align: center; /* Aligns icon with text */
+    padding-bottom: 0.2em; /* Space between icon and text */
+    vertical-align: middle; /* Aligns icon with text */
 }
 
 
@@ -260,10 +276,11 @@ h1 {
 
 h2 {
     /* font-size: 2.1vw; */
-    font-size: 1.6em;
-    padding-left: 60px;
+    font-size: 2.0em;
+    /* margin-left: 80px;
+    margin-right: 100px; */
     padding-bottom: 20px;
-    padding-top: 10px;
+    /* border-radius:20px; */
 }
 
 h3 {
@@ -272,29 +289,20 @@ h3 {
     margin-bottom: 10px;
 }
 
-p {
-    font-family: Georgia;
-    text-align: justify;
-    text-justify: inter-word;
-    margin-left: 100px;
-    margin-right: 100px;
-    margin-bottom: 20px;
-    line-height: 1.6;
-    font-size: 1.0em;
-}
 
 /* Flex container styling */
-.flex-container {
+.flex-container_papers {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: flex-start;
     border-radius: 10px;
-    margin: 0 50px;
-    padding: 15px;
+    /* margin: 0 0px;
+    padding: 15px; */
 }
 
-.flex-container > div {
+
+.flex-container_papers > div {
     background-color: #f7f5fb;
     border-radius: 10px;
     width: 350px;
@@ -305,22 +313,123 @@ p {
     font-size: 1.0em;
 }
 
+
 div.flexcontainer2 {
     display: flex;
-    margin: 10px;
+    flex-direction: row;
+    /* margin: 10px; */
     min-height: 100px;
 }
 
+
+.flexcontainer2 figure {
+    max-width: 100px; /* Adjust this size as needed */
+    margin: 0 auto 20px; /* Centers each figure and adds spacing */
+}
+
+.flexcontainer2 figure img {
+    width: 30%; /* Makes image fit the figure size */
+    height: auto; /* Maintains aspect ratio */
+    border-radius: 10px;
+}
+
+.flexcontainer2 figure figcaption {
+    font-size: small;
+    text-align: center;
+}
+
+
+
 div.columns_narrow {
     width: 30%;
-    background: white;
     text-align: left;
     border-left: 3px solid #341c4f;
 }
 
 div.columns_wide {
     width: 70%;
-    background: white;
+    /* background: white; */
+}
+
+
+.columns_wide {
+    display: flex;
+    flex-direction: column;
+}
+
+.figure-row {
+    display: flex;
+    /* gap: 10px; */
+}
+
+.figure-row figure {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; /* Centers image and caption within each figure */
+    text-align: center;
+    max-width: 320px; /* Adjust the width to make figures larger */
+}
+
+.columns_wide figure img {
+    width: 100%; /* Makes the image fill the figure’s width */
+    border-radius: 10px;
+}
+
+.columns_wide figure figcaption {
+    font-size: small;
+    text-align: center;
+    width: 100%;
+    margin-top: 10px; /* Adds space between the image and the caption */
+}
+
+
+/* Responsive layout - makes a one column layout instead of a two-column layout */
+@media (max-width: 600px) {
+    .columns_wide figure {
+        margin-left: 0;
+    }
+
+    .columns_wide,
+    .columns_narrow {
+        width: 100%;
+    }
+
+    .columns_wide figure figcaption {
+        width: auto;
+        margin-left: 0;
+    }
+
+    .flexcontainer2 {
+        flex-direction: column;
+    }
+
+    .flex-container {
+      flex-direction: column;
+      padding: 10px; /* Reduces padding slightly for smaller screens */
+    }
+}
+
+/* section to make transparent background */
+section {
+    background-color: rgba(255, 255, 255, 0.7); /* White overlay with 50% opacity */
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius:20px;
+}
+
+/* everything for p in general */
+p {
+    font-family: Georgia;
+    text-align: justify;
+    text-justify: inter-word;
+    line-height: 1.6;
+    font-size: 1.0em;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 
@@ -328,8 +437,7 @@ p.p_narrow {
     font-family: monospace;
     font-size: 1.2em;
     text-align:left;
-    margin-left: 50px;
-    padding-top: 20px;
+    margin-left: 40px;
     line-height: 2.5;
 }
 
@@ -339,12 +447,15 @@ p.p_wide {
     font-family: Georgia;
     text-align: justify;
     text-justify: inter-word;
+    padding-right: 40px;
     padding-top: 20px;
-    margin-left: 100px;
-    margin-right: 50px;
     line-height: 1.6;
 }
 
+p.p_list {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
 
 /* Miscellaneous box and button styling */
 .box_text, .box_linktext {
@@ -363,17 +474,13 @@ p.p_wide {
 
 .box_authors {
     font-family: Verdana;
-    font-size: 0.9vw;
+    /* font-size: 0.9vw; */
+    font-size: 0.9em;
     font-weight: bold;
     padding-bottom: 5px;
 }
 
-/* Responsive layout - makes a one column layout instead of a two-column layout */
-@media (max-width: 100px) {
-  .flex-container {
-    flex-direction: column;
-  }
-}
+
 
 .publication-image {
     width: 320px; /* Adjust as necessary */
