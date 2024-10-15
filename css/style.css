@@ -35,7 +35,6 @@ body::before {
 header {
     background-color: #341c4f;
     font-size: 29px;
-    width: 1.0;
     padding: 30px 0 20px 50px;
 }
 
@@ -324,7 +323,6 @@ div.flexcontainer2 {
 
 
 div.columns_narrow {
-    /* width: 30%; */
     width: 400px;
     text-align: left;
     border-left: 3px solid #341c4f;
@@ -333,7 +331,6 @@ div.columns_narrow {
 div.columns_wide {
     /* width: 70%; */
     width: 850px;
-    /* background: white; */
 }
 
 
