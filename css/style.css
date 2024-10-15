@@ -13,7 +13,7 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    margin: 0;
+    margin: 0 auto;
     background: url(../images/jwst_ngc_604.png) no-repeat center center fixed;
     background-size: cover; /* Ensures the image covers the whole viewport */
 }
