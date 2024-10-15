@@ -8,6 +8,7 @@
 /* Body styling */
 body {
     font-family: monospace;
+    font-size: 1.0em;
     margin: 0;
     /* width: 100%; */
     /* height: 100%; */
@@ -490,7 +491,7 @@ p.p_list {
 
 .publication-image {
     /* width: 100% */; /* Adjust as necessary */
-    width: 300px;
+    width: 280px;
     height: auto;
     margin-right: 15px;
     border-radius: 8px;
