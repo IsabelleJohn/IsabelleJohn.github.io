@@ -252,7 +252,7 @@ h1, h2, h3 {
 
 h1 {
     /* font-size: 4.5vw; */
-    font-size: 50px;
+    font-size: 45px;
     color: #f4cccc;
     padding-bottom: 20px;
 }
@@ -466,7 +466,7 @@ p.p_list {
 
 .box_title {
     font-family: monospace;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: bold;
     color: #4b0c02;
     text-align: left;
@@ -475,8 +475,7 @@ p.p_list {
 
 .box_authors {
     font-family: Verdana;
-    /* font-size: 0.9vw; */
-    font-size: 14px;
+    font-size: 13px;
     font-weight: bold;
     padding-bottom: 5px;
 }
