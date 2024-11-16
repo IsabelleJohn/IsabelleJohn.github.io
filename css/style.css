@@ -1,3 +1,16 @@
+:root {
+  --background_blue: #131d2f;
+  --light_blue: #b8c1ca;
+  --dark_red: #8C2920;
+  --light_red: #cd776f;
+  --very_dark_red: #4b0c02;
+  --grey_red: #af90a8;
+  --light_grey_red: #dcd5da;
+  --medium_grey_red: #b4868f;
+  --orange_yellow: #F29829;
+  --warm_red: #BF3C1F;
+
+}
 /* Reset all margins, paddings, and box-sizing */
 * {
     margin: 0;
@@ -34,7 +47,7 @@ body::before {
 /* Header styling */
 header {
     /* background-color: #4b0c02; */
-    background-color: #131d2f;
+    background-color: var(--background_blue);
     font-size: 29px;
     padding: 30px 0 20px 50px;
 }
@@ -50,8 +63,8 @@ footer {
     margin-top: 30px;
     margin-bottom: 0px;
     /* background-color: #4b0c02; */
-    background-color: #131d2f;
-    color: #b8c1ca;
+    background-color: var(--background_blue);
+    color: var(--light_blue);
     clear: both;
     position: relative;
     height: 100px;
@@ -68,14 +81,15 @@ footer {
     text-rendering: auto;
     font-size: 24px;
     padding: 0;
-    color: #ca755b;
+    /* color: #ca755b; */
+    color: var(--dark_red);
     margin-right: 0; /* Space between icon and text */
     vertical-align: middle;
 }
 
-.fa:hover {
+/* .fa:hover {
     color: #ca755b;
-}
+} */
 
 .fa:active {
     color: #ca755b;
@@ -89,12 +103,29 @@ footer {
     font-variant: normal;
     text-rendering: auto;
     padding: 0;
-    color: #ebbaab; /* Set the icon color */
+    /* color: #ebbaab; */
+    color: var(--warm_red);
     font-size: 18px;
     margin-right: 5px; /* Space between icon and text */
     padding-bottom: 2px; /* Space between icon and text */
     vertical-align: middle; /* Aligns icon with text */
 }
+
+.fa_header_this_site {
+    font-family: "FontAwesome";
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    padding: 0;
+    /* color: #ebbaab; */
+    color: var(--warm_red);
+    font-size: 18px;
+    margin-right: 5px; /* Space between icon and text */
+    padding-bottom: 2px; /* Space between icon and text */
+    vertical-align: middle; /* Aligns icon with text */
+}
+
 
 .fa_about {
     font-family: "FontAwesome";
@@ -103,7 +134,7 @@ footer {
     font-variant: normal;
     text-rendering: auto;
     padding: 0;
-    color: #ca755b; /* Set the icon color */
+    color: var(--dark_red);
     font-size: 24px;
     margin-right: 25px; /* Space between icon and text */
     padding-bottom: 2px; /* Space between icon and text */
@@ -118,23 +149,30 @@ footer {
 
 .link_header {
         text-decoration: none;
-        color: #ca755b;
+        color: var(--grey_red);
         align-items: center;
     }
 
     .link_header .text {
         font-family: monospace;
         font-size: 24px;
-        color: #ca755b;
+        /* color: #ca755b; */
+        color: var(--grey_red);
+
+    }
+
+    .link_header .text_this_site {
+        font-family: monospace;
+        font-size: 24px;
+        /* color: #ca755b; */
+        color: var(--light_grey_red);
+
     }
 
     /* Hover effect: changes text color */
     .link_header:hover .text {
-        color: #f4cccc;
+        color: var(--light_grey_red);
     }
-
-
-
 
 /* Anchor styling */
 a:link, a:visited {
@@ -150,7 +188,8 @@ a:active {
 
 a.link_text:link
 {
-    color: #ca755b;
+    /* color: #ca755b; */
+    color: var(--dark_red);
 	text-decoration: none;
 	font-weight: normal;
     /* font-family: monospace; */
@@ -159,7 +198,8 @@ a.link_text:link
 }
 a.link_text:visited
 {
-    color: #ca755b;
+    /* color: #ca755b; */
+    color: var(--dark_red);
 	text-decoration: none;
 	font-weight: normal;
     /* font-family: monospace; */
@@ -185,7 +225,8 @@ a.link_text:active {
 
 a.link1:link
 {
-    color: #ca755b;
+    /* color: #ca755b; */
+    color: var(--dark_red);
 	text-decoration: none;
 	font-weight: normal;
     /* font-family: monospace; */
@@ -194,7 +235,8 @@ a.link1:link
 }
 a.link1:visited
 {
-    color: #ca755b;
+    /* color: #ca755b; */
+    color: var(--dark_red);
 	text-decoration: none;
 	font-weight: normal;
     /* font-family: monospace; */
@@ -205,7 +247,7 @@ a.link1:hover
 {
 	text-decoration: none;
 	font-weight: normal;
-    color: #d0a497;
+    color: var(--medium_grey_red);
     /* font-family: monospace; */
     font-size: 18px;
     vertical-align: middle;
@@ -268,14 +310,18 @@ a.link3:hover
 /* Heading and paragraph styling */
 h1, h2, h3 {
     font-family: monospace;
-    color: #4b0c02;
+    /* color: #4b0c02; */
+    color: var(--dark_red);
 }
 
 h1 {
     /* font-size: 4.5vw; */
     font-size: 45px;
-    color: #f4cccc;
-    padding-bottom: 20px;
+    /* color: #f4cccc; */
+    color: var(--grey_red);
+    /* color: var(--light_grey_red); */
+    font-weight: normal;
+    padding-bottom: 15px;
 }
 
 
@@ -286,6 +332,7 @@ h2 {
     margin-right: 100px; */
     padding-bottom: 20px;
     /* border-radius:20px; */
+    color: var(--very_dark_red);
 }
 
 h3 {
@@ -429,12 +476,24 @@ div.columns_wide {
 } */
 
 /* section to make transparent background */
-section {
-    background-color: rgba(243, 246, 244, 0.8); /* White overlay with 50% opacity */
+/* section {
+    background-color: rgba(243, 246, 244, 0.8);
     margin-left: 100px;
     margin-right: 100px;
     margin-top: 20px;
     margin-bottom: 20px;
+    padding: 20px;
+    border-radius:10px;
+    font-size: 16px;
+} */
+
+
+section {
+    background-color: rgba(243, 246, 244, 0.8); /* White overlay with 50% opacity */
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 2%;
+    margin-bottom: 2%;
     padding: 20px;
     border-radius:10px;
     font-size: 16px;
@@ -515,13 +574,25 @@ p.p_list {
     display: inline-block;
     padding: 10px 15px;
     margin-top: 10px;
+    background-color: transparent;
+    text-decoration: none;
+    border-radius: 20px;
+    color: green;
+    border: 2px solid var(--very_dark_red);
+    /* transition: background-color 0.3s, border-color 0.3s, color 0.3s; */
+}
+
+/* .read-more-btn:hover {
+    display: inline-block;
+    padding: 10px 15px;
+    margin-top: 10px;
     background-color: #f8ebeb;
-    color: #4b0c02;
+    color: var(--medium_grey_red);
     text-decoration: none;
     border-radius: 20px;
     border: 2px solid #4b0c02;
     transition: background-color 0.3s, border-color 0.3s, color 0.3s;
-}
+} */
 
 
 hr {
