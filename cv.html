@@ -26,37 +26,40 @@
         <div>
             <a href="index.html"><h1>Isabelle John</h1></a>
 
-            <div style="margin: 10px; text-align: center;">
-
-                <i class="fa_header fa-house"></i>
+            <div class="topnav" id="myTopnav" style="margin: 10px; text-align: center;">
                 <a href="index.html" class="link_header">
+                    <i class="fa_header_this_site fa-house"></i>
                     <span class="text">Home</span>
-                </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </a>
 
-                <i class="fa_header fa-atom "></i>
                 <a href="research.html" class="link_header">
+                    <i class="fa_header fa-atom "></i>
                     <span class="text">Research</span>
-                </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </a>
 
-                <i class="fa_header fa-chalkboard-teacher"></i>
                 <a href="presentations.html" class="link_header">
+                    <i class="fa_header fa-chalkboard-teacher"></i>
                     <span class="text">Presentations</span>
-                </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </a>
 
-                <i class="fa_header_this_site fa-scroll"></i>
                 <a href="cv.html" class="link_header">
+                    <i class="fa_header fa-scroll"></i>
                     <span class="text_this_site">CV</span>
-                </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </a>
 
-                <i class="fa_header fa-photo-film"></i>
                 <a href="media_outreach.html" class="link_header">
+                    <i class="fa_header fa-photo-film"></i>
                     <span class="text">Media & Outreach</span>
-                </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </a>
 
-                <i class="fa_header fa-person"></i>
                 <a href="about.html" class="link_header">
+                    <i class="fa_header fa-person"></i>
                     <span class="text">About</span>
-                </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </a>
+
+                <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                    <i class="fa_header fa-bars" style="font-size: 25px"></i>
+                </a>
 
             </div>
         </div>
@@ -176,8 +179,8 @@
                     </span>
                     <br>
                     Detector Group, European Spallation Source (ESS), Lund, Sweden.
-                    <br>
-                    Supervisors: Richard Hall-Wilton and Ramsey Al Jebali
+                    <!-- <br> -->
+                    <!-- Supervisors: Richard Hall-Wilton and Ramsey Al Jebali -->
                 </p>
             </div>
         </div>
@@ -277,6 +280,17 @@
                 var month = months[currentDate.getMonth()];
                 document.getElementById('copyright-date').textContent = `Isabelle John ${month} ${year}`;
             });
+        </script>
+
+        <script>
+            function myFunction() {
+              var x = document.getElementById("myTopnav");
+              if (x.className === "topnav") {
+                x.className += " responsive";
+              } else {
+                x.className = "topnav";
+              }
+            }
         </script>
     </footer>
 
