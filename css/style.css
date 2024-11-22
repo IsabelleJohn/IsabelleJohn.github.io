@@ -706,6 +706,7 @@ hr {
         background-color: var(--light_orange_pink);
         border-radius: 10px;
         height: auto;
+        width: auto;
         padding: 0;
         text-align: justify;
         line-height: 24px;
@@ -716,7 +717,6 @@ hr {
     .flex_container_theses_division {
         display: flex;
         flex-direction: column;
-        /* width: 340px; */
         justify-content: center;
         align-items: center;
     }
