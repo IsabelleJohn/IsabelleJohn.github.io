@@ -716,7 +716,7 @@ hr {
     .flex_container_theses_division {
         display: flex;
         flex-direction: column;
-        width: 340px;
+        /* width: 340px; */
         justify-content: center;
         align-items: center;
     }
