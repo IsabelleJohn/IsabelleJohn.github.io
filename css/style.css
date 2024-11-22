@@ -697,7 +697,11 @@ hr {
         flex-direction: column;
     }
 
+
+
     .flex-container_papers > div {
+        width: auto;
+        padding: 3%;
         margin-top: 5%;
     }
 
