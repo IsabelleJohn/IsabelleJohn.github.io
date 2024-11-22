@@ -485,9 +485,7 @@ h3 {
 
 .figure-row {
     display: flex;
-    /* gap: 2%; */
     background-color: orange;
-    /* width: 100%; */
     justify-content: space-between;
 }
 
@@ -685,6 +683,7 @@ hr {
     .flexcontainer_index_item {
         width: 100%;
     }
+
     .flexcontainer_index_figure {
         width: 80%;
         margin-top: 10%;
@@ -697,31 +696,43 @@ hr {
     }
 
 
+    .flex-container_theses > div {
+        flex-direction: column;
+        background-color: var(--light_orange_pink);
+        border-radius: 10px;
+        height: auto;
+        padding: 0;
+        text-align: justify;
+        line-height: 24px;
+        font-size: 16px;
+    }
+
     .flex_container_theses_division {
         display: flex;
         flex-direction: column;
         width: 340px;
-        justify-content: center; /* align horizontal */
-        align-items: center; /* align vertical */
+        justify-content: center;
+        align-items: center; 
     }
 
     .flex_container_theses_division_image {
-        width: 100%;
+        width: auto;
+        margin: 1%;
+        padding: 1.5%;
     }
 
     .flex_container_theses_division_text {
-        width: 100%;
-        margin-right: 2%;
-    }
-
-
-    .thesis-image {
-        width: 100%;
-        border-radius: 8px;
+        width: auto;
+        margin: 1%;
+        padding: 1.5%;
     }
 
     .thesis-image {
-        margin-right: 0;
+        width: 100%;
+        height: auto;
+        align-self: center;
+    }
+
 
     .columns_wide {
         width: 100%;
