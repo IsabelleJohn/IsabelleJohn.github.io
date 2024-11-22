@@ -697,6 +697,9 @@ hr {
         flex-direction: column;
     }
 
+    .flex-container_papers > div {
+        margin-top: 5%;
+    }
 
     .flex-container_theses > div {
         flex-direction: column;
@@ -707,6 +710,7 @@ hr {
         text-align: justify;
         line-height: 24px;
         font-size: 16px;
+        margin-top: 5%;
     }
 
     .flex_container_theses_division {
