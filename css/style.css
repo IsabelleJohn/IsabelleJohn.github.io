@@ -265,26 +265,29 @@ a.link1:active {
     vertical-align: middle;
 }
 
-a.link2:link
+a.link_collaborators:link
 {
     color: #444444;
 	text-decoration: none;
 	font-weight: normal;
-    font-size: 18px;
+    font-size: 16px;
+    font-family: monospace;
+    line-height: 24px;
 }
-a.link2:visited
+a.link_collaborators:visited
 {
     color: #444444;
 	text-decoration: none;
 	font-weight: normal;
-    font-size: 18px;
+    font-size: 16px;
+
 }
-a.link2:hover
+a.link_collaborators:hover
 {
 	text-decoration: none;
 	font-weight: normal;
     color: #999999;
-    font-size: 18px;
+    font-size: 16px;
 }
 
 
@@ -500,6 +503,15 @@ h3 {
     text-align: center;
 
 }
+
+
+ul.no-bullets {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  padding-left: 12%;
+}
+
 
 section {
     background-color: rgba(243, 246, 244, 0.8); /* White overlay with 50% opacity */
