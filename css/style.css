@@ -367,6 +367,7 @@ h3 {
     border-radius: 10px;
 }
 
+
 .flex-container_papers > div {
     flex-direction: row;
     background-color: var(--light_orange_pink);
@@ -377,6 +378,11 @@ h3 {
     text-align: justify;
     line-height: 24px;
     font-size: 16px;
+    transition: transform 0.3s ease;
+}
+
+.flex-container_papers > div:hover {
+    transform: scale(1.02);
 }
 
 .flex-container_theses {
@@ -399,6 +405,12 @@ h3 {
     text-align: justify;
     line-height: 24px;
     font-size: 16px;
+    transition: transform 0.3s ease;
+}
+
+.flex-container_theses > div:hover {
+    transform: scale(1.02);
+
 }
 
 .flex_container_theses_division {
@@ -457,6 +469,11 @@ h3 {
     margin-left: 10%;
     margin-right: 10%;
     border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.flexcontainer_presentation figure img:hover {
+    transform: scale(1.02);
 }
 
 .flexcontainer_presentation figure figcaption {
