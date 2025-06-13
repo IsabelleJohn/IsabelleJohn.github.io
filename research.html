@@ -19,6 +19,27 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
+
+    <style>
+            #panels-container.left, #panels-container.right {
+                position: absolute;
+                z-index: 1;
+                height: 100%;
+                transition: transform .5s .2s !important;
+            }
+
+            #panels-container.right {right: 0}
+
+            #panels-container.left:not(:hover) {
+                transform: translateX(-100%);
+                transition: transform 2s 1s !important;
+            }
+
+            #panels-container.right:not(:hover) {
+                transform: translateX(100%);
+                transition: transform 2s 1s !important;
+            }
+    </style>
 </head>
 
 <body>
@@ -103,6 +124,9 @@
         <div class="columns_narrow">
             <!-- sidebar -->
             <p class="p_narrow">
+                <i class="fa fa-solid fa-diagram-project fa-fw"></i>
+                <a class="link1" href="#graph_view">Interactive Graph View</a>
+                <br>
                 <i class="fa fa-clipboard-list fa-fw" ></i>
                 <a class="link1" href="#list_of_publications">List of Publications</a>
                 <br>
@@ -136,6 +160,19 @@
 
     <br><br>
 
+    <section>
+        <h2 id="graph_view"> Graph View of My Research</h2>
+        <p class="p_wide" style="margin-bottom: 10px;"> Explore how my research is connected! Hover over the nodes to learn more about the research topics and how my work connects to them.</p>
+        <iframe src="graph_view.html" width=100% height=650px style="border:none; border-radius:10px;" title="Graph View"></iframe>
+    </section>
+
+    <!-- '#9c4f8b';}
+    else {return '#BF3C1F';}; })
+
+    '#af90a8';}
+else {return '#cd776f';}; }); -->
+
+    <br><br>
 
 
     <section>
@@ -156,7 +193,7 @@
         <div class="flex-container_papers">
 
 
-            <div>
+            <div id="paper9">
                 <img src="papers/solarhalo.png"
                      alt="A picture of my research paper (not)."
                      class="publication-image">
@@ -185,7 +222,7 @@
 
 
 
-            <div>
+            <div id="paper8">
                 <img src="papers/HESS_electrons.png"
                      alt="A picture of my research paper (not)."
                      class="publication-image">
@@ -215,7 +252,7 @@
 
 
 
-            <div>
+            <div id="paper7">
                 <img src="papers/BosonicDM.png"
                      alt="A picture of my research paper (not)."
                      class="publication-image">
@@ -244,7 +281,7 @@
 
 
 
-            <div>
+            <div id="paper6">
                 <img src="papers/HR_with_DM_3e-35.png"
                      alt="A picture of my research paper (not)."
                      class="publication-image">
@@ -272,7 +309,7 @@
 
 
 
-            <div>
+            <div id="paper5">
                 <img src="papers/StellarDM_overview.png"
                      alt="A picture of my research paper (not)."
                      class="publication-image">
@@ -302,7 +339,7 @@
 
 
 
-            <div>
+            <div id="paper4">
                 <img src="papers/Fig1_heavyDM_100TeV_1muG.png"
                      alt="A picture of my research paper (not)."
                      class="publication-image">
@@ -331,7 +368,7 @@
 
 
 
-            <div>
+            <div id="paper3">
                 <img src="papers/Final_energy_spectrum.png"
                      alt="A picture of my research paper (not)."
                      class="publication-image">
@@ -362,7 +399,7 @@
 
 
 
-            <div>
+            <div id="paper2">
                 <img src="papers/DMconstraints.png"
                      alt="A picture of my research paper (not)."
                      class="publication-image">
@@ -389,7 +426,7 @@
 
 
 
-            <div>
+            <div id="paper1">
                 <img src="papers/Axial_vector.png"
                      alt="A picture of my research paper (not)."
                      class="publication-image">

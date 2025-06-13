@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <title>Obsidian-like Graph View</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #af90a8;
+        }
+        #graph-container {
+            width: 100%;
+            height: 650px;
+            position: relative;
+            margin: 0;
+            padding: 0;
+            background-color: #131d2f;
+        }
+
+        .controls {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(30, 30, 30, 0.7);
+            padding: 10px;
+            border-radius: 5px;
+            z-index: 10;
+        }
+
+        .legend {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 10px;
+            border-radius: 5px;
+            z-index: 10;
+        }
+
+        .obsidian {
+            position: absolute;
+            bottom: 5px;
+            left: 5px;
+            font-size: 12px;
+            /* background: rgba(255, 255, 255, 0.05); */
+            padding: 3px;
+            border-radius: 5px;
+            z-index: 10;
+        }
+
+        .node {
+            cursor: pointer;
+        }
+
+        .link {
+            stroke-opacity: 0.8;
+        }
+
+        .node-link text {
+            cursor: pointer;
+            font-size: 14px;
+            transition: font-size 0.2s ease-in-out;
+        }
+
+        .node-link:hover text {
+            fill: #fff;
+            text-decoration: underline;
+            font-size: 16px;
+        }
+
+        /* Preview tooltip styles */
+        .preview-tooltip {
+            position: absolute;
+            background: #f8ebeb; // rgba(20, 20, 20, 0.95);
+            border: 1px solid #444;
+            border-radius: 8px;
+            padding: 10px;
+            max-width: 340px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s ease-in-out;
+            font-size: 12px;
+        }
+
+        .preview-tooltip.visible {
+            opacity: 1;
+        }
+
+        .preview-tooltip h-preview {
+            /* margin: 0 0 8px 0; */
+            /* padding: 0; */
+            /* margin-bottom: 50px; */
+            /* color: #af90a8; */
+            font-size: 14px;
+        }
+
+        .preview-tooltip .preview-image {
+            width: 100%;
+            max-width: 320px;
+            height: auto;
+            /* max-height: 200px; */
+            object-fit: cover;
+            border-radius: 4px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            background: #333;
+        }
+
+        .preview-tooltip .preview-content {
+            color: 'black'; //#ccc;
+            font-size: 13px;
+            line-height: 1.3;
+            margin-bottom: 5px;
+        }
+
+        .preview-tooltip .preview-url {
+            color: #888;
+            font-size: 10px;
+            word-break: break-all;
+        }
+
+        .preview-tooltip .loading {
+            color: #888;
+            font-style: italic;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .preview-tooltip .error {
+            color: #ff6b6b;
+            font-style: italic;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .preview-iframe {
+            width: 320px;
+            height: 200px;
+            border: none;
+            border-radius: 4px;
+            background: #333;
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+
+        a.link_name {
+            color: #b8c1ca;
+        }
+        a.link_name:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div id="graph-container"></div>
+    <!-- <div class="controls">
+        <button id="zoom-in">+</button>
+        <button id="zoom-out">-</button>
+        <button id="reset">Reset</button>
+    </div> -->
+
+    <div class="legend">
+        <i class="fa-solid fa-circle fa-fw fa-2xs" style="color:#BF3C1F;"></i>
+        <span style="color:#cd776f;">Topics</span>
+        <br>
+        <i class="fa-solid fa-circle fa-fw fa-2xs" style="color:#9c4f8b;"></i>
+        <span style="color:#af90a8;">Papers</span>
+    </div>
+
+    <div class="obsidian">
+        <span style="color:#b8c1ca;">Inspired by the Obsidian Graph View. Developed by <a class="link_name" href="https://bhashint.github.io/" target="_blank"> Bhashin Thakore </a> and Isabelle John.</span>
+    </div>
+
+    <!-- Preview tooltip -->
+    <div id="preview-tooltip" class="preview-tooltip"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+    <script>
+        // Graph data - replace with your own data structure
+        const graphData = {
+            nodes: [
+                { id: "paper1",  label: "Dark Matter at the LHC",                                    group: 1 },
+                { id: "paper2",  label: "Dark Matter Constraints from Cosmic-Ray Positrons",         group: 1 },
+                { id: "paper3",  label: "Pulsars Don't Produce Sharp Spectral Features",             group: 1 },
+                { id: "paper4",  label: "Dark Matter Signals are Enhanced in Cosmic-Ray Positrons",  group: 1 },
+                { id: "paper5",  label: "Dark Matter Constraints from Stars at the Galactic Center", group: 1 },
+                { id: "paper6",  label: "Immortal Stars at the Galactic Center",                     group: 1 },
+                { id: "paper7",  label: "Constraints on the Decay of Bosonic Dark Matter",           group: 1 },
+                { id: "paper8",  label: "Cosmic-Ray Diffusion is Inhibited Around Pulsars",          group: 1 },
+                { id: "paper9",  label: "The Solar Halo",                                            group: 1 },
+                { id: "dark matter", label: "Dark Matter",                                           group: 2 },
+                { id: "pulsars", label: "Pulsars",                                                   group: 2 },
+                { id: "cosmic rays", label: "Cosmic Rays",                                           group: 2 },
+                { id: "stellar evolution", label: "Stellar Evolution",                               group: 2 },
+                { id: "solar modulation", label: "Solar Modulation",                                 group: 2 },
+                { id: "inverse compton scattering", label: "Inverse-Compton Scattering",             group: 2 },
+                { id: "large hadron collider", label: "Large Hadron Collider (LHC)",                 group: 2 },
+            ],
+            links: [
+                { source: "paper1", target: "large hadron collider" },
+                { source: "paper1", target: "dark matter" },
+                { source: "paper2", target: "dark matter" },
+                { source: "paper2", target: "cosmic rays" },
+                { source: "paper3", target: "pulsars" },
+                { source: "paper3", target: "cosmic rays" },
+                { source: "paper3", target: "inverse compton scattering" },
+                { source: "paper4", target: "dark matter" },
+                { source: "paper4", target: "inverse compton scattering" },
+                { source: "paper5", target: "dark matter" },
+                { source: "paper5", target: "stellar evolution" },
+                { source: "paper6", target: "stellar evolution" },
+                { source: "paper6", target: "dark matter" },
+                { source: "paper7", target: "dark matter" },
+                { source: "paper7", target: "cosmic rays" },
+                { source: "paper8", target: "pulsars" },
+                { source: "paper8", target: "cosmic rays" },
+                { source: "paper9", target: "solar modulation" },
+                { source: "paper9", target: "inverse compton scattering" },
+                { source: "paper9", target: "cosmic rays" },
+            ]
+        };
+
+        // Function to map node IDs to URLs and preview images
+        function getNodeInfo(nodeId) {
+            const nodeMap = {
+                "dark matter": {
+                    url: "https://en.wikipedia.org/wiki/Dark_matter",
+                    title: "Dark Matter",
+                    preview: "Dark matter makes up about 84% of the matter in the universe, but we don't know what it is.",
+                    image: "images/dark_matter_piechart.png",
+                    imageType: "image"
+                },
+
+                "pulsars": {
+                    url: "https://en.wikipedia.org/wiki/Pulsar",
+                    title: "Pulsars",
+                    preview: "Pulsars are rapidly rotating neutron stars, that emit various types of radiation, and create highly-energetic electrons and positrons. The image shows X-ray observations of Vela, a young nearby pulsar.",
+                    image: "images/Vela_from_Chandra.png",
+                    imageType: "image"
+                    // https://www.nasa.gov/image-detail/a-new-chandra-movie-of-the-vela-pulsar-shows-it-may-be-precessing-or-wobbling-as-it-spins/
+                },
+
+                "cosmic rays": {
+                    url: "https://en.wikipedia.org/wiki/Cosmic_ray",
+                    title: "Cosmic Rays",
+                    preview: "Cosmic rays are highly-energetic charged particles of astrophysical origin. Around 90% of cosmic rays are protons, with smaller fractions of nuclei, electrons and even anti-matter particles such as positrons and antiprotons.",
+                    image: "images/positive_electrons.png",
+                    imageType: "image"
+                },
+
+                "stellar evolution": {
+                    url: "https://en.wikipedia.org/wiki/Stellar_evolution",
+                    title: "Stellar Evolution",
+                    preview: "Stars are born from massive clouds of hydrogen and helium, that they fuse to heavier nuclei. This counteracts their gravitational collapse, until they run out of light elements and die.",
+                    image: "images/HR_evolution.png",
+                    imageType: "image"
+                },
+
+                "solar modulation": {
+                    url: "https://en.wikipedia.org/wiki/Solar_cycle",
+                    title: "Solar Modulation",
+                    preview: "Solar winds and the Sun's magnetic field suppress the cosmic-ray flux at low energies. The changing intensity of solar activity leaves an imprint on the cosmic-ray fluxes measured at Earth.",
+                    image: "images/sun_image.png",
+                    imageType: "image"
+                },
+
+                "large hadron collider": {
+                    url: "https://en.wikipedia.org/wiki/Large_Hadron_Collider",
+                    title: "Large Hadron Collider (LHC)",
+                    preview: "The Large Hadron Collider (LHC) at CERN is the largest human-made machine. It accelerates particles such as protons to high energies and collides them, which re-creates conditions found in the early Universe, and helps us understand the fundamental laws of physics.",
+                    image: "images/cern_tunnel_CERN_AC_0910152.png",
+                    imageType: "image"
+                },
+
+                "inverse compton scattering": {
+                    url: "https://en.wikipedia.org/wiki/Compton_scattering",
+                    title: "Inverse-Compton Scattering",
+                    preview: "A highly-energetic electron or positrons scatters off a photon of lower energy, for example from starlight, boosting the photon to gamma-ray energies, while losing energy in the process itself. It is one of the most efficient energy loss process for cosmic-ray electrons and positrons, and the created gamma-rays are a distinct signature for tracking cosmic rays.",
+                    image: "images/ICS_sketch.png",
+                    imageType: "image"
+                },
+
+                "paper1" : {
+                    url: "research.html#paper1",
+                    title: "LHC",
+                    preview: "arXiv:1703.05703 <br> Dark matter particles might be produced at particle colliders. We review what signatures these particles would leave in the data in order to detect them.",
+                    image: "papers/Axial_vector.png",
+                    imageType: "image"
+                },
+
+                "paper2" : {
+                    url: "research.html#paper2",
+                    title: "Cosmic-Ray Positrons Strongly Constrain Leptophilic Dark Matter",
+                    preview: "arXiv:2107.10261 <br> Dark matter particles might annihililate into particles such as positrons, and thus contribute to the local cosmic-ray positron flux. Finding no signals consistent with a dark matter compoment, we set constraints on dark matter models.",
+                    image: "papers/DMconstraints.png",
+                    imageType: "image"
+                },
+
+                "paper3" : {
+                    url: "research.html#paper3",
+                    title: "Pulsars Do Not Produce Sharp Features in the Local Cosmic-Ray Electron and Positron Fluxes",
+                    preview: "arXiv:2206.04699 <br> We show that the stochastic nature of inverse-Compton scattering prevents pulsars from producing sharp spectral features in the cosmic-ray positron flux.",
+                    image: "papers/Final_energy_spectrum.png",
+                    imageType: "image"
+                },
+
+                "paper4" : {
+                    url: "research.html#paper4",
+                    title: "Accurate Inverse-Compton Models Strongly Enhance Leptophilic Dark Matter Signals",
+                    preview: "arXiv:2304.07317 <br> We show that the stochastic nature of inverse-Compton scattering makes dark matter signals peaked in the cosmic-ray positron flux.",
+                    image: "papers/Fig1_heavyDM_100TeV_1muG.png",
+                    imageType: "image"
+                },
+
+                "paper5" : {
+                    url: "research.html#paper5",
+                    title: "Dark Matter Scattering Constraints from Observations of Stars Surrounding Sgr A*",
+                    preview: "arXiv:2311.16228 <br> Dark matter that is captured by stars and annihilates in their interiors heats the stars, which changes their appearance and evolution. We use observations of stars around Sgr A*, the black hole at the center of the Milky Way, to derive constraints on this process.",
+                    image: "papers/StellarDM_overview.png",
+                    imageType: "image"
+                },
+
+                "paper6" : {
+                    url: "research.html#paper6",
+                    title: "Dark Branches of Immortal Stars at the Galactic Center",
+                    preview: "arXiv:2405.12267 <br> Dark matter might power stars, taking over the role of nuclear fusion -- which makes them immortal. We compute how this changes the composition of star clusters compared to stars without dark matter.",
+                    image: "papers/HR_with_DM_3e-35.png",
+                    imageType: "image"
+                },
+
+                "paper7" : {
+                    url: "research.html#paper7",
+                    title: "Strong Constraints on Dark Photon and Scalar Dark Matter Decay from INTEGRAL and AMS-02",
+                    preview: "arXiv:2412.00180 <br> Dark matter particles might decay into a variety of Standard Model particles. We constrain bosonic dark matter models using x-ray and cosmic-ray positron observations.",
+                    image: "papers/BosonicDM.png",
+                    imageType: "image"
+                },
+
+                "paper8" : {
+                    url: "research.html#paper8",
+                    title: "Every Nearby Energetic Pulsar Is Surrounded by a Region of Inhibited Diffusion",
+                    preview: "arXiv:2503.17442 <br> We show that the diffusion of cosmic-ray electrons and positrons is inhibited around every pulsars, which dampens the electron and positron flux measured at Earth, consistent with observations.",
+                    image: "papers/HESS_electrons.png",
+                    imageType: "image"
+                },
+
+                "paper9" : {
+                    url: "research.html#paper9",
+                    title: "First Observations of Solar Halo Gamma Rays Over a Full Solar Cycle",
+                    preview: "arXiv:2505.04625 <br> The Sun shines in a bright in gamma-ray halo produced by inverse-Compton scattering of cosmic-ray electrons on sunlight. Measurements of these gamma-rays can be used to track the modulation of the cosmic-ray flux due to solar activity.",
+                    image: "papers/solarhalo.png",
+                    imageType: "image",
+                }
+            };
+
+            return nodeMap[nodeId] || {
+                url: "index.html",
+                title: nodeId,
+                preview: "No preview available",
+                image: null,
+                imageType: "none"
+            };
+        }
+
+
+        // Preview tooltip functionality
+        const tooltip = document.getElementById('preview-tooltip');
+        let tooltipTimeout;
+
+        function showPreview(event, nodeId) {
+            clearTimeout(tooltipTimeout);
+
+            const nodeInfo = getNodeInfo(nodeId);
+
+            // Position tooltip
+            const x = event.clientX + 15;
+            const y = event.clientY - 10;
+
+            // Adjust position if tooltip would go off-screen
+            const tooltipWidth = 350;
+            const tooltipHeight = 350;
+            const adjustedX = (x + tooltipWidth > window.innerWidth) ? x - tooltipWidth - 30 : x;
+            const adjustedY = (y + tooltipHeight > window.innerHeight) ? y - tooltipHeight : y;
+
+            tooltip.style.left = adjustedX + 'px';
+            tooltip.style.top = adjustedY + 'px';
+
+            // Show loading state first
+            tooltip.innerHTML = `
+                <h-preview>${nodeInfo.title}</h-preview>
+                <div class="loading">Loading preview...</div>
+            `;
+
+            // Show tooltip with delay
+            tooltipTimeout = setTimeout(() => {
+                tooltip.classList.add('visible');
+                loadPreviewContent(nodeInfo);
+            }, 300);
+        }
+
+        function loadPreviewContent(nodeInfo) {
+            let imageContent = '';
+
+            if (nodeInfo.imageType === 'image' && nodeInfo.image) {
+                // For regular images
+                imageContent = `<img src="${nodeInfo.image}" alt="${nodeInfo.title}" class="preview-image" onerror="this.style.display='none'">`;
+            } else if (nodeInfo.imageType === 'pdf' && nodeInfo.image) {
+                // For PDFs, create an iframe preview
+                imageContent = `<iframe src="${nodeInfo.image}#toolbar=0&navpanes=0&scrollbar=0" class="preview-iframe" title="${nodeInfo.title}"></iframe>`;
+            } else if (nodeInfo.imageType === 'paper') {
+                // For paper, create an iframe preview
+                imageContent = `<iframe src="${nodeInfo.image}" class="preview-iframe-paper" style="margin: 0; padding: 0;"}"></iframe>`;
+            } else {
+                // Fallback for nodes without images
+                imageContent = `<div style="width: 320px; height: 120px; background: #333; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: #666; margin-bottom: 8px;">No preview available</div>`;
+            }
+
+            tooltip.innerHTML = `
+                <h-preview>${nodeInfo.title}</h-preview>
+                ${imageContent}
+                <div class="preview-content">${nodeInfo.preview}</div>
+            `; // add back to display url in tooltip<div class="preview-url">${nodeInfo.url}</div>
+        }
+
+        function hidePreview() {
+            clearTimeout(tooltipTimeout);
+            tooltip.classList.remove('visible');
+        }
+
+        // Set up the SVG container
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+
+        const svg = d3.select("#graph-container")
+            .append("svg")
+            .attr("width", width)
+            .attr("height", height);
+
+        // Add zoom behavior
+        const g = svg.append("g");
+        let zoom = d3.zoom()
+            .scaleExtent([0.1, 4])
+            .on("zoom", (event) => {
+                g.attr("transform", event.transform);
+            });
+
+        svg.call(zoom);
+
+        // Create a force simulation
+        const simulation = d3.forceSimulation(graphData.nodes)
+            .force("link", d3.forceLink(graphData.links).id(d => d.id).distance(50))
+            .force("charge", d3.forceManyBody().strength(-50))
+            .force("center", d3.forceCenter(width / 2, height / 2))
+            .force("collision", d3.forceCollide().radius(60));
+
+        // Define color scale based on groups
+        const color = d3.scaleOrdinal(d3.schemeCategory10);
+        // const color = d3.scaleOrdinal(d3.schemeDark2);
+
+        // Calculate node degrees
+        graphData.nodes.forEach(node => {
+            node.degree = 0;
+            graphData.links.forEach(link => {
+                if (link.source === node.id || link.source.id === node.id ||
+                    link.target === node.id || link.target.id === node.id) {
+                    node.degree++;
+                }
+            });
+        });
+
+        // Create a scale for node sizes
+        const nodeScale = d3.scaleSqrt()
+             .domain([1, d3.max(graphData.nodes, d => d.degree || 1)])
+             .range([5, 18]);
+
+        // Create links
+        const link = g.selectAll(".link")
+            .data(graphData.links)
+            .enter()
+            .append("line")
+            .attr("class", "link")
+            .style("stroke", "#666")
+            .style("stroke-width", 1.5);
+
+        // Create nodes
+        const node = g.selectAll(".node")
+            .data(graphData.nodes)
+            .enter()
+            .append("g")
+            .attr("class", "node")
+            .call(d3.drag()
+                .on("start", dragstarted)
+                .on("drag", dragged)
+                .on("end", dragended));
+
+        // Add circles to nodes with scaled radius based on degree
+        node.append("circle")
+            .attr("r", d => nodeScale(d.degree || 1)/2)
+            // .style("fill", d => color(d.group))
+            .style("fill", function (d) { if (d.group==1) {
+                                              return '#9c4f8b';}
+                                          else {return '#BF3C1F';}; })
+            .style("stroke", "#fff")
+            .style("stroke-width", 0);
+
+
+        // Add labels to nodes with links and hover functionality
+        const nodeLinks = node.append("a")
+            .attr("xlink:href", d => getNodeInfo(d.id).url)
+            .attr("target", "_blank")
+            .attr("class", "node-link");
+
+        nodeLinks.append("text")
+            .attr("dx", d => nodeScale(d.degree || 1)/2 + 4)
+            .attr("dy", ".35em")
+            .text(d => d.label)
+            .style("fill", function (d) { if (d.group==1) {
+                                              return '#af90a8';}
+                                          else {return '#cd776f';};
+                                      });
+
+        // Add hover events to the entire node group
+        node
+            .on("mouseover", function(event, d) {
+                showPreview(event, d.id);
+            })
+            .on("mousemove", function(event, d) {
+                // Update tooltip position as mouse moves
+                const x = event.clientX + 15;
+                const y = event.clientY - 50;
+
+                const tooltipWidth = 400;
+                const tooltipHeight = 350;
+                const adjustedX = (x + tooltipWidth > window.innerWidth) ? x - tooltipWidth - 30 : x;
+                const adjustedY = (y + tooltipHeight > window.innerHeight) ? y - tooltipHeight + 110 : y;
+
+                tooltip.style.left = adjustedX + 'px';
+                tooltip.style.top = adjustedY + 'px';
+            })
+            .on("mouseout", function() {
+                hidePreview();
+            });
+
+        // Add title for basic tooltip on hover (as fallback)
+        // node.append("title")
+        //     .text(d => d.label);
+
+
+        // Update positions on each tick of the simulation
+        simulation.on("tick", () => {
+            link
+                .attr("x1", d => d.source.x)
+                .attr("y1", d => d.source.y)
+                .attr("x2", d => d.target.x)
+                .attr("y2", d => d.target.y);
+
+            node
+                .attr("transform", d => `translate(${d.x}, ${d.y})`);
+        });
+
+        // Drag functions
+        function dragstarted(event, d) {
+            if (!event.active) simulation.alphaTarget(0.3).restart();
+            d.fx = d.x;
+            d.fy = d.y;
+        }
+
+        function dragged(event, d) {
+            d.fx = event.x;
+            d.fy = event.y;
+        }
+
+        function dragended(event, d) {
+            if (!event.active) simulation.alphaTarget(0);
+            d.fx = null;
+            d.fy = null;
+        }
+
+        // Set up controls
+        // document.getElementById("zoom-in").addEventListener("click", () => {
+        //     svg.transition().call(zoom.scaleBy, 1.5);
+        // });
+        //
+        // document.getElementById("zoom-out").addEventListener("click", () => {
+        //     svg.transition().call(zoom.scaleBy, 0.75);
+        // });
+        //
+        // document.getElementById("reset").addEventListener("click", () => {
+        //     svg.transition().call(zoom.transform, d3.zoomIdentity.translate(0, 0).scale(1));
+        // });
+
+        // Handle window resize
+        window.addEventListener("resize", () => {
+            const newWidth = window.innerWidth;
+            const newHeight = window.innerHeight;
+
+            svg.attr("width", newWidth)
+               .attr("height", newHeight);
+
+            simulation.force("center", d3.forceCenter(newWidth / 2, newHeight / 2))
+                     .restart();
+        });
+
+        // Hide tooltip when clicking elsewhere
+        document.addEventListener('click', (event) => {
+            if (!event.target.closest('.node') && !event.target.closest('#preview-tooltip')) {
+                hidePreview();
+            }
+        });
+    </script>
+
+</body>
+</html>

@@ -333,6 +333,15 @@ h1 {
     padding-bottom: 15px;
 }
 
+h-preview {
+    font-family: monospace;
+    color: var(--dark_red);
+    font-size: 32px;
+    font-weight: bold;
+    /* padding-bottom: 25px;
+    margin-bottom: 25px; */
+}
+
 /* .subtitle {
     font-size: 24px;
     color: var(--grey_red);
@@ -531,7 +540,7 @@ ul.no-bullets {
 
 
 section {
-    background-color: rgba(243, 246, 244, 0.85); /* White overlay with 50% opacity */
+    background-color: rgba(243, 246, 244, 0.9); /* White overlay with 50% opacity */
     margin-left: 10%;
     margin-right: 10%;
     margin-top: 2%;
@@ -539,6 +548,8 @@ section {
     padding: 1.5%;
     border-radius:10px;
     font-size: 16px;
+    /* -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px); */
 }
 
 .section_index {
