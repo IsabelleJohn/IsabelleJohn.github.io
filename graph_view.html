@@ -574,7 +574,7 @@ Thakore.
             .on("touchstart", function(event, d) {
                 showPreview(event, d.id);
             })
-            .on("mousemove", function(event, d) {
+            .on("touchmove", function(event, d) {
                 // Update tooltip position as mouse moves
                 const x = event.clientX + 15;
                 const y = event.clientY - 50;
