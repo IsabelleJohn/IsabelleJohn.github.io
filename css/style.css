@@ -112,7 +112,6 @@ footer {
     vertical-align: middle;
 }
 
-
 .fa_header_this_site {
     font-family: "FontAwesome";
     font-style: normal;
@@ -388,6 +387,8 @@ h3 {
     line-height: 24px;
     font-size: 16px;
     transition: transform 0.3s ease;
+    box-shadow: 2px 4px 12px rgba(103, 69, 96, 0.25);
+
 }
 
 .flex-container_papers > div:hover {
@@ -415,6 +416,7 @@ h3 {
     line-height: 24px;
     font-size: 16px;
     transition: transform 0.3s ease;
+    box-shadow: 2px 4px 12px rgba(103, 69, 96, 0.25);
 }
 
 .flex-container_theses > div:hover {
@@ -548,6 +550,8 @@ section {
     padding: 1.5%;
     border-radius:10px;
     font-size: 16px;
+    box-shadow: 0 0 14px 9px rgba(103, 69, 96, 0.7);
+
     /* -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px); */
 }

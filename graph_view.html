@@ -1,3 +1,23 @@
+<!--
+The following script is generates a network of nodes that are connected based on
+the relation of their content. It is similar to and inspired by the Obsidian
+Graph View.
+
+Details:
+- Nodes can be dragged to new locations, and the net will re-align itself based
+  on the chosen values for attraction and link strength.
+- Nodes increase in size depending on the number of nodes connected to it.
+- This script uses two types of nodes ('Topics' and 'Papers'), but more can be
+  added using the `group` attribute.
+- When hovering over a node, a preview shows up as a tooltip with additional
+  explanation.
+- The Graph View can be implemented into an .html site using the iframe class.
+
+The ideas for this version of the Graph View and Previews were developed by
+Isabelle John and Bhashin Thakore, while most of the code was written by Bhashin
+Thakore.
+-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +26,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
 
-    <title>Obsidian-like Graph View</title>
+    <title>Graph View</title>
     <style>
         body {
             margin: 0;
@@ -47,7 +67,6 @@
             bottom: 5px;
             left: 5px;
             font-size: 12px;
-            /* background: rgba(255, 255, 255, 0.05); */
             padding: 3px;
             border-radius: 5px;
             z-index: 10;
@@ -87,6 +106,7 @@
             opacity: 0;
             transition: opacity 0.2s ease-in-out;
             font-size: 12px;
+            box-shadow: 2px 4px 12px rgba(103, 69, 96, 0.8);
         }
 
         .preview-tooltip.visible {
@@ -94,10 +114,6 @@
         }
 
         .preview-tooltip h-preview {
-            /* margin: 0 0 8px 0; */
-            /* padding: 0; */
-            /* margin-bottom: 50px; */
-            /* color: #af90a8; */
             font-size: 14px;
         }
 
@@ -160,12 +176,15 @@
 </head>
 <body>
     <div id="graph-container"></div>
+
+    <!-- Navigation buttons -->
     <!-- <div class="controls">
         <button id="zoom-in">+</button>
         <button id="zoom-out">-</button>
         <button id="reset">Reset</button>
     </div> -->
 
+    <!-- Legend for the types of nodes -->
     <div class="legend">
         <i class="fa-solid fa-circle fa-fw fa-2xs" style="color:#BF3C1F;"></i>
         <span style="color:#cd776f;">Topics</span>
@@ -174,6 +193,7 @@
         <span style="color:#af90a8;">Papers</span>
     </div>
 
+    <!-- Credit line -->
     <div class="obsidian">
         <span style="color:#b8c1ca;">Inspired by the Obsidian Graph View. Developed by <a class="link_name" href="https://bhashint.github.io/" target="_blank"> Bhashin Thakore </a> and Isabelle John.</span>
     </div>
@@ -181,28 +201,32 @@
     <!-- Preview tooltip -->
     <div id="preview-tooltip" class="preview-tooltip"></div>
 
+    <!-- Import java script d3 for functions -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+
+    <!-- Javascript to make the nodes etc -->
     <script>
         // Graph data - replace with your own data structure
         const graphData = {
             nodes: [
-                { id: "paper1",  label: "Dark Matter at the LHC",                                    group: 1 },
-                { id: "paper2",  label: "Dark Matter Constraints from Cosmic-Ray Positrons",         group: 1 },
-                { id: "paper3",  label: "Pulsars Don't Produce Sharp Spectral Features",             group: 1 },
-                { id: "paper4",  label: "Dark Matter Signals are Enhanced in Cosmic-Ray Positrons",  group: 1 },
-                { id: "paper5",  label: "Dark Matter Constraints from Stars at the Galactic Center", group: 1 },
-                { id: "paper6",  label: "Immortal Stars at the Galactic Center",                     group: 1 },
-                { id: "paper7",  label: "Constraints on the Decay of Bosonic Dark Matter",           group: 1 },
-                { id: "paper8",  label: "Cosmic-Ray Diffusion is Inhibited Around Pulsars",          group: 1 },
-                { id: "paper9",  label: "The Solar Halo",                                            group: 1 },
-                { id: "dark matter", label: "Dark Matter",                                           group: 2 },
-                { id: "pulsars", label: "Pulsars",                                                   group: 2 },
-                { id: "cosmic rays", label: "Cosmic Rays",                                           group: 2 },
-                { id: "stellar evolution", label: "Stellar Evolution",                               group: 2 },
-                { id: "solar modulation", label: "Solar Modulation",                                 group: 2 },
-                { id: "inverse compton scattering", label: "Inverse-Compton Scattering",             group: 2 },
-                { id: "large hadron collider", label: "Large Hadron Collider (LHC)",                 group: 2 },
+                { id: "paper1",                     label: "Dark Matter at the LHC",                                    group: 1 },
+                { id: "paper2",                     label: "Dark Matter Constraints from Cosmic-Ray Positrons",         group: 1 },
+                { id: "paper3",                     label: "Pulsars Don't Produce Sharp Spectral Features",             group: 1 },
+                { id: "paper4",                     label: "Dark Matter Signals are Enhanced in Cosmic-Ray Positrons",  group: 1 },
+                { id: "paper5",                     label: "Dark Matter Constraints from Stars at the Galactic Center", group: 1 },
+                { id: "paper6",                     label: "Immortal Stars at the Galactic Center",                     group: 1 },
+                { id: "paper7",                     label: "Constraints on the Decay of Bosonic Dark Matter",           group: 1 },
+                { id: "paper8",                     label: "Cosmic-Ray Diffusion is Inhibited Around Pulsars",          group: 1 },
+                { id: "paper9",                     label: "The Solar Halo",                                            group: 1 },
+                { id: "dark matter",                label: "Dark Matter",                                               group: 2 },
+                { id: "pulsars",                    label: "Pulsars",                                                   group: 2 },
+                { id: "cosmic rays",                label: "Cosmic Rays",                                               group: 2 },
+                { id: "stellar evolution",          label: "Stellar Evolution",                                         group: 2 },
+                { id: "solar modulation",           label: "Solar Modulation",                                          group: 2 },
+                { id: "inverse compton scattering", label: "Inverse-Compton Scattering",                                group: 2 },
+                { id: "large hadron collider",      label: "Large Hadron Collider (LHC)",                               group: 2 },
             ],
+            // Set which nodes should be linked to another
             links: [
                 { source: "paper1", target: "large hadron collider" },
                 { source: "paper1", target: "dark matter" },
@@ -414,9 +438,6 @@
             } else if (nodeInfo.imageType === 'pdf' && nodeInfo.image) {
                 // For PDFs, create an iframe preview
                 imageContent = `<iframe src="${nodeInfo.image}#toolbar=0&navpanes=0&scrollbar=0" class="preview-iframe" title="${nodeInfo.title}"></iframe>`;
-            } else if (nodeInfo.imageType === 'paper') {
-                // For paper, create an iframe preview
-                imageContent = `<iframe src="${nodeInfo.image}" class="preview-iframe-paper" style="margin: 0; padding: 0;"}"></iframe>`;
             } else {
                 // Fallback for nodes without images
                 imageContent = `<div style="width: 320px; height: 120px; background: #333; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: #666; margin-bottom: 8px;">No preview available</div>`;
