@@ -567,7 +567,27 @@ Thakore.
             })
             .on("mouseout", function() {
                 hidePreview();
-            });
+            })
+
+            .on("touchstart", function(event, d) {
+                showPreview(event, d.id);
+            })
+            .on("touchmove", function(event, d) {
+                // Update tooltip position as mouse moves
+                const x = event.clientX + 15;
+                const y = event.clientY - 50;
+
+                const tooltipWidth = 400;
+                const tooltipHeight = 350;
+                const adjustedX = (x + tooltipWidth > window.innerWidth) ? x - tooltipWidth - 30 : x;
+                const adjustedY = (y + tooltipHeight > window.innerHeight) ? y - tooltipHeight + 110 : y;
+
+                tooltip.style.left = adjustedX + 'px';
+                tooltip.style.top = adjustedY + 'px';
+            })
+            .on("touchout", function() {
+                hidePreview();
+            })
 
         // Add title for basic tooltip on hover (as fallback)
         // node.append("title")
