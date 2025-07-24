@@ -209,22 +209,26 @@ Thakore.
         // Graph data - replace with your own data structure
         const graphData = {
             nodes: [
-                { id: "paper1",                     label: "Dark Matter at the LHC",                                    group: 1 },
-                { id: "paper2",                     label: "Dark Matter Constraints from Cosmic-Ray Positrons",         group: 1 },
-                { id: "paper3",                     label: "Pulsars Don't Produce Sharp Spectral Features",             group: 1 },
-                { id: "paper4",                     label: "Dark Matter Signals are Enhanced in Cosmic-Ray Positrons",  group: 1 },
-                { id: "paper5",                     label: "Dark Matter Constraints from Stars at the Galactic Center", group: 1 },
-                { id: "paper6",                     label: "Immortal Stars at the Galactic Center",                     group: 1 },
-                { id: "paper7",                     label: "Constraints on the Decay of Bosonic Dark Matter",           group: 1 },
-                { id: "paper8",                     label: "Cosmic-Ray Diffusion is Inhibited Around Pulsars",          group: 1 },
-                { id: "paper9",                     label: "The Solar Halo",                                            group: 1 },
-                { id: "dark matter",                label: "Dark Matter",                                               group: 2 },
-                { id: "pulsars",                    label: "Pulsars",                                                   group: 2 },
-                { id: "cosmic rays",                label: "Cosmic Rays",                                               group: 2 },
-                { id: "stellar evolution",          label: "Stellar Evolution",                                         group: 2 },
-                { id: "solar modulation",           label: "Solar Modulation",                                          group: 2 },
-                { id: "inverse compton scattering", label: "Inverse-Compton Scattering",                                group: 2 },
-                { id: "large hadron collider",      label: "Large Hadron Collider (LHC)",                               group: 2 },
+                { id: "paper1", label: "Dark Matter at the LHC", group: 1 },
+                { id: "paper2", label: "Dark Matter Constraints from Cosmic-Ray Positrons", group: 1 },
+                { id: "paper3", label: "Pulsars Don't Produce Sharp Spectral Features", group: 1 },
+                { id: "paper4", label: "Dark Matter Signals are Enhanced in Cosmic-Ray Positrons", group: 1 },
+                { id: "paper5", label: "Dark Matter Constraints from Stars at the Galactic Center", group: 1 },
+                { id: "paper6", label: "Immortal Stars at the Galactic Center", group: 1 },
+                { id: "paper7", label: "Constraints on the Decay of Bosonic Dark Matter", group: 1 },
+                { id: "paper8", label: "Cosmic-Ray Diffusion is Inhibited Around Pulsars", group: 1 },
+                { id: "paper9", label: "The Solar Halo", group: 1 },
+                { id: "paper10", label: "Constraints on the Decay of Light Bosonic Dark Matter Models", group: 1 },
+                { id: "dark matter",  label: "Dark Matter", group: 2 },
+                { id: "pulsars", label: "Pulsars", group: 2 },
+                { id: "cosmic rays", label: "Cosmic Rays", group: 2 },
+                { id: "stellar evolution", label: "Stellar Evolution", group: 2 },
+                { id: "solar modulation", label: "Solar Modulation", group: 2 },
+                { id: "inverse compton scattering", label: "Inverse-Compton Scattering", group: 2 },
+                { id: "large hadron collider", label: "Large Hadron Collider", group: 2 },
+                { id: "gamma rays", label: "Gamma Rays", group: 2 },
+                // { id: "x rays", label: "X Rays", group: 2 },
+                // { id: "511-keV line", label: "511-keV Line", group: 2 },
             ],
             // Set which nodes should be linked to another
             links: [
@@ -248,6 +252,9 @@ Thakore.
                 { source: "paper9", target: "solar modulation" },
                 { source: "paper9", target: "inverse compton scattering" },
                 { source: "paper9", target: "cosmic rays" },
+                { source: "paper9", target: "gamma rays" },
+                { source: "paper10", target: "dark matter" },
+                { source: "paper10", target: "cosmic rays" },
             ]
         };
 
@@ -308,6 +315,14 @@ Thakore.
                     title: "Inverse-Compton Scattering",
                     preview: "A highly-energetic electron or positrons scatters off a photon of lower energy, for example from starlight, boosting the photon to gamma-ray energies, while losing energy in the process itself. It is one of the most efficient energy loss process for cosmic-ray electrons and positrons, and the created gamma-rays are a distinct signature for tracking cosmic rays.",
                     image: "images/ICS_sketch.png",
+                    imageType: "image"
+                },
+
+                "gamma rays": {
+                    url: "https://en.wikipedia.org/wiki/Gamma_ray",
+                    title: "Gamma Rays",
+                    preview: "Gamma rays are highly energetic electromagnetic radiation produced in a variety of processes such as radioactive decay, cosmic-ray interactions, or astrophysical processes.",
+                    image: "images/gamma_ray_fermi.png",
                     imageType: "image"
                 },
 
@@ -380,7 +395,15 @@ Thakore.
                     title: "First Observations of Solar Halo Gamma Rays Over a Full Solar Cycle",
                     preview: "arXiv:2505.04625 <br> The Sun shines in a bright in gamma-ray halo produced by inverse-Compton scattering of cosmic-ray electrons on sunlight. Measurements of these gamma-rays can be used to track the modulation of the cosmic-ray flux due to solar activity.",
                     image: "papers/solarhalo.png",
-                    imageType: "image",
+                    imageType: "image"
+                },
+
+                "paper10" : {
+                    url: "research.html#paper10",
+                    title: "INTEGRAL, eROSITA and Voyager Constraints on Light Bosonic Dark Matter: ALPs, Dark Photons, Scalars, <i>B−L</i> and <i> L<sub>i</sub>−L<sub>j</sub></i> Vectors",
+                    preview: "arXiv:2507.13432 <br> We derive strong constraints on the decay of light bosonic dark matter models.",
+                    image: "papers/ALP_lifetime_limits.png",
+                    imageType: "image"
                 }
             };
 

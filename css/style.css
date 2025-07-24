@@ -632,7 +632,7 @@ p.p_list {
 }
 
 .box_authors {
-    font-family: Verdana;
+    /* font-family: Verdana; */
     font-size: 13px;
     font-weight: bold;
     padding-bottom: 5px;
