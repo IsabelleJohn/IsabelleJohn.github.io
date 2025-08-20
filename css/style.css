@@ -1,5 +1,6 @@
 :root {
   --background_blue: #131d2f;
+  --button_blue: #2c313b;
   --light_blue: #b8c1ca;
   --dark_red: #8C2920;
   --light_red: #cd776f;
@@ -73,6 +74,37 @@ footer {
     /* height: 100px; */
     font-family: monospace;
     font-size: 12px;
+}
+
+
+#myBtn {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    horizontal-align: middle;
+    /* right: 50%; */
+    right: 12.5%;
+    z-index: 99;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    background-color: var(--button_blue);
+    color: var(--light_grey_red);
+    cursor: pointer;
+    padding-left:   21px;
+    padding-right:  21px;
+    padding-top:    15px;
+    padding-bottom: 15px;
+    border-radius: 50%;
+    text-align: center;
+    font-family: monospace;
+    opacity: 0.7;
+}
+
+#myBtn:hover {
+    color: var(--light_grey_red);
+    background-color: var(--background_blue);
+    opacity: 0.8;
 }
 
 /* Font Awesome icon styling */
@@ -287,6 +319,22 @@ a.link_collaborators:hover
 	font-weight: normal;
     color: #999999;
     font-size: 16px;
+}
+
+
+a.link2:link
+{
+    color: black;
+	text-decoration: none;
+}
+a.link2:visited
+{
+    color: black;
+	text-decoration: none;
+}
+a.link2:hover
+{
+    color: #999999;
 }
 
 
