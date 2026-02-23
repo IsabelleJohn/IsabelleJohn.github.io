@@ -211,7 +211,7 @@ Thakore.
             nodes: [
                 { id: "paper1", label: "Dark Matter at the LHC", group: 1 },
                 { id: "paper2", label: "Dark Matter Constraints from Cosmic-Ray Positrons", group: 1 },
-                { id: "paper3", label: "Pulsars Don't Produce Sharp Spectral Features", group: 1 },
+                { id: "paper3", label: "Pulsars Do Not Produce Sharp Spectral Features", group: 1 },
                 { id: "paper4", label: "Dark Matter Signals are Enhanced in Cosmic-Ray Positrons", group: 1 },
                 { id: "paper5", label: "Dark Matter Constraints from Stars at the Galactic Center", group: 1 },
                 { id: "paper6", label: "Immortal Stars at the Galactic Center", group: 1 },
@@ -219,6 +219,7 @@ Thakore.
                 { id: "paper8", label: "Cosmic-Ray Diffusion is Inhibited Around Pulsars", group: 1 },
                 { id: "paper9", label: "The Solar Halo", group: 1 },
                 { id: "paper10", label: "Constraints on the Decay of Light Bosonic Dark Matter Models", group: 1 },
+                { id: "paper11", label: "Solar Activity Impacts the Cosmic-Ray Fluxes", group: 1 },
                 { id: "dark matter",  label: "Dark Matter", group: 2 },
                 { id: "pulsars", label: "Pulsars", group: 2 },
                 { id: "cosmic rays", label: "Cosmic Rays", group: 2 },
@@ -255,6 +256,8 @@ Thakore.
                 { source: "paper9", target: "gamma rays" },
                 { source: "paper10", target: "dark matter" },
                 { source: "paper10", target: "cosmic rays" },
+                { source: "paper11", target: "cosmic rays" },
+                { source: "paper11", target: "solar modulation" },
             ]
         };
 
@@ -403,6 +406,14 @@ Thakore.
                     title: "INTEGRAL, eROSITA and Voyager Constraints on Light Bosonic Dark Matter: ALPs, Dark Photons, Scalars, <i>B−L</i> and <i> L<sub>i</sub>−L<sub>j</sub></i> Vectors",
                     preview: "arXiv:2507.13432 <br> We derive strong constraints on the decay of light bosonic dark matter models.",
                     image: "papers/ALP_lifetime_limits.png",
+                    imageType: "image"
+                },
+
+                "paper11" : {
+                    url: "research.html#paper11",
+                    title: "Addressing the Impact of Solar Modulation Systematic Uncertainties on Cosmic-Ray Propagation Models",
+                    preview: "arXiv:2602.17759 <br> We investigate the impact of the Sun on cosmic-ray propagation models.",
+                    image: "papers/SolarModulationUncertainties.png",
                     imageType: "image"
                 }
             };

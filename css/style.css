@@ -662,18 +662,27 @@ p.p_list {
 }
 
 /* Miscellaneous box and button styling */
-.box_text, .box_linktext {
+.box_text {
     font-family: Georgia;
     font-size: 16px;
+    line-height: 21px;
 }
 
 .box_linktext {
-     margin-bottom:5px;
+    font-family: Georgia;
+    margin-top:7px;
+    margin-bottom:7px;
+    line-height: 14px;
+    font-size: 13px;
+}
+
+a.link_text.link_text--box {
+    font-size: 13px;
 }
 
 .box_title {
     font-family: monospace;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
     color: #4b0c02;
     text-align: left;
@@ -683,8 +692,10 @@ p.p_list {
 .box_authors {
     /* font-family: Verdana; */
     font-size: 13px;
-    font-weight: bold;
+    line-height: 15px;
+    /* font-weight: bold; */
     padding-bottom: 5px;
+    color: #444444;
 }
 
 
