@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CSQRXTN7TE"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-CSQRXTN7TE');
+    </script>
+
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+    </script>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Isabelle John</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/style_for_colour_palettes.css">
+</head>
+
+
+
+<body>
+
+    Disclaimer: unfinished preview version. <br><br>
+
+    <div class="sidenav">
+        <button id="modeButton" onclick="myFunction()" class='mode-button'>
+          <i id="modeIcon" class="fa-solid fa-sun"></i>
+          <span id="modeText">Light Mode</span>
+        </button>
+
+        <div style="margin: 5%; margin-top:50px;">
+                Click on the colours to the left to move them to the boxes below and test how they look together!
+
+           <div class="palette-compare">
+               <div class="target-box" id="target1"><span id="targetText1" class="target-text"></span></div>
+               <div class="target-box" id="target2"><span id="targetText2" class="target-text"></span></div>
+               <div class="target-box" id="target3"><span id="targetText3" class="target-text"></span></div>
+               <div class="target-box" id="target4"><span id="targetText4" class="target-text"></span></div>
+               <div class="target-box" id="target5"><span id="targetText5" class="target-text"></span></div>
+           </div>
+
+           <button onclick="clearBoxes()" class='mode-button clear-button'>
+               <i class="fa-solid fa-palette"></i>
+               <span>Clear Colors</span>
+           </button>
+
+           <button onclick="toggleCharts()" class='mode-button chart-button' id="chartButton">
+               <i class="fa-solid fa-chart-line"></i>
+               <span id="chartButtonText">Click For Plots</span>
+           </button>
+
+           <div id="chartContainer" style="display:none; margin-top:80px; width:100%; max-width:600px;">
+               <canvas id="pieChart"></canvas>
+               <br>
+               <canvas id="lineChart"></canvas>
+               <br>
+               <canvas id="barChart"></canvas>
+           </div>
+
+        </div>
+    </div>
+
+
+
+Colours from solar modulation paper.
+<table>
+    <tr>
+        <th></th>
+        <th>HEX</th>
+        <th>RGB</th>
+        <th>HSV</th>
+        <th>Colour Label</th>
+    </tr>
+
+    <tr>
+      <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--orange_light)"></div></td>
+      <td><span class="color-label">#f6b26b</span></td>
+      <td><span class="color-label">(246, 178, 107)</span></td>
+      <td><span class="color-label">( 30,  56,  96)</span></td>
+      <td><span class="color-label">orange_light</span></td>
+    </tr>
+
+    <tr>
+      <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--orange_medium)"></div></td>
+      <td><span class="color-label">#e69138</span></td>
+      <td><span class="color-label">(230, 145,  56)</span></td>
+      <td><span class="color-label">( 30,  75,  90)</span></td>
+      <td><span class="color-label">orange_medium</span></td>
+    </tr>
+
+    <tr>
+      <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--orange_dark)"></div></td>
+      <td><span class="color-label">#b45f06</span></td>
+      <td><span class="color-label">(180,  95,   6)</span></td>
+      <td><span class="color-label">( 30,  96,  70)</span></td>
+      <td><span class="color-label">orange_dark</span></td>
+    </tr>
+
+    <tr>
+      <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--turquoise_light)"></div></td>
+      <td><span class="color-label">#76a5af</span></td>
+      <td><span class="color-label">(118, 165, 175)</span></td>
+      <td><span class="color-label">(190,  32,  68)</span></td>
+      <td><span class="color-label">turquoise_light</span></td>
+    </tr>
+
+    <tr>
+      <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--turquoise_medium)"></div></td>
+      <td><span class="color-label">#45818e</span></td>
+      <td><span class="color-label">( 69, 129, 142)</span></td>
+      <td><span class="color-label">(190,  51,  55)</span></td>
+      <td><span class="color-label">turquoise_medium</span></td>
+    </tr>
+
+    <tr>
+      <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--turquoise_dark)"></div></td>
+      <td><span class="color-label">#134f5c</span></td>
+      <td><span class="color-label">( 19,  79,  92)</span></td>
+      <td><span class="color-label">(190,  79,  36)</span></td>
+      <td><span class="color-label">turquoise_dark</span></td>
+    </tr>
+
+    <tr>
+      <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--burgundy_light)"></div></td>
+      <td><span class="color-label">#c27ba0</span></td>
+      <td><span class="color-label">(194, 123, 160)</span></td>
+      <td><span class="color-label">(328,  36,  76)</span></td>
+      <td><span class="color-label">burgundy_light</span></td>
+    </tr>
+
+    <tr>
+      <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--burgundy_medium)"></div></td>
+      <td><span class="color-label">#a64d79</span></td>
+      <td><span class="color-label">(166,  77, 121)</span></td>
+      <td><span class="color-label">(330,  53,  65)</span></td>
+      <td><span class="color-label">burgundy_medium</span></td>
+    </tr>
+
+    <tr>
+      <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--burgundy_dark)"></div></td>
+      <td><span class="color-label">#741b47</span></td>
+      <td><span class="color-label">(116,  27,  71)</span></td>
+      <td><span class="color-label">(330,  76,  45)</span></td>
+      <td><span class="color-label">burgundy_dark</span></td>
+    </tr>
+
+    <tr>
+    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--yellow_light)"></div></td>
+    <td><span class="color-label">#f0d974</span></td>
+    <td><span class="color-label">(240, 217, 116)</span></td>
+    <td><span class="color-label">( 48,  51,  94)</span></td>
+    <td><span class="color-label">yellow_light</span></td>
+    </tr>
+
+    <tr>
+        <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--yellow_medium)"></div></td>
+        <td><span class="color-label">#e6c12e</span></td>
+        <td><span class="color-label">(230, 193,  46)</span></td>
+        <td><span class="color-label">( 47,  80,  90)</span></td>
+        <td><span class="color-label">yellow_medium</span></td>
+    </tr>
+
+
+    <tr>
+        <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--yellow_dark)"></div></td>
+        <td><span class="color-label">#b8912b</span></td>
+        <td><span class="color-label">(184, 145,  43)</span></td>
+        <td><span class="color-label">( 43,  76,  72)</span></td>
+        <td><span class="color-label">yellow_dark</span></td>
+    </tr>
+
+
+    <tr>
+        <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--mossgreen_light)"></div></td>
+        <td><span class="color-label">#b8c99a</span></td>
+        <td><span class="color-label">(184, 201, 154)</span></td>
+        <td><span class="color-label">( 81,  23,  78)</span></td>
+        <td><span class="color-label">mossgreen_light</span></td>
+    </tr>
+
+
+    <tr>
+        <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--mossgreen_medium)"></div></td>
+        <td><span class="color-label">#88a85d</span></td>
+        <td><span class="color-label">(136, 168,  93)</span></td>
+        <td><span class="color-label">( 85,  44,  65)</span></td>
+        <td><span class="color-label">mossgreen_medium</span></td>
+    </tr>
+
+
+    <tr>
+        <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--mossgreen_dark)"></div></td>
+        <td><span class="color-label">#5b7832</span></td>
+        <td><span class="color-label">( 91, 120,  50)</span></td>
+        <td><span class="color-label">( 84,  58,  47)</span></td>
+        <td><span class="color-label">mossgreen_dark</span></td>
+    </tr>
+
+
+    <tr>
+        <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--steelblue_light)"></div></td>
+        <td><span class="color-label">#869dc4</span></td>
+        <td><span class="color-label">(134, 157, 196)</span></td>
+        <td><span class="color-label">(217,  31,  76)</span></td>
+        <td><span class="color-label">steelblue_light</span></td>
+    </tr>
+
+
+    <tr>
+        <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--steelblue_medium)"></div></td>
+        <td><span class="color-label">#3e6192</span></td>
+        <td><span class="color-label">( 62,  97, 146)</span></td>
+        <td><span class="color-label">(215,  57,  57)</span></td>
+        <td><span class="color-label">steelblue_medium</span></td>
+    </tr>
+
+
+    <tr>
+        <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--steelblue_dark)"></div></td>
+        <td><span class="color-label">#263c61</span></td>
+        <td><span class="color-label">( 38,  60,  97)</span></td>
+        <td><span class="color-label">(217,  60,  38)</span></td>
+        <td><span class="color-label">steelblue_dark</span></td>
+    </tr>
+
+
+    <tr>
+        <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--dustyplum_light)"></div></td>
+        <td><span class="color-label">#c28b85</span></td>
+        <td><span class="color-label">(194, 139, 133)</span></td>
+        <td><span class="color-label">(  5,  31,  76)</span></td>
+        <td><span class="color-label">dustyplum_light</span></td>
+    </tr>
+
+
+    <tr>
+        <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--dustyplum_medium)"></div></td>
+        <td><span class="color-label">#8b524e</span></td>
+        <td><span class="color-label">(139,  82,  78)</span></td>
+        <td><span class="color-label">(  3,  43,  54)</span></td>
+        <td><span class="color-label">dustyplum_medium</span></td>
+    </tr>
+
+
+    <tr>
+        <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--dustyplum_dark)"></div></td>
+        <td><span class="color-label">#5f3738</span></td>
+        <td><span class="color-label">( 95,  55,  56)</span></td>
+        <td><span class="color-label">(358,  42,  37)</span></td>
+        <td><span class="color-label">dustyplum_dark</span></td>
+    </tr>
+
+
+    <tr>
+        <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--coral_light)"></div></td>
+        <td><span class="color-label">#d6c3b0</span></td>
+        <td><span class="color-label">(214, 195, 176)</span></td>
+        <td><span class="color-label">( 29,  17,  83)</span></td>
+        <td><span class="color-label">coral_light</span></td>
+    </tr>
+
+
+    <tr>
+        <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--coral_medium)"></div></td>
+        <td><span class="color-label">#aa8f76</span></td>
+        <td><span class="color-label">(170, 143, 118)</span></td>
+        <td><span class="color-label">( 28,  30,  66)</span></td>
+        <td><span class="color-label">coral_medium</span></td>
+    </tr>
+
+
+    <tr>
+        <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--coral_dark)"></div></td>
+        <td><span class="color-label">#6b533c</span></td>
+        <td><span class="color-label">(107,  83,  60)</span></td>
+        <td><span class="color-label">( 29,  43,  41)</span></td>
+        <td><span class="color-label">coral_dark</span></td>
+    </tr>
+
+
+    <tr>
+        <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--red_light)"></div></td>
+        <td><span class="color-label">#e0a298</span></td>
+        <td><span class="color-label">(224, 162, 152)</span></td>
+        <td><span class="color-label">(  8,  32,  87)</span></td>
+        <td><span class="color-label">red_light</span></td>
+    </tr>
+
+
+    <tr>
+        <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--red_medium)"></div></td>
+        <td><span class="color-label">#ca5e4d</span></td>
+        <td><span class="color-label">(202,  94,  77)</span></td>
+        <td><span class="color-label">(  8,  61,  79)</span></td>
+        <td><span class="color-label">red_medium</span></td>
+    </tr>
+
+
+    <tr>
+        <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--red_dark)"></div></td>
+        <td><span class="color-label">#9b3329</span></td>
+        <td><span class="color-label">(155,  51,  41)</span></td>
+        <td><span class="color-label">(  5,  73,  60)</span></td>
+        <td><span class="color-label">red_dark</span></td>
+    </tr>
+
+</table>
+
+Colours from immortal stars paper.
+<table>
+    <tr>
+        <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--henyey)"></div></td>
+        <td><span class="color-label">#fee28e</span></td>
+        <td><span class="color-label">(254, 226, 142)</span></td>
+        <td><span class="color-label">( 44,  44,  99)</span></td>
+        <td><span class="color-label">henyey</span></td>
+    </tr>
+
+
+    <tr>
+        <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--hayashi)"></div></td>
+        <td><span class="color-label">#ee7416</span></td>
+        <td><span class="color-label">(238, 116,  22)</span></td>
+        <td><span class="color-label">( 26,  90,  93)</span></td>
+        <td><span class="color-label">hayashi</span></td>
+    </tr>
+
+
+    <tr>
+        <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--forever_young)"></div></td>
+        <td><span class="color-label">#b64203</span></td>
+        <td><span class="color-label">(182,  66,   3)</span></td>
+        <td><span class="color-label">( 21,  98,  71)</span></td>
+        <td><span class="color-label">forever_young</span></td>
+    </tr>
+
+
+    <tr>
+        <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--longevity_light)"></div></td>
+        <td><span class="color-label">#b6e192</span></td>
+        <td><span class="color-label">(182, 225, 146)</span></td>
+        <td><span class="color-label">( 92,  35,  88)</span></td>
+        <td><span class="color-label">longevity_light</span></td>
+    </tr>
+
+
+    <tr>
+        <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--longevity_medium)"></div></td>
+        <td><span class="color-label">#3ba358</span></td>
+        <td><span class="color-label">( 59, 163,  88)</span></td>
+        <td><span class="color-label">(136,  63,  63)</span></td>
+        <td><span class="color-label">longevity_medium</span></td>
+    </tr>
+
+
+    <tr>
+        <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--longevity_dark)"></div></td>
+        <td><span class="color-label">#006034</span></td>
+        <td><span class="color-label">(  0,  96,  52)</span></td>
+        <td><span class="color-label">(152, 100,  37)</span></td>
+        <td><span class="color-label">longevity_dark</span></td>
+    </tr>
+</table>
+
+
+<!--                             scripts                                     -->
+
+<script>
+    Chart.defaults.global.defaultFontFamily = "Menlo, Monaco, Consolas, monospace";
+    Chart.defaults.global.defaultFontSize = 14;
+    function updateColorData() {
+      labels = [
+        document.getElementById("targetText1").textContent,
+        document.getElementById("targetText2").textContent,
+        document.getElementById("targetText3").textContent,
+        document.getElementById("targetText4").textContent,
+        document.getElementById("targetText5").textContent
+      ];
+
+      colors = [
+        document.getElementById("target1").style.backgroundColor,
+        document.getElementById("target2").style.backgroundColor,
+        document.getElementById("target3").style.backgroundColor,
+        document.getElementById("target4").style.backgroundColor,
+        document.getElementById("target5").style.backgroundColor
+      ];
+    }
+
+    let pieChart   = null;
+    let lineChart  = null;
+    let barChart   = null;
+    let chartShown = false;
+
+    function drawPieChart() {
+      // pie chart
+      updateColorData();
+
+      if (pieChart) {
+        pieChart.destroy();
+      }
+
+      pieChart = new Chart("pieChart", {
+        type: "pie",
+        data: {
+            labels: labels,
+            datasets: [{data: [55, 49, 44, 24, 15], backgroundColor: colors}]
+            },
+        options: {
+          responsive: true,
+          layout: { padding: { top: 10, bottom: 10 } },
+          legend: {
+              labels: {fontSize: 14, boxWidth: 25, boxHeight:10, padding: 20, fontFamily: "Menlo, monospace" },
+              position:"right"
+          },
+          tooltips: {
+              displayColors: false,
+              callbacks: {
+                title: function() {
+                  return "";
+                },
+                label: function(tooltipItem, data) {
+                  return data.labels[tooltipItem.index];
+                }
+              }
+            }
+        }
+      });
+    }
+
+    function drawLineChart() {
+        // line chart
+        updateColorData();
+
+        if (lineChart) {
+          lineChart.destroy();
+        }
+
+        lineChart = new Chart("lineChart", {
+          type: "line",
+          data: {
+            labels: [100,200,300,400,500,600,700,800,900,1000],
+            datasets: [{
+              data: [860,1140,1060,1060,1070,1110,1330,2210,1830,2478],
+              borderColor: colors[0],
+              label: labels[0],
+              fill: false
+            },{
+              data: [1600,1700,1700,1900,2000,2700,3000,500,600,700],
+              borderColor: colors[1],
+              label: labels[1],
+              fill: false
+            },{
+              data: [300,700,2000,3000,2800,2400,2000,1000,200,100],
+              borderColor: colors[2],
+              label: labels[2],
+              fill: false
+            },{
+              data: [500,300,1000,500,700,800,1000,2000,300,400],
+              borderColor: colors[3],
+              label: labels[3],
+              fill: false
+            },{
+              data: [2000,1800,1500,1100,1200,900,700,400,300,500],
+              borderColor: colors[4],
+              label: labels[4],
+              fill: false
+            }]
+          },
+          options: {
+            responsive: true,
+            layout: { padding: { top: 20, bottom: 10 } },
+            legend: {
+                labels: {fontSize: 14, boxWidth: 25, boxHeight:10, padding: 20, fontFamily: "Menlo, monospace"},
+                position:"right"
+            },
+            tooltips: {
+                displayColors: false,
+                callbacks: {
+                  title: function() {
+                    return "";
+                  },
+                  label: function(tooltipItem, data) {
+                    return data.labels[tooltipItem.index];
+                  }
+                }
+            },
+              scales: {
+                  xAxes: [{
+                    ticks: {
+                      fontColor: "gray"   // color of tick labels
+                    },
+                    gridLines: {
+                      color: "gray",       // grid line color
+                      zeroLineColor: "gray"
+                    }
+                  }],
+                  yAxes: [{
+                    ticks: {
+                      fontColor: "gray"
+                    },
+                    gridLines: {
+                      color: "gray",
+                      zeroLineColor: "gray"
+                    }
+                  }]
+                }
+          }
+        });
+    }
+
+    function drawBarChart() {
+        // bar chart
+        updateColorData();
+
+        if (barChart) {
+          barChart.destroy();
+        }
+
+        barChart = new Chart("barChart", {
+          type: "bar",
+          data: {
+            labels: labels,
+            datasets: [
+                        {
+                          label: labels[0],
+                          backgroundColor: colors[0],
+                          data: [55,0,0,0,0]
+                        },
+                        {
+                          label: labels[1],
+                          backgroundColor: colors[1],
+                          data: [0,49,0,0,0]
+                        },
+                        {
+                          label: labels[2],
+                          backgroundColor: colors[2],
+                          data: [0,0,44,0,0]
+                        },
+                        {
+                          label: labels[3],
+                          backgroundColor: colors[3],
+                          data: [0,0,0,24,0]
+                        },
+                        {
+                          label: labels[4],
+                          backgroundColor: colors[4],
+                          data: [0,0,0,0,30]
+                        }
+                        ]
+          },
+          options: {
+            responsive: true,
+            layout: { padding: { top: 20, bottom: 10 } },
+            legend: {
+                labels: {fontSize: 14, boxWidth: 25, boxHeight:10, padding: 20, fontFamily: "Menlo, monospace" },
+                position: "right"
+            },
+            tooltips: {
+                displayColors: false,
+                callbacks: {
+                  title: function() {
+                    return "";
+                  },
+                  label: function(tooltipItem, data) {
+                    return data.labels[tooltipItem.index];
+                  }
+                }
+            },
+              scales: {
+                  xAxes: [{
+                    ticks: {
+                      fontColor: "gray"   // color of tick labels
+                    },
+                    gridLines: {
+                      color: "gray",       // grid line color
+                      zeroLineColor: "gray"
+                    },
+                  stacked: true
+                  }],
+                  yAxes: [{
+                    ticks: {
+                      fontColor: "gray", min: 0,
+                    },
+                    gridLines: {
+                      color: "gray",
+                      zeroLineColor: "gray"
+                    },
+                    stacked: true
+                  }]
+                }
+          }
+        });
+    }
+
+    function toggleCharts() {
+      const container = document.getElementById("chartContainer");
+
+      if (!chartShown) {
+          container.style.display = "block";
+          chartShown = true;
+      }
+
+      drawPieChart();
+      document.getElementById("pieChart").style.border = "2px solid #37322c";
+      document.getElementById("pieChart").style.borderRadius = "10px";
+
+      drawLineChart();
+      document.getElementById("lineChart").style.border = "2px solid #37322c";
+      document.getElementById("lineChart").style.borderRadius = "10px";
+
+      drawBarChart();
+      document.getElementById("barChart").style.border = "2px solid #37322c";
+      document.getElementById("barChart").style.borderRadius = "10px";
+
+      document.getElementById("chartButtonText").textContent = "Update Plots";
+      }
+
+
+</script>
+
+
+<script>
+    function rgbToHex(rgb) {
+      const nums = rgb.match(/\d+/g).map(Number);
+      return "#" + nums.map(x => x.toString(16).padStart(2, "0")).join("");
+    }
+
+    let   nextBox = 1;
+    const totalBoxes = 5;
+
+    // cycle colors through target boxes
+    function changeColor(element) {
+        const rgb = window.getComputedStyle(element).backgroundColor;
+        const hex = rgbToHex(rgb);
+
+        document.getElementById("target" + nextBox).style.backgroundColor = rgb;
+        document.getElementById("targetText" + nextBox).textContent = hex;
+        nextBox++;
+        if (nextBox > totalBoxes) {
+            nextBox = 1;
+        }
+    }
+
+    // clear target boxes
+    function clearBoxes() {
+        for (let i = 1; i <= totalBoxes; i++) {
+          document.getElementById("target" + i).style.backgroundColor = "";
+          document.getElementById("targetText" + i).textContent = "";
+        }
+        nextBox = 1; // reset to start with target1 again
+
+        if (pieChart) {
+            pieChart.destroy();
+        }
+        if (lineChart) {
+            lineChart.destroy();
+        }
+        if (barChart) {
+            barChart.destroy();
+        }
+
+        pieChart   = null;
+        lineChart  = null;
+        barChart   = null;
+        chartShown = false;
+        document.getElementById("chartButtonText").textContent = "Click For Plots";
+        document.getElementById("pieChart").style.border = "none";
+        document.getElementById("lineChart").style.border = "none";
+        document.getElementById("barChart").style.border = "none";
+    }
+
+    // toggle dark and light mode
+    function myFunction() {
+      var element = document.body;
+      element.classList.toggle("dark-light-mode");
+
+      const icon = document.getElementById("modeIcon");
+      const text = document.getElementById("modeText");
+
+      if (element.classList.contains("dark-light-mode")) {
+          icon.classList.remove("fa-sun");
+          icon.classList.add("fa-moon");
+          text.textContent = "Dark Mode";
+      } else {
+          icon.classList.remove("fa-moon");
+          icon.classList.add("fa-sun");
+          text.textContent = "Light Mode";
+      }
+    }
+
+
+
+</script>
+
+</body>
+
+</html>
