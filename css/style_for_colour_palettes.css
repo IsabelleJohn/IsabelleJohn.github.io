@@ -8,24 +8,28 @@
   --burgundy_light:    #c27ba0;
   --burgundy_medium:   #a64d79;
   --burgundy_dark:     #741b47;
-  --yellow_light     : #f0d974;
-  --yellow_medium    : #e6c12e;
-  --yellow_dark      : #b8912b;
+
   --mossgreen_light  : #b8c99a;
   --mossgreen_medium : #88a85d;
   --mossgreen_dark   : #5b7832;
+  --red_light        : #e0a298;
+  --red_medium       : #ca5e4d;
+  --red_dark         : #9b3329;
+  --coral_light      : #d6c3b0;
+  --coral_medium     : #aa8f76;
+  --coral_dark       : #6b533c;
   --steelblue_light  : #869dc4;
   --steelblue_medium : #3e6192;
   --steelblue_dark   : #263c61;
   --dustyplum_light  : #c28b85;
   --dustyplum_medium : #8b524e;
   --dustyplum_dark   : #5f3738;
-  --coral_light      : #d6c3b0;
-  --coral_medium     : #aa8f76;
-  --coral_dark       : #6b533c;
-  --red_light        : #e0a298;
-  --red_medium       : #ca5e4d;
-  --red_dark         : #9b3329;
+  --yellow_light     : #f0d974;
+  --yellow_medium    : #e6c12e;
+  --yellow_dark      : #b8912b;
+  --plum_light       : #9e91c4;
+  --plum_medium      : #6f58aa;
+  --plum_dark        : #432f76;
 
   --henyey :           #fee28e;
   --hayashi :          #ee7416;
@@ -33,25 +37,36 @@
   --longevity_light :   #b6e192;
   --longevity_medium : #3ba358;
   --longevity_dark  :  #006034;
+
+  --Vela:              #f6bc6b;
+  --Monogem:           #e69138;
+  --Geminga:           #b45f06;
+  --Pulsar:            #76204a;
+  --one_zone:          #d8f1eb;
+  --two_zone_light:    #3fbc9d;
+  --two_zone_medium:   #2c836d;
+  --two_zone_dark:     #194b3e;
+  --extrapolated:      #87d7df;
+  --background_bar:    #eeeeee;
+
+
 }
 
 /* Body styling */
 body {
-    font-family: Menlo;
-    font-size: 16px;
-    /* top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0; */
-    /* margin: 0 auto; */
+    font-family: Menlo, Monaco, Consolas, monospace;
+    font-size: 14px;
+    margin: 0;
+    padding: 0;
+    padding-bottom: 0;
     background: #1f1b16;
-    color: white;
+    color: #f2efea;
 }
 
 
 .dark-light-mode {
     background-color: #f2efea;
-    color: black;
+    color: #1f1b16;
 }
 
 .mode-button {
@@ -66,9 +81,10 @@ body {
     border: 2px solid #1f1b16;
     transition-duration: 0.4s;
     width: 140px;
-    top:1%;
-    right:1.5%;
     position: absolute;
+    /* top: 80px; */
+    top: 10px;
+    right: 30px;
     /* transition: background-color 0.3s, border-color 0.3s, color 0.3s; */
 }
 
@@ -92,30 +108,38 @@ body {
 }
 
 /* Light mode */
-.dark-light-mode .sidenav {
+.dark-light-mode .sidebar {
   background-color:#f2efea;
   color: black;
 }
 
 .clear-button {
-    margin-top: 230px;
-    top:1%;
-    right:0%;
-    left: 20px;
-    position: absolute;
-    width:160px;
+    position: static;
+    width: 160px;
+    margin-right: 0;
+    margin-left: 0;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .chart-button {
-    margin-top: 230px;
-    top:1%;
-    right: 20px;
-    position: absolute;
-    width:200px;
+    position: static;
+    width: 200px;
+    margin-right: 0;
+    margin-left: 0;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.button-row {
+    margin-top: auto;         /* push BOTH buttons to bottom */
+    display: flex;
+    gap: 10px;                /* space between buttons */
+    padding: 0 0px 0px 0px;
+    justify-content: space-between;
 }
 
 .palette-list {
-  /* display: flex; */
   gap: 10px;
   margin-bottom: 20px;
 }
@@ -123,8 +147,8 @@ body {
 .palette-compare {
   display: flex;
   gap: 0px;
-  margin-bottom: 20px;
-  margin-top:10px;
+  margin-bottom: 10px;
+  margin-top: 10px;
 }
 
 
@@ -148,9 +172,6 @@ body {
   border-radius: 5px;
 }
 
-/* .red { background: red; }
-.blue { background: blue; }
-.green { background: green; } */
 
 .target-box {
   /* width: 120px;
@@ -164,32 +185,146 @@ body {
   align-items: center;
   justify-content: center;
   margin: 5px;
-  /* margin-bottom: 20px; */
 }
+.target-box:hover {
+    transition: transform 0.3s ease;
+    box-shadow: 1px 1px 2px 4px #444444;
+}
+
+.dark-light-mode .target-box:hover {
+  box-shadow: 1px 1px 2px 4px #c5c1bc;
+}
+
+.selected-source {
+    outline: 2px solid #f2efea;
+    border-radius: 10px;
+}
+
+.dark-light-mode .selected-source {
+    outline: 2px solid #1f1b16;
+    border-radius: 10px;
+}
+
+.dark-light-mode canvas {
+    background-color: white;
+}
+
 
 table {
     margin: 15px;
+    margin-left: auto;
+    margin-right: auto;
     padding:5px;
     border: 2px solid #37322c;
     border-radius: 5px;
 }
+
 table td:nth-child(5) { text-align: center; }
 
 th, td {
     padding-right: 20px;
 }
 
+/* page layout things */
+.page-layout {
+    min-height: 100vh;
+    padding-top: 100px;
+}
 
-/* sidebar */
-.sidenav {
-  height: 100%; /* Full-height: remove this if you want "auto" height */
-  width: 40%; /* Set the width of the sidebar */
-  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
-  z-index: 1; /* Stay on top */
-  top: 0; /* Stay at the top */
-  right: 0;
-  background-color: #1f1b16; /* Black */
-  overflow-x: hidden; /* Disable horizontal scroll */
-  padding-top: 20px;
-  border-left: 3px solid #37322c;
+.main-content {
+    width: 60%;
+    margin-right: 40%;
+    box-sizing: border-box;
+    padding: 5%;
+    padding-top: 10px;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: #1f1b16;
+    overflow-x: hidden;
+    border-left: 3px solid #37322c;
+    box-sizing: border-box;
+    height: 100vh;
+    padding-bottom: 80px;
+    padding-top: 90px;
+}
+
+h1 {
+    margin-top: 50px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.links-to-papers {
+    color: inherit;
+}
+
+.links-to-papers:hover {
+    color: white;
+}
+
+.dark-light-mode .links-to-papers {
+    color: inherit;
+}
+
+.dark-light-mode .links-to-papers:hover {
+    color: #3f3a34;
+}
+
+
+header {
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: left;
+    text-align: left;
+    margin: 0;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 80px;
+    background-color: inherit;
+    color: inherit;
+    position: relative;
+    font-family: inherit;
+    font-size: 12px;
+    border-bottom: 2px solid #37322c;
+    z-index: 10;
+    position: fixed;
+}
+
+.header-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 36px;
+    align-items: center;
+    padding-top: 5px;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 0px;
+    padding-bottom: 30px;
+    padding-top: 10px;
+    height: 60px;
+    background-color: inherit;
+    color: inherit;
+    clear: both;
+    position: relative;
+    font-family: inherit;
+    font-size: 12px;
+    border-top: 2px solid #37322c;
 }
