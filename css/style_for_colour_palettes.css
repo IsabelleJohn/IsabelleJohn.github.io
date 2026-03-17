@@ -49,7 +49,25 @@
   --extrapolated:      #87d7df;
   --background_bar:    #eeeeee;
 
-
+  --S2_1            :  #d9eeee;
+  --S2_2            :  #bfe2e2;
+  --S2_3            :  #a6d7d8;
+  --S2              :  #008a8b;
+  --S62_1           :  #d8d9ed;
+  --S62_2           :  #bfbfe2;
+  --S62_3           :  #a6a6d7;
+  --S62             :  #00048b;
+  --S4711_1         :  #ecd9ec;
+  --S4711_2         :  #dfbfdf;
+  --S4711_3         :  #d2a6d4;
+  --S4711           :  #800080;
+  --S4714_1         :  #fadce2;
+  --S4714_2         :  #f6c4ce;
+  --S4714_3         :  #f3adbb;
+  --S4714           :  #db143b;
+  --S1_1            :  #ffe2bf;
+  --S1_2            :  #ffd199;
+  --S1              :  #ff8c00;
 }
 
 /* Body styling */
