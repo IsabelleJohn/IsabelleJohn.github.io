@@ -30,19 +30,51 @@
 <body>
 
     <header>
-        <a class="links-to-papers" href="https://isabellejohn.github.io" target="_blank" style="text-decoration:none;">
-        <span style="font-size:20px; display:block; padding-bottom:10px;">Isabelle John</span>
-        <span style="display:block;"><i class="fa-solid fa-arrow-left"></i>
-            Back to main website</span>
-        </a>
+        <div class="header-left">
+            <a class="links-to-papers" href="https://isabellejohn.github.io" target="_blank" style="text-decoration:none;">
+            <span style="display:block;font-size:20px; padding-bottom:5px;">Isabelle John</span>
+            <span style="display:block;font-size:12px">
+                <i class="fa-solid fa-arrow-left"></i> Back to main website
+            </span>
+            </a>
+        </div>
 
-        <span class="header-center">Colour Palettes</span>
 
-        <button id="modeButton" onclick="myFunction()" class='mode-button'>
+        <div class="header-center">
+            Colour Palettes
+
+            <div class='palette-memory'>
+                <div class='memory-box' id="memory1"  onclick="jumpToColor(this)"></div>
+                <div class='memory-box' id="memory2"  onclick="jumpToColor(this)"></div>
+                <div class='memory-box' id="memory3"  onclick="jumpToColor(this)"></div>
+                <div class='memory-box' id="memory4"  onclick="jumpToColor(this)"></div>
+                <div class='memory-box' id="memory5"  onclick="jumpToColor(this)"></div>
+                <div class='memory-box' id="memory6"  onclick="jumpToColor(this)"></div>
+                <div class='memory-box' id="memory7"  onclick="jumpToColor(this)"></div>
+                <div class='memory-box' id="memory8"  onclick="jumpToColor(this)"></div>
+                <div class='memory-box' id="memory9"  onclick="jumpToColor(this)"></div>
+                <div class='memory-box' id="memory10" onclick="jumpToColor(this)"></div>
+                <div class='memory-box' id="memory11" onclick="jumpToColor(this)"></div>
+                <div class='memory-box' id="memory12" onclick="jumpToColor(this)"></div>
+                <div class='memory-box' id="memory13" onclick="jumpToColor(this)"></div>
+                <div class='memory-box' id="memory14" onclick="jumpToColor(this)"></div>
+                <div class='memory-box' id="memory15" onclick="jumpToColor(this)"></div>
+                <div class='memory-box' id="memory16" onclick="jumpToColor(this)"></div>
+                <div class='memory-box' id="memory17" onclick="jumpToColor(this)"></div>
+                <div class='memory-box' id="memory18" onclick="jumpToColor(this)"></div>
+                <div class='memory-box' id="memory19" onclick="jumpToColor(this)"></div>
+                <div class='memory-box' id="memory20" onclick="jumpToColor(this)"></div>
+            </div>
+        </div>
+
+
+        <button id="modeButton" onclick="toggleDarkLight()" class='mode-button'>
           <i id="modeIcon" class="fa-solid fa-sun"></i>
           <span id="modeText">Light Mode</span>
         </button>
     </header>
+
+
 
     <div class="page-layout">
         <main class="main-content">
@@ -63,210 +95,210 @@
                     <th>HSV</th>
                     <th>Colour Label</th>
                 </tr>    <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--orange_light)" data-color="orange_light"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--orange_light)" data-color="orange_light"></div></td>
                     <td><span class="color-label">#f6b26b</span></td>
                     <td><span class="color-label"><pre>(246, 178, 107)</pre></span></td>
                     <td><span class="color-label"><pre>( 30,  56,  96)</pre></span></td>
                     <td><span class="color-label">orange_light</span></td>
                 </tr>
                 <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--orange_medium)" data-color="orange_medium"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--orange_medium)" data-color="orange_medium"></div></td>
                     <td><span class="color-label">#e69138</span></td>
                     <td><span class="color-label"><pre>(230, 145,  56)</pre></span></td>
                     <td><span class="color-label"><pre>( 30,  75,  90)</pre></span></td>
                     <td><span class="color-label">orange_medium</span></td>
                 </tr>
                 <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--orange_dark)" data-color="orange_dark"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--orange_dark)" data-color="orange_dark"></div></td>
                     <td><span class="color-label">#b45f06</span></td>
                     <td><span class="color-label"><pre>(180,  95,   6)</pre></span></td>
                     <td><span class="color-label"><pre>( 30,  96,  70)</pre></span></td>
                     <td><span class="color-label">orange_dark</span></td>
                 </tr>
                 <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--turquoise_light)" data-color="turquoise_light"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--turquoise_light)" data-color="turquoise_light"></div></td>
                     <td><span class="color-label">#76a5af</span></td>
                     <td><span class="color-label"><pre>(118, 165, 175)</pre></span></td>
                     <td><span class="color-label"><pre>(190,  32,  68)</pre></span></td>
                     <td><span class="color-label">turquoise_light</span></td>
                 </tr>
                 <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--turquoise_medium)" data-color="turquoise_medium"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--turquoise_medium)" data-color="turquoise_medium"></div></td>
                     <td><span class="color-label">#45818e</span></td>
                     <td><span class="color-label"><pre>( 69, 129, 142)</pre></span></td>
                     <td><span class="color-label"><pre>(190,  51,  55)</pre></span></td>
                     <td><span class="color-label">turquoise_medium</span></td>
                 </tr>
                 <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--turquoise_dark)" data-color="turquoise_dark"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--turquoise_dark)" data-color="turquoise_dark"></div></td>
                     <td><span class="color-label">#134f5c</span></td>
                     <td><span class="color-label"><pre>( 19,  79,  92)</pre></span></td>
                     <td><span class="color-label"><pre>(190,  79,  36)</pre></span></td>
                     <td><span class="color-label">turquoise_dark</span></td>
                 </tr>
                 <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--burgundy_light)" data-color="burgundy_light"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--burgundy_light)" data-color="burgundy_light"></div></td>
                     <td><span class="color-label">#c27ba0</span></td>
                     <td><span class="color-label"><pre>(194, 123, 160)</pre></span></td>
                     <td><span class="color-label"><pre>(328,  36,  76)</pre></span></td>
                     <td><span class="color-label">burgundy_light</span></td>
                 </tr>
                 <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--burgundy_medium)" data-color="burgundy_medium"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--burgundy_medium)" data-color="burgundy_medium"></div></td>
                     <td><span class="color-label">#a64d79</span></td>
                     <td><span class="color-label"><pre>(166,  77, 121)</pre></span></td>
                     <td><span class="color-label"><pre>(330,  53,  65)</pre></span></td>
                     <td><span class="color-label">burgundy_medium</span></td>
                 </tr>
                 <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--burgundy_dark)" data-color="burgundy_dark"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--burgundy_dark)" data-color="burgundy_dark"></div></td>
                     <td><span class="color-label">#741b47</span></td>
                     <td><span class="color-label"><pre>(116,  27,  71)</pre></span></td>
                     <td><span class="color-label"><pre>(330,  76,  45)</pre></span></td>
                     <td><span class="color-label">burgundy_dark</span></td>
                 </tr>
                 <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--mossgreen_light)" data-color="mossgreen_light"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--mossgreen_light)" data-color="mossgreen_light"></div></td>
                     <td><span class="color-label">#b8c99a</span></td>
                     <td><span class="color-label"><pre>(184, 201, 154)</pre></span></td>
                     <td><span class="color-label"><pre>( 81,  23,  78)</pre></span></td>
                     <td><span class="color-label">mossgreen_light</span></td>
                 </tr>
                 <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--mossgreen_medium)" data-color="mossgreen_medium"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--mossgreen_medium)" data-color="mossgreen_medium"></div></td>
                     <td><span class="color-label">#88a85d</span></td>
                     <td><span class="color-label"><pre>(136, 168,  93)</pre></span></td>
                     <td><span class="color-label"><pre>( 85,  44,  65)</pre></span></td>
                     <td><span class="color-label">mossgreen_medium</span></td>
                 </tr>
                 <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--mossgreen_dark)" data-color="mossgreen_dark"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--mossgreen_dark)" data-color="mossgreen_dark"></div></td>
                     <td><span class="color-label">#5b7832</span></td>
                     <td><span class="color-label"><pre>( 91, 120,  50)</pre></span></td>
                     <td><span class="color-label"><pre>( 84,  58,  47)</pre></span></td>
                     <td><span class="color-label">mossgreen_dark</span></td>
                 </tr>
                 <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--red_light)" data-color="red_light"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--red_light)" data-color="red_light"></div></td>
                     <td><span class="color-label">#e0a298</span></td>
                     <td><span class="color-label"><pre>(224, 162, 152)</pre></span></td>
                     <td><span class="color-label"><pre>(  8,  32,  87)</pre></span></td>
                     <td><span class="color-label">red_light</span></td>
                 </tr>
                 <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--red_medium)" data-color="red_medium"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--red_medium)" data-color="red_medium"></div></td>
                     <td><span class="color-label">#ca5e4d</span></td>
                     <td><span class="color-label"><pre>(202,  94,  77)</pre></span></td>
                     <td><span class="color-label"><pre>(  8,  61,  79)</pre></span></td>
                     <td><span class="color-label">red_medium</span></td>
                 </tr>
                 <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--red_dark)" data-color="red_dark"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--red_dark)" data-color="red_dark"></div></td>
                     <td><span class="color-label">#9b3329</span></td>
                     <td><span class="color-label"><pre>(155,  51,  41)</pre></span></td>
                     <td><span class="color-label"><pre>(  5,  73,  60)</pre></span></td>
                     <td><span class="color-label">red_dark</span></td>
                 </tr>
                 <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--coral_light)" data-color="coral_light"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--coral_light)" data-color="coral_light"></div></td>
                     <td><span class="color-label">#d6c3b0</span></td>
                     <td><span class="color-label"><pre>(214, 195, 176)</pre></span></td>
                     <td><span class="color-label"><pre>( 29,  17,  83)</pre></span></td>
                     <td><span class="color-label">coral_light</span></td>
                 </tr>
                 <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--coral_medium)" data-color="coral_medium"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--coral_medium)" data-color="coral_medium"></div></td>
                     <td><span class="color-label">#aa8f76</span></td>
                     <td><span class="color-label"><pre>(170, 143, 118)</pre></span></td>
                     <td><span class="color-label"><pre>( 28,  30,  66)</pre></span></td>
                     <td><span class="color-label">coral_medium</span></td>
                 </tr>
                 <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--coral_dark)" data-color="coral_dark"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--coral_dark)" data-color="coral_dark"></div></td>
                     <td><span class="color-label">#6b533c</span></td>
                     <td><span class="color-label"><pre>(107,  83,  60)</pre></span></td>
                     <td><span class="color-label"><pre>( 29,  43,  41)</pre></span></td>
                     <td><span class="color-label">coral_dark</span></td>
                 </tr>
                 <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--steelblue_light)" data-color="steelblue_light"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--steelblue_light)" data-color="steelblue_light"></div></td>
                     <td><span class="color-label">#869dc4</span></td>
                     <td><span class="color-label"><pre>(134, 157, 196)</pre></span></td>
                     <td><span class="color-label"><pre>(217,  31,  76)</pre></span></td>
                     <td><span class="color-label">steelblue_light</span></td>
                 </tr>
                 <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--steelblue_medium)" data-color="steelblue_medium"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--steelblue_medium)" data-color="steelblue_medium"></div></td>
                     <td><span class="color-label">#3e6192</span></td>
                     <td><span class="color-label"><pre>( 62,  97, 146)</pre></span></td>
                     <td><span class="color-label"><pre>(215,  57,  57)</pre></span></td>
                     <td><span class="color-label">steelblue_medium</span></td>
                 </tr>
                 <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--steelblue_dark)" data-color="steelblue_dark"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--steelblue_dark)" data-color="steelblue_dark"></div></td>
                     <td><span class="color-label">#263c61</span></td>
                     <td><span class="color-label"><pre>( 38,  60,  97)</pre></span></td>
                     <td><span class="color-label"><pre>(217,  60,  38)</pre></span></td>
                     <td><span class="color-label">steelblue_dark</span></td>
                 </tr>
                 <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--dustyplum_light)" data-color="dustyplum_light"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--dustyplum_light)" data-color="dustyplum_light"></div></td>
                     <td><span class="color-label">#c28b85</span></td>
                     <td><span class="color-label"><pre>(194, 139, 133)</pre></span></td>
                     <td><span class="color-label"><pre>(  5,  31,  76)</pre></span></td>
                     <td><span class="color-label">dustyplum_light</span></td>
                 </tr>
                 <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--dustyplum_medium)" data-color="dustyplum_medium"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--dustyplum_medium)" data-color="dustyplum_medium"></div></td>
                     <td><span class="color-label">#8b524e</span></td>
                     <td><span class="color-label"><pre>(139,  82,  78)</pre></span></td>
                     <td><span class="color-label"><pre>(  3,  43,  54)</pre></span></td>
                     <td><span class="color-label">dustyplum_medium</span></td>
                 </tr>
                 <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--dustyplum_dark)" data-color="dustyplum_dark"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--dustyplum_dark)" data-color="dustyplum_dark"></div></td>
                     <td><span class="color-label">#5f3738</span></td>
                     <td><span class="color-label"><pre>( 95,  55,  56)</pre></span></td>
                     <td><span class="color-label"><pre>(358,  42,  37)</pre></span></td>
                     <td><span class="color-label">dustyplum_dark</span></td>
                 </tr>
                 <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--yellow_light)" data-color="yellow_light"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--yellow_light)" data-color="yellow_light"></div></td>
                     <td><span class="color-label">#f0d974</span></td>
                     <td><span class="color-label"><pre>(240, 217, 116)</pre></span></td>
                     <td><span class="color-label"><pre>( 48,  51,  94)</pre></span></td>
                     <td><span class="color-label">yellow_light</span></td>
                 </tr>
                 <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--yellow_medium)" data-color="yellow_medium"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--yellow_medium)" data-color="yellow_medium"></div></td>
                     <td><span class="color-label">#e6c12e</span></td>
                     <td><span class="color-label"><pre>(230, 193,  46)</pre></span></td>
                     <td><span class="color-label"><pre>( 47,  80,  90)</pre></span></td>
                     <td><span class="color-label">yellow_medium</span></td>
                 </tr>
                 <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--yellow_dark)" data-color="yellow_dark"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--yellow_dark)" data-color="yellow_dark"></div></td>
                     <td><span class="color-label">#b8912b</span></td>
                     <td><span class="color-label"><pre>(184, 145,  43)</pre></span></td>
                     <td><span class="color-label"><pre>( 43,  76,  72)</pre></span></td>
                     <td><span class="color-label">yellow_dark</span></td>
                 </tr>
                 <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--plum_light)" data-color="plum_light"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--plum_light)" data-color="plum_light"></div></td>
                     <td><span class="color-label">#9e91c4</span></td>
                     <td><span class="color-label"><pre>(158, 145, 196)</pre></span></td>
                     <td><span class="color-label"><pre>(255,  26,  76)</pre></span></td>
                     <td><span class="color-label">plum_light</span></td>
                 </tr>
                 <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--plum_medium)" data-color="plum_medium"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--plum_medium)" data-color="plum_medium"></div></td>
                     <td><span class="color-label">#6f58aa</span></td>
                     <td><span class="color-label"><pre>(111,  88, 170)</pre></span></td>
                     <td><span class="color-label"><pre>(256,  48,  66)</pre></span></td>
                     <td><span class="color-label">plum_medium</span></td>
                 </tr>
                 <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--plum_dark)" data-color="plum_dark"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--plum_dark)" data-color="plum_dark"></div></td>
                     <td><span class="color-label">#432f76</span></td>
                     <td><span class="color-label"><pre>( 67,  47, 118)</pre></span></td>
                     <td><span class="color-label"><pre>(256,  60,  46)</pre></span></td>
@@ -288,7 +320,7 @@
                     <th>Colour Label</th>
                 </tr>
                 <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--henyey)" data-color="henyey"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--henyey)" data-color="henyey"></div></td>
                     <td><span class="color-label">#fee28e</span></td>
                     <td><span class="color-label"><pre>(254, 226, 142)</pre></span></td>
                     <td><span class="color-label"><pre>( 44,  44,  99)</pre></span></td>
@@ -297,7 +329,7 @@
 
 
                 <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--hayashi)" data-color="hayashi"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--hayashi)" data-color="hayashi"></div></td>
                     <td><span class="color-label">#ee7416</span></td>
                     <td><span class="color-label"><pre>(238, 116,  22)</pre></span></td>
                     <td><span class="color-label"><pre>( 26,  90,  93)</pre></span></td>
@@ -306,7 +338,7 @@
 
 
                 <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--forever_young)" data-color="forever_young"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--forever_young)" data-color="forever_young"></div></td>
                     <td><span class="color-label">#b64203</span></td>
                     <td><span class="color-label"><pre>(182,  66,   3)</pre></span></td>
                     <td><span class="color-label"><pre>( 21,  98,  71)</pre></span></td>
@@ -315,7 +347,7 @@
 
 
                 <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--longevity_light)" data-color="longevity_light"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--longevity_light)" data-color="longevity_light"></div></td>
                     <td><span class="color-label">#b6e192</span></td>
                     <td><span class="color-label"><pre>(182, 225, 146)</pre></span></td>
                     <td><span class="color-label"><pre>( 92,  35,  88)</pre></span></td>
@@ -324,7 +356,7 @@
 
 
                 <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--longevity_medium)" data-color="longevity_medium"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--longevity_medium)" data-color="longevity_medium"></div></td>
                     <td><span class="color-label">#3ba358</span></td>
                     <td><span class="color-label"><pre>( 59, 163,  88)</pre></span></td>
                     <td><span class="color-label"><pre>(136,  63,  63)</pre></span></td>
@@ -333,7 +365,7 @@
 
 
                 <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--longevity_dark)" data-color="longevity_dark"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--longevity_dark)" data-color="longevity_dark"></div></td>
                     <td><span class="color-label">#006034</span></td>
                     <td><span class="color-label"><pre>(  0,  96,  52)</pre></span></td>
                     <td><span class="color-label"><pre>(152, 100,  37)</pre></span></td>
@@ -356,7 +388,7 @@
                     <th>Colour Label</th>
                 </tr>
                 <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--Vela)" data-color="Vela"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--Vela)" data-color="Vela"></div></td>
                     <td><span class="color-label">#f6bc6b</span></td>
                     <td><span class="color-label"><pre>(246, 188, 107)</pre></span></td>
                     <td><span class="color-label"><pre>( 34,  56,  96)</pre></span></td>
@@ -364,7 +396,7 @@
                 </tr>
 
                 <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--Monogem)" data-color="Monogem"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--Monogem)" data-color="Monogem"></div></td>
                     <td><span class="color-label">#e69138</span></td>
                     <td><span class="color-label"><pre>(230, 145,  56)</pre></span></td>
                     <td><span class="color-label"><pre>( 30,  75,  90)</pre></span></td>
@@ -372,7 +404,7 @@
                 </tr>
 
                 <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--Geminga)" data-color="Geminga"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--Geminga)" data-color="Geminga"></div></td>
                     <td><span class="color-label">#b45f06</span></td>
                     <td><span class="color-label"><pre>(180,  95,   6)</pre></span></td>
                     <td><span class="color-label"><pre>( 30,  96,  70)</pre></span></td>
@@ -380,7 +412,7 @@
                 </tr>
 
                 <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--Pulsar)" data-color="Pulsar"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--Pulsar)" data-color="Pulsar"></div></td>
                     <td><span class="color-label">#76204a</span></td>
                     <td><span class="color-label"><pre>(118,  32,  74)</pre></span></td>
                     <td><span class="color-label"><pre>(330,  72,  46)</pre></span></td>
@@ -388,7 +420,7 @@
                 </tr>
 
                 <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--one_zone)" data-color="one_zone"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--one_zone)" data-color="one_zone"></div></td>
                     <td><span class="color-label">#d8f1eb</span></td>
                     <td><span class="color-label"><pre>(216, 241, 235)</pre></span></td>
                     <td><span class="color-label"><pre>(165,  10,  94)</pre></span></td>
@@ -396,7 +428,7 @@
                 </tr>
 
                 <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--two_zone_light)" data-color="two_zone_light"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--two_zone_light)" data-color="two_zone_light"></div></td>
                     <td><span class="color-label">#3fbc9d</span></td>
                     <td><span class="color-label"><pre>( 63, 188, 157)</pre></span></td>
                     <td><span class="color-label"><pre>(165,  66,  73)</pre></span></td>
@@ -404,7 +436,7 @@
                 </tr>
 
                 <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--two_zone_medium)" data-color="two_zone_medium"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--two_zone_medium)" data-color="two_zone_medium"></div></td>
                     <td><span class="color-label">#2c836d</span></td>
                     <td><span class="color-label"><pre>( 44, 131, 109)</pre></span></td>
                     <td><span class="color-label"><pre>(164,  66,  51)</pre></span></td>
@@ -412,7 +444,7 @@
                 </tr>
 
                 <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--two_zone_dark)" data-color="two_zone_dark"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--two_zone_dark)" data-color="two_zone_dark"></div></td>
                     <td><span class="color-label">#194b3e</span></td>
                     <td><span class="color-label"><pre>( 25,  75,  62)</pre></span></td>
                     <td><span class="color-label"><pre>(164,  66,  29)</pre></span></td>
@@ -420,7 +452,7 @@
                 </tr>
 
                 <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--extrapolated)" data-color="extrapolated"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--extrapolated)" data-color="extrapolated"></div></td>
                     <td><span class="color-label">#87d7df</span></td>
                     <td><span class="color-label"><pre>(135, 215, 223)</pre></span></td>
                     <td><span class="color-label"><pre>(185,  39,  87)</pre></span></td>
@@ -428,7 +460,7 @@
                 </tr>
 
                 <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--background_bar)" data-color="background_bar"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--background_bar)" data-color="background_bar"></div></td>
                     <td><span class="color-label">#eeeeee</span></td>
                     <td><span class="color-label"><pre>(238, 238, 238)</pre></span></td>
                     <td><span class="color-label"><pre>(  0,   0,  93)</pre></span></td>
@@ -450,133 +482,133 @@
                     <th>HSV</th>
                     <th>Colour Label</th>
                 </tr>    <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--S2_1)" data-color="S2_1"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--S2_1)" data-color="S2_1"></div></td>
                     <td><span class="color-label">#d9eeee</span></td>
                     <td><span class="color-label"><pre>(217, 238, 238)</pre></span></td>
                     <td><span class="color-label"><pre>(180,   8,  93)</pre></span></td>
                     <td><span class="color-label">S2_1</span></td>
                 </tr>
                 <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--S2_2)" data-color="S2_2"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--S2_2)" data-color="S2_2"></div></td>
                     <td><span class="color-label">#bfe2e2</span></td>
                     <td><span class="color-label"><pre>(191, 226, 226)</pre></span></td>
                     <td><span class="color-label"><pre>(180,  15,  88)</pre></span></td>
                     <td><span class="color-label">S2_2</span></td>
                 </tr>
                 <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--S2_3)" data-color="S2_3"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--S2_3)" data-color="S2_3"></div></td>
                     <td><span class="color-label">#a6d7d8</span></td>
                     <td><span class="color-label"><pre>(166, 215, 216)</pre></span></td>
                     <td><span class="color-label"><pre>(181,  23,  84)</pre></span></td>
                     <td><span class="color-label">S2_3</span></td>
                 </tr>
                 <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--S2)" data-color="S2"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--S2)" data-color="S2"></div></td>
                     <td><span class="color-label">#008a8b</span></td>
                     <td><span class="color-label"><pre>(  0, 138, 139)</pre></span></td>
                     <td><span class="color-label"><pre>(180, 100,  54)</pre></span></td>
                     <td><span class="color-label">S2</span></td>
                 </tr>
                 <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--S62_1)" data-color="S62_1"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--S62_1)" data-color="S62_1"></div></td>
                     <td><span class="color-label">#d8d9ed</span></td>
                     <td><span class="color-label"><pre>(216, 217, 237)</pre></span></td>
                     <td><span class="color-label"><pre>(237,   8,  92)</pre></span></td>
                     <td><span class="color-label">S62_1</span></td>
                 </tr>
                 <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--S62_2)" data-color="S62_2"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--S62_2)" data-color="S62_2"></div></td>
                     <td><span class="color-label">#bfbfe2</span></td>
                     <td><span class="color-label"><pre>(191, 191, 226)</pre></span></td>
                     <td><span class="color-label"><pre>(240,  15,  88)</pre></span></td>
                     <td><span class="color-label">S62_2</span></td>
                 </tr>
                 <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--S62_3)" data-color="S62_3"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--S62_3)" data-color="S62_3"></div></td>
                     <td><span class="color-label">#a6a6d7</span></td>
                     <td><span class="color-label"><pre>(166, 166, 215)</pre></span></td>
                     <td><span class="color-label"><pre>(240,  22,  84)</pre></span></td>
                     <td><span class="color-label">S62_3</span></td>
                 </tr>
                 <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--S62)" data-color="S62"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--S62)" data-color="S62"></div></td>
                     <td><span class="color-label">#00048b</span></td>
                     <td><span class="color-label"><pre>(  0,   4, 139)</pre></span></td>
                     <td><span class="color-label"><pre>(238, 100,  54)</pre></span></td>
                     <td><span class="color-label">S62</span></td>
                 </tr>
                 <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--S4711_1)" data-color="S4711_1"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--S4711_1)" data-color="S4711_1"></div></td>
                     <td><span class="color-label">#ecd9ec</span></td>
                     <td><span class="color-label"><pre>(236, 217, 236)</pre></span></td>
                     <td><span class="color-label"><pre>(300,   8,  92)</pre></span></td>
                     <td><span class="color-label">S4711_1</span></td>
                 </tr>
                 <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--S4711_2)" data-color="S4711_2"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--S4711_2)" data-color="S4711_2"></div></td>
                     <td><span class="color-label">#dfbfdf</span></td>
                     <td><span class="color-label"><pre>(223, 191, 223)</pre></span></td>
                     <td><span class="color-label"><pre>(300,  14,  87)</pre></span></td>
                     <td><span class="color-label">S4711_2</span></td>
                 </tr>
                 <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--S4711_3)" data-color="S4711_3"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--S4711_3)" data-color="S4711_3"></div></td>
                     <td><span class="color-label">#d2a6d4</span></td>
                     <td><span class="color-label"><pre>(210, 166, 212)</pre></span></td>
                     <td><span class="color-label"><pre>(297,  21,  83)</pre></span></td>
                     <td><span class="color-label">S4711_3</span></td>
                 </tr>
                 <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--S4711)" data-color="S4711"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--S4711)" data-color="S4711"></div></td>
                     <td><span class="color-label">#800080</span></td>
                     <td><span class="color-label"><pre>(128,   0, 128)</pre></span></td>
                     <td><span class="color-label"><pre>(300, 100,  50)</pre></span></td>
                     <td><span class="color-label">S4711</span></td>
                 </tr>
                 <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--S4714_1)" data-color="S4714_1"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--S4714_1)" data-color="S4714_1"></div></td>
                     <td><span class="color-label">#fadce2</span></td>
                     <td><span class="color-label"><pre>(250, 220, 226)</pre></span></td>
                     <td><span class="color-label"><pre>(348,  11,  98)</pre></span></td>
                     <td><span class="color-label">S4714_1</span></td>
                 </tr>
                 <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--S4714_2)" data-color="S4714_2"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--S4714_2)" data-color="S4714_2"></div></td>
                     <td><span class="color-label">#f6c4ce</span></td>
                     <td><span class="color-label"><pre>(246, 196, 206)</pre></span></td>
                     <td><span class="color-label"><pre>(348,  20,  96)</pre></span></td>
                     <td><span class="color-label">S4714_2</span></td>
                 </tr>
                 <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--S4714_3)" data-color="S4714_3"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--S4714_3)" data-color="S4714_3"></div></td>
                     <td><span class="color-label">#f3adbb</span></td>
                     <td><span class="color-label"><pre>(243, 173, 187)</pre></span></td>
                     <td><span class="color-label"><pre>(348,  28,  95)</pre></span></td>
                     <td><span class="color-label">S4714_3</span></td>
                 </tr>
                 <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--S4714)" data-color="S4714"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--S4714)" data-color="S4714"></div></td>
                     <td><span class="color-label">#db143b</span></td>
                     <td><span class="color-label"><pre>(219,  20,  59)</pre></span></td>
                     <td><span class="color-label"><pre>(348,  90,  85)</pre></span></td>
                     <td><span class="color-label">S4714</span></td>
                 </tr>
                 <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--S1_1)" data-color="S1_1"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--S1_1)" data-color="S1_1"></div></td>
                     <td><span class="color-label">#ffe2bf</span></td>
                     <td><span class="color-label"><pre>(255, 226, 191)</pre></span></td>
                     <td><span class="color-label"><pre>( 32,  25, 100)</pre></span></td>
                     <td><span class="color-label">S1_1</span></td>
                 </tr>
                 <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--S1_2)" data-color="S1_2"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--S1_2)" data-color="S1_2"></div></td>
                     <td><span class="color-label">#ffd199</span></td>
                     <td><span class="color-label"><pre>(255, 209, 153)</pre></span></td>
                     <td><span class="color-label"><pre>( 32,  40, 100)</pre></span></td>
                     <td><span class="color-label">S1_2</span></td>
                 </tr>
                 <tr>
-                    <td><div  class="color-box" onclick="changeColor(this)" style="background:var(--S1)" data-color="S1"></div></td>
+                    <td><div  class="color-box" onclick="changeColorTarget(this);changeColorMemory(this)" style="background:var(--S1)" data-color="S1"></div></td>
                     <td><span class="color-label">#ff8c00</span></td>
                     <td><span class="color-label"><pre>(255, 140,   0)</pre></span></td>
                     <td><span class="color-label"><pre>( 32, 100, 100)</pre></span></td>
@@ -587,8 +619,6 @@
             <p style="padding-top: 30px;">
                 Note that some colours can appear in several palettes.
             </p>
-
-
 
         </main>
 
@@ -1004,7 +1034,7 @@
     const totalBoxes = 5;
 
     // cycle colors through target boxes
-    function changeColor(element) {
+    function changeColorTarget(element) {
         const rgb      = window.getComputedStyle(element).backgroundColor;
         const hexText  = rgbToHex(rgb);
         const colorKey = element.dataset.color;
@@ -1020,8 +1050,8 @@
     }
 
     // jump from target box to small colour box
-    function jumpToColor(targetBox) {
-        const colorKey = targetBox.dataset.color;
+    function jumpToColor(varBox) {
+        const colorKey = varBox.dataset.color;
         if (!colorKey) return;
 
         const source = document.querySelector('.color-box[data-color="' + colorKey + '"]');
@@ -1072,8 +1102,74 @@
         document.getElementById("scatterChart").style.border = "none";
     }
 
+    // memory boxes
+    let   nextMemory = 1;
+    const totalMemories = 20;
+
+    // cycle colors through target boxes
+    function changeColorMemory(element) {
+        const rgb      = window.getComputedStyle(element).backgroundColor;
+        const hexText  = rgbToHex(rgb);
+        const colorKey = element.dataset.color;
+
+        // document.getElementById("memory" + nextMemory).style.backgroundColor = rgb;
+        // document.getElementById("memory" + nextMemory).dataset.color = colorKey;
+        // document.getElementById("memory" + nextMemory).dataset.hex = hexText;
+        // document.getElementById("memory" + nextMemory).classList.add("active");
+
+
+        updateMemoryBoxes(rgb, hexText, colorKey);
+
+        // nextMemory++;
+        // if (nextMemory > totalMemories) {
+        //     nextMemory = 1;
+        // }
+    }
+
+
+    function updateMemoryBoxes(rgb, hexText, colorKey) {
+        const lastBox = document.getElementById('memory' + totalMemories);
+        const isFull = lastBox.dataset.color && lastBox.dataset.color !== '';
+
+        if (!isFull) {
+            for (let i = 1; i <= totalMemories; i++) {
+                const box = document.getElementById('memory' + i);
+                if (!box.dataset.color) {
+                    box.style.backgroundColor = rgb;
+                    box.dataset.color = colorKey;
+                    box.dataset.hex = hexText;
+                    box.classList.add('active');
+                    break;
+                }
+            }
+        } else {
+            for (let i = 1; i < totalMemories; i++) {
+                const current = document.getElementById('memory' + i);
+                const next = document.getElementById('memory' + (i + 1));
+
+                current.style.backgroundColor = next.style.backgroundColor;
+                current.dataset.color = next.dataset.color;
+                current.dataset.hex = next.dataset.hex;
+
+                if (next.classList.contains('active')) {
+                    current.classList.add('active');
+                } else {
+                    current.classList.remove('active');
+                }
+            }
+
+            const rightmost = document.getElementById('memory' + totalMemories);
+            rightmost.style.backgroundColor = rgb;
+            rightmost.dataset.color = colorKey;
+            rightmost.dataset.hex = hexText;
+            rightmost.classList.add('active');
+        }
+    }
+
+
+
     // toggle dark and light mode
-    function myFunction() {
+    function toggleDarkLight() {
       var element = document.body;
       element.classList.toggle("dark-light-mode");
 
