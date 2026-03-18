@@ -219,7 +219,7 @@ body {
     border-radius: 10px;
 }
 
-.dark-light-mode canvas {
+.dark-light-mode .chart-canvas {
     background-color: white;
 }
 

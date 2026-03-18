@@ -64,6 +64,7 @@
                 <div class='memory-box' id="memory18" onclick="jumpToColor(this)"></div>
                 <div class='memory-box' id="memory19" onclick="jumpToColor(this)"></div>
                 <div class='memory-box' id="memory20" onclick="jumpToColor(this)"></div>
+                <div class='memory-box' id="memory21" onclick="jumpToColor(this)"></div>
             </div>
         </div>
 
@@ -647,13 +648,13 @@
                </div>
 
                <div id="chartContainer" style="display:none; margin:80px auto 0 auto; width:100%; max-width:600px;">
-                   <canvas id="lineChart"></canvas>
+                   <canvas class='chart-canvas' id="lineChart"></canvas>
                    <br>
-                   <canvas id="barChart"></canvas>
+                   <canvas class='chart-canvas' id="barChart"></canvas>
                    <br>
-                   <canvas id="scatterChart"></canvas>
+                   <canvas class='chart-canvas' id="scatterChart"></canvas>
                    <br>
-                   <canvas id="pieChart"></canvas>
+                   <canvas class='chart-canvas' id="pieChart"></canvas>
                </div>
 
             </div>
@@ -1018,6 +1019,11 @@
       document.getElementById("pieChart").style.borderRadius = "10px";
 
       document.getElementById("chartButtonText").textContent = "Update Plots";
+
+      document.getElementById('pieChart').classList.add('chart-canvas');
+      document.getElementById('lineChart').classList.add('chart-canvas');
+      document.getElementById('barChart').classList.add('chart-canvas');
+      document.getElementById('scatterChart').classList.add('chart-canvas');
       }
 
 
@@ -1100,33 +1106,26 @@
         document.getElementById("lineChart").style.border = "none";
         document.getElementById("barChart").style.border = "none";
         document.getElementById("scatterChart").style.border = "none";
+        document.getElementById('pieChart').classList.remove('chart-canvas');
+        document.getElementById('lineChart').classList.remove('chart-canvas');
+        document.getElementById('barChart').classList.remove('chart-canvas');
+        document.getElementById('scatterChart').classList.remove('chart-canvas');
     }
 
     // memory boxes
     let   nextMemory = 1;
-    const totalMemories = 20;
+    const totalMemories = 21;
 
-    // cycle colors through target boxes
+    // cycle colors through memory boxes
     function changeColorMemory(element) {
         const rgb      = window.getComputedStyle(element).backgroundColor;
         const hexText  = rgbToHex(rgb);
         const colorKey = element.dataset.color;
 
-        // document.getElementById("memory" + nextMemory).style.backgroundColor = rgb;
-        // document.getElementById("memory" + nextMemory).dataset.color = colorKey;
-        // document.getElementById("memory" + nextMemory).dataset.hex = hexText;
-        // document.getElementById("memory" + nextMemory).classList.add("active");
-
-
         updateMemoryBoxes(rgb, hexText, colorKey);
-
-        // nextMemory++;
-        // if (nextMemory > totalMemories) {
-        //     nextMemory = 1;
-        // }
     }
 
-
+    // queue memory boxes and move colours along
     function updateMemoryBoxes(rgb, hexText, colorKey) {
         const lastBox = document.getElementById('memory' + totalMemories);
         const isFull = lastBox.dataset.color && lastBox.dataset.color !== '';
