@@ -186,14 +186,14 @@ footer {
         text-decoration: none;
         color: var(--grey_red);
         /* align-items: center; */
-        float: left;
+        padding: 0 20px;
         display: block;
-        padding-left: 4%;
+        /* padding-left: 4%; */
     }
 
     .link_header .text {
         font-family: monospace;
-        font-size: 24px;
+        font-size: 20px;
         /* color: #ca755b; */
         color: var(--grey_red);
 
@@ -201,7 +201,7 @@ footer {
 
     .link_header .text_this_site {
         font-family: monospace;
-        font-size: 24px;
+        font-size: 20px;
         /* color: #ca755b; */
         color: var(--light_grey_red);
 
@@ -876,6 +876,7 @@ hr {
 
 .topnav {
     overflow: auto;
+    justify-content: center;
 }
 
 .topnav a {
@@ -884,7 +885,7 @@ hr {
   color: #f2f2f2;
   text-align: center;
   text-decoration: none;
-  font-size: 17px;
+  font-size: 15px;
 }
 
 /* Hide the link that should open and close the topnav on small screens */

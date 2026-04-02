@@ -92,10 +92,9 @@ body {
     padding: 10px 15px;
     margin: 10px;
     background-color: #c5c1bc;
+    color: #1f1b16;
     text-decoration: none;
     border-radius: 15px;
-    color: #1f1b16;
-    border: 2px solid #1f1b16;
     transition-duration: 0.4s;
     width: 140px;
     position: absolute;
@@ -182,7 +181,7 @@ body {
   width: 35px;
   height: 35px;
   cursor: pointer;
-  border: none; // 2px solid black;
+  border: none; /* 2px solid black; */
   margin-bottom: 5px;
   border-radius: 5px;
 }
@@ -345,8 +344,9 @@ th, td {
 
 /* page layout things */
 .page-layout {
-    min-height: 100vh;
-    padding-top: 50px;
+    display: flex;
+    height: calc(100vh - 80px); /* subtract your header height */
+    overflow: hidden;
 }
 
 .main-content {
@@ -355,9 +355,13 @@ th, td {
     box-sizing: border-box;
     padding-left: 5%;
     padding-right: 5%;
+    overflow-y: auto;
+    flex: 1;
+    padding-top: 20px;
 }
 
 .sidebar {
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
     width: 40%;
@@ -377,10 +381,12 @@ h1 {
     margin-top: 50px;
     font-size: 16px;
     font-weight: bold;
+    overflow: visible;
 }
 
 .links-to-papers {
     color: inherit;
+    position: relative;
 }
 
 .links-to-papers:hover {
@@ -392,6 +398,63 @@ h1 {
 }
 
 .dark-light-mode .links-to-papers:hover {
+    color: #3f3a34;
+}
+
+/* .links-to-papers::after {
+    position: fixed;
+    top: var(--tooltip-top);
+    left: var(--tooltip-left);
+    transform: none;
+    content: '';
+    width: 200px;
+    height: 150px;
+    background-image: var(--tooltip-img);
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    z-index: 200;
+}
+
+.links-to-papers:hover::after {
+    opacity: 1;
+} */
+
+#link-tooltip {
+    position: fixed;
+    max-width: 300px;      /* cap the maximum size */
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    z-index: 200;
+    overflow: hidden;
+}
+
+#link-tooltip img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.link-to-main {
+    color: inherit;
+}
+
+.link-to-main:hover {
+    color: white;
+}
+
+.dark-light-mode .link-to-main {
+    color: inherit;
+}
+
+.dark-light-mode .link-to-main:hover {
     color: #3f3a34;
 }
 
@@ -513,8 +576,6 @@ footer {
     position: absolute;
     opacity: 0;
     pointer-events: none;
-    position: absolute;
-    opacity: 0;
     width: 0;
     height: 0;
 }
@@ -526,4 +587,37 @@ footer {
 .pcr-app {
     position: relative !important;
     z-index: 1 !important;
+    margin: 10px !important;
+    padding: 4px !important;
+}
+
+.tooltip-pickr{
+  position: relative;
+  display: inline-block;
+  border-bottom: 1.5px dotted;
+  cursor: pointer;
+}
+
+.tooltip-pickr-text {
+  visibility: hidden;
+  width: auto;
+  bottom: 100%;
+  left: 65%;
+  margin-left: -65px;
+  color: #1f1b16;
+  background-color: #f2efea;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 8px;
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltip-pickr:hover .tooltip-pickr-text {
+  visibility: visible;
+}
+
+.dark-light-mode .tooltip-pickr-text {
+  color: #f2efea;
+  background-color: #3f3a34;
 }

@@ -35,7 +35,7 @@
 
     <header>
         <div class="header-left">
-            <a class="links-to-papers" href="https://isabellejohn.github.io" target="_blank" style="text-decoration:none;">
+            <a class="link-to-main" href="index.html" target="_blank" style="text-decoration:none;">
             <span style="display:block;font-size:20px; padding-bottom:5px;">Isabelle John</span>
             <span style="display:block;font-size:12px">
                 <i class="fa-solid fa-arrow-left"></i> Back to main website
@@ -45,7 +45,7 @@
 
 
         <div class="header-center">
-            Colour Palettes
+            <span><i class="fa-solid fa-palette"></i> Colour Palettes</span>
 
             <div class='palette-memory'>
                 <div class='memory-box' id="memory1"  onclick="handleMemoryClick(this)"></div>
@@ -86,7 +86,14 @@
 
             <br><br><br>
 
-            Select a colour in the colour picker. Click on the colour box to use the colour in the preview plots on the right.
+            Select a colour in the <div class="tooltip-pickr">
+                                        <a class="links-to-papers" style="text-decoration: none;" href="https://simonwep.github.io/pickr/">
+                                            colour picker
+                                        </a>
+                                        <span class="tooltip-pickr-text">Pickr Nano</span>
+                                    </div>. Click on the colour box to use the colour in the preview plots on the right.
+
+
 
             <div class="button-row" style="justify-content: left; align-items: center; padding-top: 10px;">
                 <!-- <div class="color-picker-wrapper"> old color picker (native)
@@ -135,7 +142,7 @@
               </ul>
             </nav>
 
-            <h1 id="solar_modulation_colours"> Colours from <a class="links-to-papers" href="https://isabellejohn.github.io/research.html#paper11" target="_blank">Solar Modulation Paper</a> </h1>
+            <h1 id="solar_modulation_colours"> Colours from <a class="links-to-papers" data-tooltip-img="papers/SolarModulationUncertainties.png" href="https://isabellejohn.github.io/research.html#paper11" target="_blank">Solar Modulation Paper</a> </h1>
             <p>
                 This colour scheme is partially based on the MS Office theme colours, with some modification and tuning down
                 of the colours.
@@ -360,7 +367,7 @@
             </table>
 
 
-            <h1 id="immortal_stars_colours"> Colours from <a class="links-to-papers" href="https://isabellejohn.github.io/research.html#paper6" target="_blank">Immortal Stars Paper</a> </h1>
+            <h1 id="immortal_stars_colours"> Colours from <a class="links-to-papers" data-tooltip-img="papers/StellarMass_vs_GCdistance_1.0GeV_1e-37cm2_1.0spike_withtext.png" href="https://isabellejohn.github.io/research.html#paper6" target="_blank">Immortal Stars Paper</a> </h1>
             <p>
                 I developed this colour scheme for plots with large shaded areas.
             </p>
@@ -427,7 +434,7 @@
             </table>
 
 
-            <h1 id="pulsars_diffusion_colours"> Colours from <a class="links-to-papers" href="https://isabellejohn.github.io/research.html#paper8" target="_blank">Pulsar Paper</a></h1>
+            <h1 id="pulsars_diffusion_colours"> Colours from <a class="links-to-papers" data-tooltip-img="papers/HESS_electrons.png" href="https://isabellejohn.github.io/research.html#paper8" target="_blank">Pulsar Paper</a></h1>
             <p>
                 I made this colour scheme for plots with the green shades as background and orange and burgundy markers on top of the green shades.
             </p>
@@ -522,7 +529,7 @@
 
             </table>
 
-            <h1 id="stellar_colours"> Colours from <a class="links-to-papers" href="https://isabellejohn.github.io/research.html#paper5" target="_blank">Dark Matter in Stars Paper</a></h1>
+            <h1 id="stellar_colours"> Colours from <a class="links-to-papers" data-tooltip-img="papers/S-cluster_stars_vs_important_distances.png" href="https://isabellejohn.github.io/research.html#paper5" target="_blank">Dark Matter in Stars Paper</a></h1>
             <p>
                 This is the colour scheme for the S-cluster stars.
             </p>
@@ -1235,7 +1242,7 @@
         for (let i = 1; i <= totalBoxes; i++) {
           document.getElementById("target" + i).style.backgroundColor = "";
           document.getElementById('target' + i).dataset.color = "";
-          document.getElementById("target" + i).dataset.hex = ""; 
+          document.getElementById("target" + i).dataset.hex = "";
           document.getElementById('target' + i).classList.remove('active');
           document.getElementById("targetText" + i).textContent = "";
         }
@@ -1544,6 +1551,27 @@
     }
 
 
+    // tooltip for links to papers to show preview plot
+    document.addEventListener('DOMContentLoaded', () => {
+        const tooltip = document.getElementById('link-tooltip');
+
+        document.querySelectorAll('.links-to-papers[data-tooltip-img]').forEach(link => {
+            const img = link.getAttribute('data-tooltip-img');
+
+            link.addEventListener('mouseenter', () => {
+                const rect = link.getBoundingClientRect();
+                document.getElementById('link-tooltip-img').src = img;
+                tooltip.style.top  = (rect.bottom + 8) + 'px';
+                tooltip.style.left = rect.left + 'px';
+                tooltip.style.opacity = '1';
+            });
+
+            link.addEventListener('mouseleave', () => {
+                tooltip.style.opacity = '0';
+            });
+        });
+    });
+
 
 </script>
 
@@ -1592,6 +1620,8 @@
     </script>
 </footer>
 
+<!-- makes tooltips to preview plots -->
+<div id="link-tooltip"><img id="link-tooltip-img" src="" alt=""></div>
 </body>
 
 </html>
