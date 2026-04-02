@@ -86,7 +86,7 @@
 
             <br><br><br>
 
-            Open the colour picker to select a colour. Click on the colour box to use them in the preview plots on the right.
+            Select a colour in the colour picker. Click on the colour box to use the colour in the preview plots on the right.
 
             <div class="button-row" style="justify-content: left; align-items: center; padding-top: 10px;">
                 <!-- <div class="color-picker-wrapper"> old color picker (native)
@@ -677,7 +677,7 @@
 
         <aside class="sidebar">
             <div style="margin: 5%; margin-top:50px;">
-                    Select colours on the left to collect them here to see how they look together. Press button below for preview plots showcasing the selected colours.
+                    Select colours on the left to collect them here to see how they look together. Press the button below for preview plots showcasing the selected colours.
 
                 <div class="palette-compare">
 
@@ -1235,6 +1235,7 @@
         for (let i = 1; i <= totalBoxes; i++) {
           document.getElementById("target" + i).style.backgroundColor = "";
           document.getElementById('target' + i).dataset.color = "";
+          document.getElementById("target" + i).dataset.hex = ""; 
           document.getElementById('target' + i).classList.remove('active');
           document.getElementById("targetText" + i).textContent = "";
         }
