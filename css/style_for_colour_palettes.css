@@ -91,7 +91,7 @@ body {
     display: inline-block;
     padding: 10px 15px;
     margin: 10px;
-    background-color:#c5c1bc;
+    background-color: #c5c1bc;
     text-decoration: none;
     border-radius: 15px;
     color: #1f1b16;
@@ -102,6 +102,7 @@ body {
     /* top: 80px; */
     top: 10px;
     right: 30px;
+    border: 2px solid #37322c;
     /* transition: background-color 0.3s, border-color 0.3s, color 0.3s; */
 }
 
@@ -109,13 +110,14 @@ body {
 .mode-button:hover {
   color: #1f1b16;
   background-color: #f2efea;
+  border: 2px solid #37322c;
 }
 
 /* Light mode */
 .dark-light-mode .mode-button {
   color: #f2efea;
   background-color: #3f3a34;
-  border: 2px solid #f2efea;
+  border: 2px solid #c5c1bc;
 }
 
 /* Hover light */
@@ -141,7 +143,7 @@ body {
 
 .chart-button {
     position: static;
-    width: 200px;
+    width: auto;
     margin-right: 0;
     margin-left: 0;
     margin-top: 5px;
@@ -185,24 +187,88 @@ body {
   border-radius: 5px;
 }
 
+.picker-button {
+    width: auto;
+}
+
+.preview-box {
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    min-width: 35px;
+    min-height: 35px;
+    border-radius: 5px;
+    display: inline-block;
+    margin-top: 0px;
+    margin-left: 20px;
+    margin-right: 20px;
+    vertical-align: middle;
+    background: #878079;
+}
+
+.color-picker-wrapper {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.color-info {
+    margin-top: 5px;
+    display: flex;
+    gap: 10px;
+    line-height: 1.5;
+    text-align: center;
+}
+
+.target-item {
+    width: 20%;
+    min-width: 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 5px;
+}
 
 .target-box {
-  /* width: 120px;
-  height: 120px; */
-  width: 20%;          /* or whatever percentage you want */
-  aspect-ratio: 1 / 1;
-  border: none; // 2px solid black;
-  background: #878079;
-  border-radius: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 5px;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background: #878079;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5px;
+    position: relative;
+    transition: outline 0.2s ease;
+}
+
+.target-clear {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #1f1b16;
+    background: #f2efea;
+    color: black;
+    border-radius: 50%;
+    padding: 0;
+    text-align: center;
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    z-index: 10;
+}
+
+.target-box.active:hover .target-clear {
+    opacity: 0.6;
+    pointer-events: auto;
 }
 
 .target-box:hover {
-    transition: transform 0.3s ease;
     outline: 2px solid #444444;
+    transition: transform 0.3s ease;
 }
 
 .dark-light-mode .target-box:hover {
@@ -223,6 +289,43 @@ body {
     background-color: white;
 }
 
+
+[id] {
+  scroll-margin-top: 100px; /* height of your header */
+}
+
+.toc {
+    border: 2px solid #37322c;
+    border-radius: 5px;
+}
+
+.toc ul {
+    list-style: none;
+    padding: 5px;
+    margin: 0;
+}
+
+.toc li {
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+.toc a {
+    text-decoration: none;
+    color: inherit;
+    font-family: Menlo, monospace;
+    display: block;
+    padding: 6px 10px;
+    border-radius: 6px;
+}
+
+.toc a:hover {
+    background-color: #37322c;
+}
+
+.dark-light-mode .toc a:hover {
+    background-color: #c5c1bc;
+}
 
 table {
     margin: 15px;
@@ -345,22 +448,6 @@ h1 {
     opacity: 1;
 }
 
-/* header {
-    width: 100%;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    margin: 0;
-    padding: 5px 10px;
-    background-color: inherit;
-    color: inherit;
-    font-family: inherit;
-    font-size: 12px;
-    border-bottom: 2px solid #37322c;
-    z-index: 10;
-    position: fixed;
-} */
 
 header {
   display: flex;
@@ -372,7 +459,7 @@ header {
   padding: 5px 10px;
   width: 100%;
   background-color: inherit;
-  border-bottom: 2px solid #37322c;
+  border-bottom: 3px solid #37322c;
   min-height: 80px;
   box-sizing: border-box;
 }
@@ -412,5 +499,43 @@ footer {
     position: relative;
     font-family: inherit;
     font-size: 12px;
-    border-top: 2px solid #37322c;
+    border-top: 3px solid #37322c;
 }
+
+.color-picker-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#colorPicker {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+/* #picker-trigger {
+  width: 28px;
+  height: 28px;
+  border: 2px solid #37322c;
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.pcr-app .pcr-interaction .pcr-type {
+  display: none !important;
+} */
+
+/* #picker-trigger {
+  width: 260px;
+  min-height: 50px;
+  border: 2px solid green;
+}
+
+.pcr-app[data-theme='nano'] {
+  width: 260px !important;
+}
+
+.pcr-app .pcr-interaction .pcr-type {
+  display: none !important;
+} */

@@ -23,6 +23,10 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="css/style_for_colour_palettes.css">
+
+    <!-- color picker from Pickr -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/nano.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.min.js"></script>
 </head>
 
 
@@ -90,15 +94,22 @@
             </div> -->
 
             <div class="button-row" style="justify-content: left; padding-top: 10px;">
-                <div class="color-picker-wrapper">
+                <!-- <div class="color-picker-wrapper">
                     <button class="mode-button clear-button picker-button" id="pickerBtn">
                         <i class="fa-solid fa-palette"></i>
                         <span>Open Colour Picker</span>
-                    </button>
-                    <div><input type="color" id="colorPicker"></div>
+                    </button> -->
 
+                    <!-- <div id="picker-trigger"></div>
+                    <div id="previewBox" class="preview-box" onclick="changeColorTarget(this);changeColorMemory(this)"></div>
+                </div> -->
+
+                <div class="color-picker-wrapper">
+                    <div id="picker-trigger"></div>
                     <div id="previewBox" class="preview-box" onclick="changeColorTarget(this);changeColorMemory(this)"></div>
                 </div>
+
+                <!-- <input type="color" id="colorPicker" style="display:none;"> -->
 
                 <div class="color-info">
                     <span id="colorHex" style="margin-right:25px"></span>
@@ -1388,9 +1399,9 @@
     }
 
     // colour picker
-    const btn = document.getElementById("pickerBtn");
-    const picker = document.getElementById("colorPicker");
-    const preview = document.getElementById("previewBox");
+    // const btn = document.getElementById("pickerBtn");
+    // const picker = document.getElementById("colorPicker");
+    // const preview = document.getElementById("previewBox");
     const hexText = document.getElementById("colorHex");
     const rgbText = document.getElementById("colorRGB");
     const hsvText = document.getElementById("colorHSV");
@@ -1437,6 +1448,37 @@
       }
     }
 
+
+
+    // color picker from Pickr
+    const pickr = Pickr.create({
+        el: '#picker-trigger',
+        theme: 'nano',
+        default: '#878079',
+        useAsButton: true,
+
+        components: {
+            preview: true,
+            opacity: false,
+            hue: true,
+            interaction: {
+                hex: true,
+                input: true,
+                save: false,
+                cancel: false,
+                clear: false
+            }
+        }
+    });
+
+    pickr.on('change', (color) => {
+      const hex = color.toHEXA().toString();
+      const preview = document.getElementById('previewBox');
+
+      preview.style.backgroundColor = hex;
+      preview.dataset.color = hex;
+      preview.dataset.hex = hex;
+    });
 
 
 </script>
