@@ -1388,31 +1388,33 @@
     }
 
     // colour picker
-    const btn = document.getElementById("pickerBtn");
-    const picker = document.getElementById("colorPicker");
-    const preview = document.getElementById("previewBox");
-    const hexText = document.getElementById("colorHex");
-    const rgbText = document.getElementById("colorRGB");
-    const hsvText = document.getElementById("colorHSV");
+    document.addEventListener("DOMContentLoaded", () => {
+        const btn = document.getElementById("pickerBtn");
+        const picker = document.getElementById("colorPicker");
+        const preview = document.getElementById("previewBox");
+        const hexText = document.getElementById("colorHex");
+        const rgbText = document.getElementById("colorRGB");
+        const hsvText = document.getElementById("colorHSV");
 
-    btn.addEventListener("click", () => {
-      picker.click();
-    });
+        btn.addEventListener("click", () => {
+          picker.click();
+        });
 
-    picker.addEventListener("input", function () {
-        const hex = picker.value;
-        const {r, g, b} = hexToRgb(hex);
-        const {h, s, v} = rgbToHsv(r, g, b);
+        picker.addEventListener("input", function () {
+            const hex = picker.value;
+            const {r, g, b} = hexToRgb(hex);
+            const {h, s, v} = rgbToHsv(r, g, b);
 
-      // update preview box
-      preview.style.backgroundColor = hex;
+          // update preview box
+          preview.style.backgroundColor = hex;
 
-      setLabelValue(hexText, 'HEX', hex);
-      setLabelValue(rgbText, 'RGB', `(${r}, ${g}, ${b})`);
-      setLabelValue(hsvText, 'HSV', `(${h}, ${s}, ${v})`);
+          setLabelValue(hexText, 'HEX', hex);
+          setLabelValue(rgbText, 'RGB', `(${r}, ${g}, ${b})`);
+          setLabelValue(hsvText, 'HSV', `(${h}, ${s}, ${v})`);
 
-      // (optional) use color in your app
-      console.log(hex);
+          // (optional) use color in your app
+          console.log(hex);
+        });
     });
 
 
