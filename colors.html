@@ -84,11 +84,6 @@
 
             Open the colour picker to select a colour. Click on the colour box to use them in the preview plots on the right.
 
-            <!-- <div class="color-picker-wrapper">
-                <div id="picker-trigger"></div>
-                <div id="previewBox" class="preview-box" onclick="changeColorTarget(this);changeColorMemory(this)"></div>
-            </div> -->
-
             <div class="button-row" style="justify-content: left; padding-top: 10px;">
                 <div class="color-picker-wrapper">
                     <button class="mode-button clear-button picker-button" id="pickerBtn">
@@ -108,7 +103,7 @@
             </div>
 
             <span style="display:block; padding-top: 15px;">
-                Alternatively, you can also select colours from these colour palettes:
+                You can also select colours from these colour palettes:
             </span>
 
             <nav class="toc" style="margin-top: 15px;">
@@ -677,36 +672,36 @@
                     Select colours on the left to collect them here to see how they look together. Press button below for preview plots showcasing the selected colours.
 
                 <div class="palette-compare">
-                    <div class="target-item" draggable="true">
-                      <div class="target-box" id="target1" onclick="handleTargetClick(this)">
+                    <div class="target-item">
+                      <div class="target-box" id="target1" onclick="handleTargetClick(this)" draggable="true">
                         <span id="targetText1" class="target-text"></span>
                         <button class="target-clear" onclick="event.stopPropagation(); clearTarget(1)"><i class="fas fa-times"></i></button>
                       </div>
                     </div>
 
                     <div class="target-item">
-                      <div class="target-box" id="target2" onclick="handleTargetClick(this)">
+                      <div class="target-box" id="target2" onclick="handleTargetClick(this)" draggable="true">
                         <span id="targetText2" class="target-text"></span>
                         <button class="target-clear" onclick="event.stopPropagation(); clearTarget(2)"><i class="fas fa-times"></i></button>
                       </div>
                     </div>
 
                     <div class="target-item">
-                      <div class="target-box" id="target3" onclick="handleTargetClick(this)">
+                      <div class="target-box" id="target3" onclick="handleTargetClick(this)" draggable="true">
                         <span id="targetText3" class="target-text"></span>
                         <button class="target-clear" onclick="event.stopPropagation(); clearTarget(3)"><i class="fas fa-times"></i></button>
                       </div>
                     </div>
 
                     <div class="target-item">
-                      <div class="target-box" id="target4" onclick="handleTargetClick(this)">
+                      <div class="target-box" id="target4" onclick="handleTargetClick(this)" draggable="true">
                         <span id="targetText4" class="target-text"></span>
                         <button class="target-clear" onclick="event.stopPropagation(); clearTarget(4)"><i class="fas fa-times"></i></button>
                       </div>
                     </div>
 
                     <div class="target-item">
-                      <div class="target-box" id="target5" onclick="handleTargetClick(this)">
+                      <div class="target-box" id="target5" onclick="handleTargetClick(this)" draggable="true">
                         <span id="targetText5" class="target-text"></span>
                         <button class="target-clear" onclick="event.stopPropagation(); clearTarget(5)"><i class="fas fa-times"></i></button>
                       </div>
@@ -714,7 +709,7 @@
                 </div>
 
                 <div class="button-row">
-                   <button onclick="clearBoxes()" class='mode-button clear-button'>
+                   <button onclick="clearTargetBoxes()" class='mode-button clear-button'>
                        <i class="fas fa-paint-roller"></i>
                        <span>Clear Colours</span>
                    </button>
@@ -1174,11 +1169,20 @@
             index = nextBox;
         }
 
-        document.getElementById("target"     + index).style.backgroundColor = rgb;
-        document.getElementById("target"     + index).dataset.color = colorKey;
-        document.getElementById("target"     + index).dataset.hex = hexText;
-        document.getElementById("targetText" + index).textContent = hexText;
-        document.getElementById("target"     + index).classList.add("active");
+        // document.getElementById("target"     + index).style.backgroundColor = rgb;
+        // document.getElementById("target"     + index).dataset.color = colorKey;
+        // document.getElementById("target"     + index).dataset.hex = hexText;
+        // document.getElementById("targetText" + index).textContent = hexText;
+        // document.getElementById("target"     + index).classList.add("active");
+
+        // updateNextBox(index);
+
+        const box = document.getElementById("target" + index);
+
+        // ONLY set the source of truth
+        box.dataset.hex = hexText;
+
+        applyColor(box); // 🔥 THIS handles everything
 
         updateNextBox(index);
     }
@@ -1226,7 +1230,7 @@
     }
 
     // clear target boxes
-    function clearBoxes() {
+    function clearTargetBoxes() {
         for (let i = 1; i <= totalBoxes; i++) {
           document.getElementById("target" + i).style.backgroundColor = "";
           document.getElementById('target' + i).dataset.color = "";
@@ -1277,6 +1281,62 @@
         const firstEmpty = findFirstEmptyTarget();
         nextBox = firstEmpty !== null ? firstEmpty : 1;
     }
+
+
+    // drag colors between target boxes
+    const boxes = document.querySelectorAll(".target-box");
+    let draggedBox = null;
+
+    function applyColor(box) {
+        const hex = box.dataset.hex;
+
+        if (!hex) {
+            box.querySelector(".target-text").textContent = "";
+            box.classList.remove("active");
+            return;
+        }
+
+        box.style.backgroundColor = hex;
+        box.querySelector(".target-text").textContent = hex;
+        box.classList.add("active");
+    }
+
+    boxes.forEach(box => {
+        applyColor(box);
+
+        box.addEventListener("dragstart", () => {
+            draggedBox = box;
+            box.classList.add("dragging");
+        });
+
+        box.addEventListener("dragover", (e) => {
+            e.preventDefault(); // REQUIRED
+        });
+
+        box.addEventListener("dragend", () => {
+            box.classList.remove("dragging");
+        });
+
+        box.addEventListener("drop", (e) => {
+            e.preventDefault();
+
+            const target = e.currentTarget;
+
+            if (!draggedBox || draggedBox === target) return;
+
+            // swap
+            const temp = draggedBox.dataset.hex;
+            draggedBox.dataset.hex = target.dataset.hex;
+            target.dataset.hex = temp;
+
+            // re-render boxex
+            applyColor(draggedBox);
+            applyColor(target);
+        });
+    });
+
+
+
 
     // memory boxes
     let   nextMemory = 1;
@@ -1341,15 +1401,23 @@
 
         const source = document.querySelector('.color-box[data-color="' + colorKey + '"]');
 
+        activeMemoryBox = memoryBox;
+        const picker = document.getElementById('colorPicker');
+        picker.value = memoryBox.dataset.hex || '#000000';
+        picker.click();
         if (source) {
             jumpToColor(memoryBox);
-        } else {
-            activeMemoryBox = memoryBox;
-
-            const picker = document.getElementById('colorPicker');
-            picker.value = memoryBox.dataset.hex || '#000000';
-            picker.click();
         }
+
+        // if (source) {
+        //     jumpToColor(memoryBox);
+        // } else {
+        //     activeMemoryBox = memoryBox;
+        //
+        //     const picker = document.getElementById('colorPicker');
+        //     picker.value = memoryBox.dataset.hex || '#000000';
+        //     picker.click();
+        // }
     }
 
     // when click on target box, go either to picker or existing colour box

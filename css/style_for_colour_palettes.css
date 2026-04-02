@@ -240,6 +240,7 @@ body {
     margin: 5px;
     position: relative;
     transition: outline 0.2s ease;
+    cursor: grab;
 }
 
 .target-clear {
