@@ -518,29 +518,12 @@ footer {
     width: 0;
     height: 0;
 }
-/* #picker-trigger {
-  width: 28px;
-  height: 28px;
-  border: 2px solid #37322c;
-  border-radius: 5px;
-  cursor: pointer;
-  display: inline-block;
+
+.pcr-button {
+    display: none;
 }
 
-.pcr-app .pcr-interaction .pcr-type {
-  display: none !important;
-} */
-
-/* #picker-trigger {
-  width: 260px;
-  min-height: 50px;
-  border: 2px solid green;
+.pcr-app {
+    position: relative !important;
+    z-index: 1 !important;
 }
-
-.pcr-app[data-theme='nano'] {
-  width: 260px !important;
-}
-
-.pcr-app .pcr-interaction .pcr-type {
-  display: none !important;
-} */

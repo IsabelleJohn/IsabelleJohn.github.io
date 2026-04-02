@@ -23,6 +23,10 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="css/style_for_colour_palettes.css">
+
+    <!-- pickr colour picker -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/nano.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.min.js"></script>
 </head>
 
 
@@ -84,14 +88,18 @@
 
             Open the colour picker to select a colour. Click on the colour box to use them in the preview plots on the right.
 
-            <div class="button-row" style="justify-content: left; padding-top: 10px;">
-                <div class="color-picker-wrapper">
+            <div class="button-row" style="justify-content: left; align-items: center; padding-top: 10px;">
+                <!-- <div class="color-picker-wrapper"> old color picker (native)
                     <button class="mode-button clear-button picker-button" id="pickerBtn">
                         <i class="fa-solid fa-palette"></i>
                         <span>Open Colour Picker</span>
                     </button>
-                    <div><input type="color" id="colorPicker"></div>
 
+                    <div id="previewBox" class="preview-box" onclick="changeColorTarget(this);changeColorMemory(this)"></div>
+                </div> -->
+
+                <div class="color-picker-wrapper">
+                    <div id="pickrContainer"></div>
                     <div id="previewBox" class="preview-box" onclick="changeColorTarget(this);changeColorMemory(this)"></div>
                 </div>
 
@@ -1170,14 +1178,6 @@
             index = nextBox;
         }
 
-        // document.getElementById("target"     + index).style.backgroundColor = rgb;
-        // document.getElementById("target"     + index).dataset.color = colorKey;
-        // document.getElementById("target"     + index).dataset.hex = hexText;
-        // document.getElementById("targetText" + index).textContent = hexText;
-        // document.getElementById("target"     + index).classList.add("active");
-
-        // updateNextBox(index);
-
         const box = document.getElementById("target" + index);
 
         box.dataset.hex = hexText;
@@ -1425,9 +1425,8 @@
         const source = document.querySelector('.color-box[data-color="' + colorKey + '"]');
 
         activeMemoryBox = memoryBox;
-        const picker = document.getElementById('colorPicker');
-        picker.value = memoryBox.dataset.hex || '#000000';
-        picker.click();
+        pickr.setColor(memoryBox.dataset.hex);
+        pickr.getRoot().app.scrollIntoView({ behavior: 'smooth', block: 'center' });
         if (source) {
             jumpToColor(memoryBox);
         }
@@ -1454,9 +1453,8 @@
 
         activeTargetBox = targetBox;
 
-        const picker = document.getElementById('colorPicker');
-        picker.value = targetBox.dataset.hex || '#000000';
-        picker.click();
+        pickr.setColor(targetBox.dataset.hex);
+        pickr.getRoot().app.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
         if (source) {
             jumpToColor(targetBox);
@@ -1479,33 +1477,47 @@
     }
 
     // colour picker
+    let pickr = null;
     document.addEventListener("DOMContentLoaded", () => {
-        const btn = document.getElementById("pickerBtn");
-        const picker = document.getElementById("colorPicker");
+        // const btn     = document.getElementById("pickerBtn");
         const preview = document.getElementById("previewBox");
         const hexText = document.getElementById("colorHex");
         const rgbText = document.getElementById("colorRGB");
         const hsvText = document.getElementById("colorHSV");
 
-        btn.addEventListener("click", () => {
-          picker.click();
+        pickr = Pickr.create({
+            el: '#pickrContainer',
+            theme: 'nano',
+            default: '#e69138',
+            inline: true,
+            showAlways: true,
+            components: {
+                palette: true,
+                preview: false,
+                opacity: false,
+                hue: true,
+                interaction: {
+                    input: true,
+                    save: false,
+                }
+            }
         });
 
-        picker.addEventListener("input", function () {
-            const hex = picker.value;
-            const {r, g, b} = hexToRgb(hex);
-            const {h, s, v} = rgbToHsv(r, g, b);
+        pickr.on('change', (color) => {
+            const hex = color.toHEXA().toString();
+            const [r, g, b] = color.toRGBA().map(Math.round);
+            const { h, s, v } = rgbToHsv(r, g, b);
 
-          // update preview box
-          preview.style.backgroundColor = hex;
+            preview.style.backgroundColor = hex;
+            preview.dataset.color = hex;
+            preview.dataset.hex = hex;
 
-          setLabelValue(hexText, 'HEX', hex);
-          setLabelValue(rgbText, 'RGB', `(${r}, ${g}, ${b})`);
-          setLabelValue(hsvText, 'HSV', `(${h}, ${s}, ${v})`);
-
-          // (optional) use color in your app
-          console.log(hex);
+            setLabelValue(hexText, 'HEX', hex);
+            setLabelValue(rgbText, 'RGB', `(${r}, ${g}, ${b})`);
+            setLabelValue(hsvText, 'HSV', `(${h}, ${s}, ${v})`);
         });
+
+        // btn.addEventListener("click", () => pickr.show());
     });
 
 
