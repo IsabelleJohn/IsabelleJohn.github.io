@@ -672,8 +672,9 @@
                     Select colours on the left to collect them here to see how they look together. Press button below for preview plots showcasing the selected colours.
 
                 <div class="palette-compare">
+
                     <div class="target-item">
-                      <div class="target-box" id="target1" onclick="handleTargetClick(this)" draggable="true">
+                      <div class="target-box" id="target1"  draggable="true">
                         <span id="targetText1" class="target-text"></span>
                         <button class="target-clear" onclick="event.stopPropagation(); clearTarget(1)"><i class="fas fa-times"></i></button>
                       </div>
@@ -1179,10 +1180,10 @@
 
         const box = document.getElementById("target" + index);
 
-        // ONLY set the source of truth
         box.dataset.hex = hexText;
+        box.dataset.color = colorKey;
 
-        applyColor(box); // 🔥 THIS handles everything
+        applyColor(box);
 
         updateNextBox(index);
     }
@@ -1286,11 +1287,13 @@
     // drag colors between target boxes
     const boxes = document.querySelectorAll(".target-box");
     let draggedBox = null;
+    let didDrag = false;
 
     function applyColor(box) {
         const hex = box.dataset.hex;
 
         if (!hex) {
+            box.style.backgroundColor = "";
             box.querySelector(".target-text").textContent = "";
             box.classList.remove("active");
             return;
@@ -1304,34 +1307,54 @@
     boxes.forEach(box => {
         applyColor(box);
 
+        // Drag
         box.addEventListener("dragstart", () => {
             draggedBox = box;
+            didDrag = false;
             box.classList.add("dragging");
         });
 
         box.addEventListener("dragover", (e) => {
-            e.preventDefault(); // REQUIRED
+            e.preventDefault();
         });
 
         box.addEventListener("dragend", () => {
             box.classList.remove("dragging");
+            draggedBox = null;
         });
 
         box.addEventListener("drop", (e) => {
             e.preventDefault();
-
+            didDrag = true;
             const target = e.currentTarget;
-
             if (!draggedBox || draggedBox === target) return;
 
-            // swap
-            const temp = draggedBox.dataset.hex;
-            draggedBox.dataset.hex = target.dataset.hex;
-            target.dataset.hex = temp;
+            const draggedHex   = draggedBox.dataset.hex;
+            const draggedColor = draggedBox.dataset.color;
+            const targetHex    = target.dataset.hex;
+            const targetColor  = target.dataset.color;
 
-            // re-render boxex
-            applyColor(draggedBox);
+            // moved dragged to target
+            target.dataset.hex   = draggedHex;
+            target.dataset.color = draggedColor;
+
+            // move target if target wasn't empty
+            if (targetHex) {
+                draggedBox.dataset.hex   = targetHex;
+                draggedBox.dataset.color = targetColor;
+            } else {
+                draggedBox.dataset.hex   = "";
+                draggedBox.dataset.color = "";
+            }
+
             applyColor(target);
+            applyColor(draggedBox);
+        });
+
+        // click, only if not dragging
+        box.addEventListener("click", (e) => {
+            if (didDrag) {didDrag = false; return;}
+            handleTargetClick(box);
         });
     });
 
