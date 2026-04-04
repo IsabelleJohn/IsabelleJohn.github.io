@@ -152,7 +152,7 @@ body {
 .button-row {
     margin-top: auto;         /* push BOTH buttons to bottom */
     display: flex;
-    gap: 10px;                /* space between buttons */
+    gap: 5px;                /* space between buttons */
     padding: 0 0px 0px 0px;
     justify-content: space-between;
 }
@@ -591,6 +591,14 @@ footer {
     padding: 4px !important;
 }
 
+.pcr-app[data-theme="nano"] {
+    background-color: #1f1b16;
+}
+
+.dark-light-mode .pcr-app[data-theme="nano"] {
+    background-color: #f2efea;
+}
+
 .tooltip-pickr{
   position: relative;
   display: inline-block;
@@ -620,4 +628,57 @@ footer {
 .dark-light-mode .tooltip-pickr-text {
   color: #f2efea;
   background-color: #3f3a34;
+}
+
+
+/* select menu */
+#colorblindBtn {
+    min-width: 170px;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 12px !important;
+}
+
+.colorblind-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.colorblind-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #c5c1bc;
+    border: 2px solid #37322c;
+    border-radius: 10px;
+    z-index: 150;
+    min-width: 160px;
+    overflow: hidden;
+    margin-top: 4px;
+}
+
+.colorblind-menu div {
+    padding: 8px 12px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+    color: #1f1b16;
+}
+
+.colorblind-menu div:hover {
+    background-color: #f2efea;
+}
+
+.dark-light-mode .colorblind-menu {
+    background-color: #3f3a34;
+}
+
+.dark-light-mode .colorblind-menu div {
+    color: #f2efea;
+}
+
+.dark-light-mode .colorblind-menu div:hover {
+    background-color: #1f1b16;
 }

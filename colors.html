@@ -45,7 +45,7 @@
 
 
         <div class="header-center">
-            <span><i class="fa-solid fa-palette"></i> Colour Palettes</span>
+            <span>Colour <i id="palette" class="fa-solid fa-palette" style="font-size:30px;"></i> Palettes</span>
 
             <div class='palette-memory'>
                 <div class='memory-box' id="memory1"  onclick="handleMemoryClick(this)"></div>
@@ -734,6 +734,23 @@
                        <i class="fa-solid fa-chart-line"></i>
                        <span id="chartButtonText">Show Plots</span>
                    </button>
+
+                   <div class="colorblind-dropdown" id="colorblindDropdown">
+                       <button class="mode-button clear-button" id="colorblindBtn" onclick="toggleColorblindMenu()">
+                           <span style="display:flex; align-items:center; gap:6px;">
+                               <i class="far fa-eye"></i>
+                               <span id="colorblindLabel">Normal vision</span>
+                           </span>
+                           <i class="fa-solid fa-chevron-down" id="colorblindChevron" style="font-size: 10px;"></i>
+                       </button>
+                       <div class="colorblind-menu" id="colorblindMenu" style="display:none;">
+                           <div onclick="selectColorblind('none',        'Normal vision')" >Normal vision</div>
+                           <div onclick="selectColorblind('deuteranopia','Deuteranopia')"  >Deuteranopia</div>
+                           <div onclick="selectColorblind('protanopia',  'Protanopia')"    >Protanopia</div>
+                           <div onclick="selectColorblind('tritanopia',  'Tritanopia')"    >Tritanopia</div>
+                           <div onclick="selectColorblind('achromatopsia','Achromatopsia')">Achromatopsia</div>
+                       </div>
+                   </div>
                 </div>
 
                 <div id="chartContainer" style="display:none; margin:80px auto 0 auto; width:100%; max-width:600px;">
@@ -759,21 +776,28 @@
     Chart.defaults.global.defaultFontSize = 14;
 
     function updateColorData() {
-      labels = [
-        document.getElementById("targetText1").textContent,
-        document.getElementById("targetText2").textContent,
-        document.getElementById("targetText3").textContent,
-        document.getElementById("targetText4").textContent,
-        document.getElementById("targetText5").textContent
-      ];
+          labels = [
+            document.getElementById("targetText1").textContent,
+            document.getElementById("targetText2").textContent,
+            document.getElementById("targetText3").textContent,
+            document.getElementById("targetText4").textContent,
+            document.getElementById("targetText5").textContent
+          ];
 
-      colors = [
-        document.getElementById("target1").style.backgroundColor,
-        document.getElementById("target2").style.backgroundColor,
-        document.getElementById("target3").style.backgroundColor,
-        document.getElementById("target4").style.backgroundColor,
-        document.getElementById("target5").style.backgroundColor
-      ];
+          // colors = [
+          //   document.getElementById("target1").style.backgroundColor,
+          //   document.getElementById("target2").style.backgroundColor,
+          //   document.getElementById("target3").style.backgroundColor,
+          //   document.getElementById("target4").style.backgroundColor,
+          //   document.getElementById("target5").style.backgroundColor
+          // ];
+
+          colors = [1,2,3,4,5].map(i => {
+            const hex = document.getElementById("target" + i).dataset.hex;
+            if (!hex || hex === 'undefined') return document.getElementById("target" + i).style.backgroundColor;
+            const simulated = colorblindType === 'none' ? hex : simulateColorblindness(hex, colorblindType);
+            return simulated;
+        });
     }
 
     let pieChart       = null;
@@ -1118,7 +1142,6 @@
 
 </script>
 
-
 <script>
     function rgbToHex(rgb) {
       const nums = rgb.match(/\d+/g).map(Number);
@@ -1300,7 +1323,7 @@
     function applyColor(box) {
         const hex = box.dataset.hex;
 
-        if (!hex) {
+        if (!hex || hex === "undefined") {
             box.style.backgroundColor = "";
             box.querySelector(".target-text").textContent = "";
             box.classList.remove("active");
@@ -1337,16 +1360,14 @@
             const target = e.currentTarget;
             if (!draggedBox || draggedBox === target) return;
 
-            const draggedHex   = draggedBox.dataset.hex;
-            const draggedColor = draggedBox.dataset.color;
-            const targetHex    = target.dataset.hex;
-            const targetColor  = target.dataset.color;
+            const draggedHex   = draggedBox.dataset.hex    || "";
+            const draggedColor = draggedBox.dataset.color  || "";
+            const targetHex    = target.dataset.hex        || "";
+            const targetColor  = target.dataset.color      || "";
 
-            // moved dragged to target
             target.dataset.hex   = draggedHex;
             target.dataset.color = draggedColor;
 
-            // move target if target wasn't empty
             if (targetHex) {
                 draggedBox.dataset.hex   = targetHex;
                 draggedBox.dataset.color = targetColor;
@@ -1365,9 +1386,6 @@
             handleTargetClick(box);
         });
     });
-
-
-
 
     // memory boxes
     let   nextMemory = 1;
@@ -1484,19 +1502,24 @@
         container.appendChild(value);
     }
 
+    // generate random hex
+    function randomHex() {
+        return '#' + Math.floor(Math.random() * 0xffffff).toString(16).padStart(6, '0');
+    }
+
     // colour picker
     let pickr = null;
     document.addEventListener("DOMContentLoaded", () => {
-        // const btn     = document.getElementById("pickerBtn");
         const preview = document.getElementById("previewBox");
         const hexText = document.getElementById("colorHex");
         const rgbText = document.getElementById("colorRGB");
         const hsvText = document.getElementById("colorHSV");
+        const palette = document.getElementById("palette");
 
         pickr = Pickr.create({
             el: '#pickrContainer',
             theme: 'nano',
-            default: '#e69138',
+            default: randomHex(),
             inline: true,
             showAlways: true,
             components: {
@@ -1507,7 +1530,7 @@
                 interaction: {
                     input: true,
                     save: false,
-                }
+                },
             }
         });
 
@@ -1520,6 +1543,8 @@
             preview.dataset.color = hex;
             preview.dataset.hex = hex;
 
+            palette.style.color = hex;
+
             setLabelValue(hexText, 'HEX', hex);
             setLabelValue(rgbText, 'RGB', `(${r}, ${g}, ${b})`);
             setLabelValue(hsvText, 'HSV', `(${h}, ${s}, ${v})`);
@@ -1527,6 +1552,70 @@
 
         // btn.addEventListener("click", () => pickr.show());
     });
+
+    // colorblind
+    function toggleColorblindMenu() {
+        const menu = document.getElementById('colorblindMenu');
+        const chevron = document.getElementById('colorblindChevron');
+        const isOpen = menu.style.display === 'block';
+        menu.style.display = isOpen ? 'none' : 'block';
+        chevron.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
+        chevron.style.transition = 'transform 0.2s ease';
+    }
+
+    let colorblindType = 'none';
+    function selectColorblind(type, label) {
+        colorblindType = type;
+        document.getElementById('colorblindLabel').textContent = label;
+        document.getElementById('colorblindMenu').style.display = 'none';
+        document.getElementById('colorblindChevron').style.transform = 'rotate(0deg)';
+
+        if (chartShown) toggleCharts();  // auto-update plots if visible
+    }
+
+    // close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!document.getElementById('colorblindDropdown').contains(e.target)) {
+            document.getElementById('colorblindMenu').style.display = 'none';
+            document.getElementById('colorblindChevron').style.transform = 'rotate(0deg)';
+        }
+    });
+
+    // color blind matrices
+    function simulateColorblindness(hex, type) {
+        const {r, g, b} = hexToRgb(hex);
+
+        // Matrices from Machado et al. (2009)
+        const matrices = {
+            deuteranopia: [
+                0.367,  0.861, -0.228,
+                0.280,  0.673,  0.047,
+               -0.012,  0.043,  0.969
+            ],
+            protanopia: [
+                0.152,  1.053, -0.205,
+                0.115,  0.786,  0.099,
+               -0.004, -0.048,  1.052
+            ],
+            tritanopia: [
+                1.256, -0.077, -0.179,
+               -0.078,  0.931,  0.148,
+                0.005,  0.691,  0.304
+            ],
+            achromatopsia: [
+                0.299,  0.587,  0.114,
+                0.299,  0.587,  0.114,
+                0.299,  0.587,  0.114
+            ]
+        };
+
+        const m = matrices[type];
+        const sr = Math.min(255, Math.max(0, Math.round(m[0]*r + m[1]*g + m[2]*b)));
+        const sg = Math.min(255, Math.max(0, Math.round(m[3]*r + m[4]*g + m[5]*b)));
+        const sb = Math.min(255, Math.max(0, Math.round(m[6]*r + m[7]*g + m[8]*b)));
+
+        return '#' + [sr, sg, sb].map(x => x.toString(16).padStart(2, '0')).join('');
+    }
 
 
 
@@ -1574,6 +1663,7 @@
 
 
 </script>
+
 
 
 <footer>
