@@ -644,6 +644,7 @@ footer {
 .colorblind-dropdown {
     position: relative;
     display: inline-block;
+    align-self: flex-start;
 }
 
 .colorblind-menu {
@@ -657,6 +658,7 @@ footer {
     min-width: 160px;
     overflow: hidden;
     margin-top: 4px;
+    width: auto !important;
 }
 
 .colorblind-menu div {
@@ -665,6 +667,8 @@ footer {
     font-family: inherit;
     font-size: inherit;
     color: #1f1b16;
+    width: auto;
+    box-sizing: border-box;
 }
 
 .colorblind-menu div:hover {
