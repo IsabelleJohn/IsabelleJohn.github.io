@@ -1740,8 +1740,9 @@
     function selectGradientColor(type, hex) {
         if (type === 'From') {
             gradientFromHex = hex;
-            document.getElementById('gradientFromLabel').textContent  = hex;
-            document.getElementById('gradientFromSwatch').style.background = hex;
+            document.getElementById('gradientFromSwatch').style.backgroundColor = hex || '#878079';
+            document.getElementById('gradientToSwatch').style.backgroundColor   = hex || '#878079';
+            document.getElementById('gradientMidSwatch').style.backgroundColor  = hex || '#878079';
             document.getElementById('gradientFromMenu').style.display = 'none';
         } else {
             gradientToHex = hex;
@@ -1904,8 +1905,9 @@
         document.getElementById('gradientFromLabel').textContent  = 'Colour 1';
         document.getElementById('gradientToLabel').textContent    = 'Colour 2';
         document.getElementById('gradientStepsLabel').textContent = 'Steps';
-        document.getElementById('gradientFromSwatch').style.background = '#878079';
-        document.getElementById('gradientToSwatch').style.background   = '#878079';
+        document.getElementById('gradientFromSwatch').style.backgroundColor = '#878079';
+        document.getElementById('gradientToSwatch').style.backgroundColor   = '#878079';
+        document.getElementById('gradientMidSwatch').style.backgroundColor  = '#878079';
 
         const bar = document.getElementById('gradientBar');
         bar.replaceChildren();

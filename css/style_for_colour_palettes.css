@@ -670,7 +670,7 @@ footer {
     position: absolute;
     top: 100%;
     left: 0;
-    background-color: #c5c1bc;
+    background-color: #c5c1bc !important;
     border: 2px solid #37322c;
     border-radius: 10px;
     z-index: 150;
@@ -693,11 +693,11 @@ footer {
 }
 
 .select-menu div:hover {
-    background-color: #f2efea;
+    background-color: #f2efea !important;
 }
 
 .dark-light-mode .select-menu {
-    background-color: #3f3a34;
+    background-color: #3f3a34 !important;
 }
 
 .dark-light-mode .select-menu div {
@@ -705,7 +705,7 @@ footer {
 }
 
 .dark-light-mode .select-menu div:hover {
-    background-color: #1f1b16;
+    background-color: #1f1b16 !important;
 }
 
 
@@ -735,7 +735,7 @@ footer {
     display: flex;
     gap: 8px;
     margin-bottom: 8px;
-    align-items: center;
+    align-items: flex-start;
     flex-wrap: wrap;
 }
 
