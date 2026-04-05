@@ -127,7 +127,7 @@ body {
 
 /* Light mode */
 .dark-light-mode .sidebar {
-  background-color:#f2efea;
+  background-color: #f2efea;
   color: black;
 }
 
@@ -187,6 +187,15 @@ body {
   border-radius: 5px;
 }
 
+.color-box:hover {
+    outline: 2px solid #444444;
+    transition: transform 0.3s ease;
+}
+
+.dark-light-mode .color-box:hover {
+  outline: 2px solid #c5c1bc;
+}
+
 .picker-button {
     width: auto;
 }
@@ -204,6 +213,15 @@ body {
     margin-right: 20px;
     vertical-align: middle;
     background: #878079;
+}
+
+.preview-box:hover {
+    outline: 2px solid #444444;
+    transition: transform 0.3s ease;
+}
+
+.dark-light-mode .preview-box:hover {
+  outline: 2px solid #c5c1bc;
 }
 
 .color-picker-wrapper {
@@ -593,12 +611,12 @@ footer {
 }
 
 .pcr-app[data-theme="nano"] {
-    background-color: #1f1b16;
+    background-color: #c5c1bc; /* #1f1b16; */
 }
 
-.dark-light-mode .pcr-app[data-theme="nano"] {
+/* .dark-light-mode .pcr-app[data-theme="nano"] {
     background-color: #f2efea;
-}
+} */
 
 .tooltip-pickr{
   position: relative;
@@ -648,7 +666,7 @@ footer {
     align-self: flex-start;
 }
 
-.colorblind-menu {
+.select-menu {
     position: absolute;
     top: 100%;
     left: 0;
@@ -660,9 +678,11 @@ footer {
     overflow: hidden;
     margin-top: 4px;
     width: auto !important;
+    overflow-y: auto;
+    max-height: 140px;
 }
 
-.colorblind-menu div {
+.select-menu div {
     padding: 8px 12px;
     cursor: pointer;
     font-family: inherit;
@@ -672,18 +692,126 @@ footer {
     box-sizing: border-box;
 }
 
-.colorblind-menu div:hover {
+.select-menu div:hover {
     background-color: #f2efea;
 }
 
-.dark-light-mode .colorblind-menu {
+.dark-light-mode .select-menu {
     background-color: #3f3a34;
 }
 
-.dark-light-mode .colorblind-menu div {
+.dark-light-mode .select-menu div {
     color: #f2efea;
 }
 
-.dark-light-mode .colorblind-menu div:hover {
+.dark-light-mode .select-menu div:hover {
     background-color: #1f1b16;
+}
+
+
+/* gradient menu and buttons */
+.gradient-container {
+    margin-top: 20px;
+}
+
+#gradientBtn {
+    min-width: 170px;
+}
+
+
+.gradient-dropdown {
+    position: relative;
+    display: inline-block;
+    align-self: flex-start;
+}
+
+.dark-light-mode .gradient-dropdown {
+    position: relative;
+    display: inline-block;
+    align-self: flex-start;
+}
+
+.gradient-options {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.gradient-steps-button {
+    position:static;
+    width:80px;
+    font-size:12px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding: 10px 12px !important;
+}
+
+.dark-light-mode .gradient-steps-button {
+    position:static;
+    width:80px;
+    font-size:12px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding: 10px 12px !important;
+    color: #f2efea;
+    background-color: #3f3a34;
+}
+
+.dark-light-mode .gradient-steps-button:hover {
+    position:static;
+    width:80px;
+    font-size:12px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding: 10px 12px !important;
+    color: #f2efea;
+    background-color: #1f1b16;
+}
+
+.gradient-select-color-button {
+    position:static;
+    width:130px;
+    font-size:12px;
+    display:flex;
+    align-items:center;
+    gap:6px;
+}
+
+.dark-light-mode .gradient-select-color-button {
+    color: #f2efea;
+    background-color: #3f3a34;
+
+}
+
+.dark-light-mode .gradient-select-color-button:hover {
+    background-color: #1f1b16;
+
+}
+
+.gradient-swatch-box {
+    width:15px;
+    height:15px;
+    border-radius:3px;
+    background-color: #878079;
+    flex-shrink:0;
+}
+
+#gradientBar {
+    display:none;
+    height:35px;
+    border-radius:8px;
+    border: 2px solid #37322c;
+    background-color: #878079;
+    margin-top: 8px;
+    flex-direction: row;
+    overflow: visible;
+}
+
+.dark-light-mode #gradientBar {
+    border: 2px solid #c5c1bc;
 }

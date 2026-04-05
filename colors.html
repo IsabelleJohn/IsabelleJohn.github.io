@@ -36,7 +36,7 @@
     <header>
         <div class="header-left">
             <a class="link-to-main" href="index.html" target="_blank" style="text-decoration:none;">
-            <span style="display:block;font-size:20px; padding-bottom:5px;">Isabelle John</span>
+            <!-- <span style="display:block;font-size:20px; padding-bottom:5px;">Isabelle John</span> -->
             <span style="display:block;font-size:12px">
                 <i class="fa-solid fa-arrow-left"></i> Back to main website
             </span>
@@ -735,16 +735,17 @@
                        <span id="chartButtonText">Show Plots</span>
                    </button>
 
+                   <!-- color blind menu -->
                    <div class="colorblind-dropdown" id="colorblindDropdown">
                        <button class="mode-button clear-button" id="colorblindBtn" onclick="toggleColorblindMenu()">
                            <span style="display:flex; align-items:center; gap:6px;">
                                <i class="far fa-eye"></i>
-                               <span id="colorblindLabel">Normal vision</span>
+                               <span id="colorblindLabel">Normal Vision</span>
                            </span>
                            <i class="fa-solid fa-chevron-down" id="colorblindChevron" style="font-size: 10px;"></i>
                        </button>
-                       <div class="colorblind-menu" id="colorblindMenu" style="display:none;">
-                           <div onclick="selectColorblind('none',        'Normal vision')" >Normal vision</div>
+                       <div class="select-menu" id="colorblindMenu" style="display:none;">
+                           <div onclick="selectColorblind('none',        'Normal Vision')" >Normal Vision</div>
                            <div onclick="selectColorblind('deuteranopia','Deuteranopia')"  >Deuteranopia</div>
                            <div onclick="selectColorblind('protanopia',  'Protanopia')"    >Protanopia</div>
                            <div onclick="selectColorblind('tritanopia',  'Tritanopia')"    >Tritanopia</div>
@@ -753,7 +754,63 @@
                    </div>
                 </div>
 
-                <div id="chartContainer" style="display:none; margin:80px auto 0 auto; width:100%; max-width:600px;">
+
+                <!-- gradient things -->
+                <div class="gradient-container">
+                    <div class="button-row">
+                        <button class="mode-button clear-button" id="gradientBtn" onclick="toggleGradientBar()">
+                            <span style="display:flex; align-items:center; gap:6px;">
+                                <i class="fas fa-rainbow"></i>
+                                <span id="gradientButtonText">Show Gradient</span>
+                            </span>
+                        </button>
+                    </div>
+
+                    <div class="gradient-options" id="gradientOptions" style="display:none;">
+                        <div class="gradient-dropdown" id="gradientFromDropdown">
+                            <button class="gradient-select-color-button mode-button clear-button" id="gradientFromBtn" onclick="toggleGradientMenu('From')">
+                                <span id="gradientFromSwatch" class="gradient-swatch-box"></span>
+                                <span id="gradientFromLabel">Colour 1</span>
+                                <i class="fa-solid fa-chevron-down" id="gradientFromChevron" style="font-size:9px; margin-left:auto;"></i>
+                            </button>
+                            <div class="select-menu" id="gradientFromMenu" style="display:none;"></div>
+                        </div>
+
+                        <div class="gradient-dropdown" id="gradientToDropdown">
+                            <button class="gradient-select-color-button mode-button clear-button" id="gradientToBtn" onclick="toggleGradientMenu('To')">
+                                <span id="gradientToSwatch" class="gradient-swatch-box"></span>
+                                <span id="gradientToLabel">Colour 2</span>
+                                <i class="fa-solid fa-chevron-down" id="gradientToChevron" style="font-size:9px; margin-left:auto;"></i>
+                            </button>
+                            <div class="select-menu" id="gradientToMenu" style="display:none;"></div>
+                        </div>
+
+                        <div class="gradient-dropdown" id="gradientStepsDropdown">
+                            <button class="gradient-steps-button mode-button clear-button" id="gradientStepsBtn" onclick="toggleGradientMenu('Steps')">
+                                <span id="gradientStepsLabel">Steps</span>
+                                <i class="fa-solid fa-chevron-down" id="gradientStepsChevron" style="font-size:9px;"></i>
+                            </button>
+                            <div class="select-menu" id="gradientStepsMenu" style="display:none;">
+                                <div onclick="selectGradientSteps(0, 'Smooth')">Smooth</div>
+                                <div onclick="selectGradientSteps(2, '2')">2</div>
+                                <div onclick="selectGradientSteps(3, '3')">3</div>
+                                <div onclick="selectGradientSteps(4, '4')">4</div>
+                                <div onclick="selectGradientSteps(5, '5')">5</div>
+                                <div onclick="selectGradientSteps(6, '6')">6</div>
+                                <div onclick="selectGradientSteps(7, '7')">7</div>
+                                <div onclick="selectGradientSteps(8, '8')">8</div>
+                                <div onclick="selectGradientSteps(9, '9')">9</div>
+                                <div onclick="selectGradientSteps(10, '10')">10</div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div id="gradientBar"></div>
+                </div>
+
+                <!-- the preview charts -->
+                <div id="chartContainer" style="display:none; margin:40px auto 0 auto; width:100%; max-width:600px;">
                    <canvas class='chart-canvas' id="lineChart"></canvas>
                    <br>
                    <canvas class='chart-canvas' id="barChart"></canvas>
@@ -1214,7 +1271,7 @@
         box.dataset.color = colorKey;
 
         applyColor(box);
-
+        updateGradientSelects();
         updateNextBox(index);
     }
 
@@ -1298,6 +1355,13 @@
         document.getElementById('lineChart').classList.remove('chart-canvas');
         document.getElementById('barChart').classList.remove('chart-canvas');
         document.getElementById('scatterChart').classList.remove('chart-canvas');
+
+        colorblindType = 'none';
+        document.getElementById('colorblindLabel').textContent = 'Normal Vision';
+        document.getElementById('colorblindChevron').style.transform = 'rotate(0deg)';
+        document.getElementById('colorblindMenu').style.display = 'none';
+
+        clearGradient();
     }
 
     // clear individual target box
@@ -1534,23 +1598,27 @@
             }
         });
 
-        pickr.on('change', (color) => {
-            const hex = color.toHEXA().toString();
-            const [r, g, b] = color.toRGBA().map(Math.round);
-            const { h, s, v } = rgbToHsv(r, g, b);
+        function applyPickrColor(color) {
+            const hex        = color.toHEXA().toString();
+            const [r, g, b]  = color.toRGBA().map(Math.round);
+            const { h, s, v} = rgbToHsv(r, g, b);
 
             preview.style.backgroundColor = hex;
+            preview.dataset.hex   = hex;
             preview.dataset.color = hex;
-            preview.dataset.hex = hex;
 
             palette.style.color = hex;
 
             setLabelValue(hexText, 'HEX', hex);
             setLabelValue(rgbText, 'RGB', `(${r}, ${g}, ${b})`);
             setLabelValue(hsvText, 'HSV', `(${h}, ${s}, ${v})`);
-        });
+        }
 
-        // btn.addEventListener("click", () => pickr.show());
+        pickr.on('init',   ()      => applyPickrColor(pickr.getColor()));
+        pickr.on('change', (color) => applyPickrColor(color));
+
+
+
     });
 
     // colorblind
@@ -1571,6 +1639,7 @@
         document.getElementById('colorblindChevron').style.transform = 'rotate(0deg)';
 
         if (chartShown) toggleCharts();  // auto-update plots if visible
+        if (gradientShown) updateGradientBar();
     }
 
     // close menu when clicking outside
@@ -1618,6 +1687,248 @@
     }
 
 
+    // generate colour gradients
+    let gradientFromHex = '';
+    let gradientToHex   = '';
+
+    function updateGradientSelects() {
+        const fromMenu = document.getElementById('gradientFromMenu');
+        const toMenu   = document.getElementById('gradientToMenu');
+
+        fromMenu.replaceChildren();
+        toMenu.replaceChildren();
+
+        const makeItem = (hex, index, menuType) => {
+            const item = document.createElement('div');
+            item.style.display    = 'flex';
+            item.style.alignItems = 'center';
+            item.style.gap        = '8px';
+            item.style.padding    = '8px 12px';
+            item.style.cursor     = 'pointer';
+
+            const swatch = document.createElement('span');
+            swatch.style.width        = '15px';
+            swatch.style.height       = '15px';
+            swatch.style.borderRadius = '3px';
+            swatch.style.background   = hex;
+            swatch.style.flexShrink   = '0';
+
+            const label = document.createElement('span');
+            label.textContent = `${hex}`;
+            label.style.fontFamily = 'inherit';
+            // label.style.fontSize   = '12px';
+
+            item.appendChild(swatch);
+            item.appendChild(label);
+
+            item.addEventListener('click', () => selectGradientColor(menuType, hex));
+            return item;
+        };
+
+        for (let i = 1; i <= totalBoxes; i++) {
+            const box = document.getElementById('target' + i);
+            if (!box.classList.contains('active')) continue;
+            const hex = box.dataset.hex;
+            fromMenu.appendChild(makeItem(hex, i, 'From'));
+            toMenu.appendChild(makeItem(hex, i, 'To'));
+        }
+
+        updateGradientBar();
+    }
+
+
+    function selectGradientColor(type, hex) {
+        if (type === 'From') {
+            gradientFromHex = hex;
+            document.getElementById('gradientFromLabel').textContent  = hex;
+            document.getElementById('gradientFromSwatch').style.background = hex;
+            document.getElementById('gradientFromMenu').style.display = 'none';
+        } else {
+            gradientToHex = hex;
+            document.getElementById('gradientToLabel').textContent  = hex;
+            document.getElementById('gradientToSwatch').style.background = hex;
+            document.getElementById('gradientToMenu').style.display = 'none';
+        }
+        updateGradientBar();
+    }
+
+    // close gradient menus when clicking outside
+    let gradientSteps = 0;
+
+    function interpolateHex(hex1, hex2, t) {
+        const {r: r1, g: g1, b: b1} = hexToRgb(hex1);
+        const {r: r2, g: g2, b: b2} = hexToRgb(hex2);
+        const r = Math.round(r1 + (r2 - r1) * t);
+        const g = Math.round(g1 + (g2 - g1) * t);
+        const b = Math.round(b1 + (b2 - b1) * t);
+        return '#' + [r, g, b].map(x => x.toString(16).padStart(2, '0')).join('');
+    }
+
+    function updateGradientBar() {
+        const oldBar = document.getElementById('gradientBar');
+        const bar    = oldBar.cloneNode(false);
+        oldBar.replaceWith(bar);
+
+        const fromSim = applyColorblind(gradientFromHex);
+        const toSim   = applyColorblind(gradientToHex);
+
+        if (!gradientFromHex || !gradientToHex) {
+            bar.style.background = '';
+            return;
+        }
+
+        if (gradientSteps === 0) {
+            bar.style.background = `linear-gradient(to right, ${fromSim}, ${toSim})`;
+            // bar.style.cursor = 'crosshair';
+
+            bar.addEventListener('click', (e) => {
+                const rect  = bar.getBoundingClientRect();
+                const t     = (e.clientX - rect.left) / rect.width;
+                const color = interpolateHex(gradientFromHex, gradientToHex, t); // use original colors for picker
+                pickr.setColor(color);
+                scrollToPicker();
+            });
+            return;
+        }
+
+        // stepped — build individual divs
+        bar.style.background = 'none';
+
+        const colors = [];
+        for (let i = 0; i < gradientSteps; i++) {
+            const t = gradientSteps === 1 ? 0.5 : i / (gradientSteps - 1);
+            colors.push(interpolateHex(gradientFromHex, gradientToHex, t));
+        }
+
+        colors.forEach((color, i) => {
+            const simColor = applyColorblind(color);  // simulated color for display
+            const step = document.createElement('div');
+            step.style.flex            = '1';
+            step.style.backgroundColor = simColor;
+            step.style.position        = 'relative';
+            step.style.cursor          = 'default';
+            if (i === 0)               step.style.borderRadius = '6px 0 0 6px';
+            if (i === colors.length-1) step.style.borderRadius = '0 6px 6px 0';
+
+            // tooltip
+            const tip = document.createElement('span');
+            tip.textContent      = color;
+            tip.style.position   = 'absolute';
+            tip.style.bottom     = '120%';
+            tip.style.left       = '50%';
+            tip.style.transform  = 'translateX(-50%)';
+            tip.style.background = '#37322c';
+            tip.style.color      = '#f2efea';
+            tip.style.padding    = '4px 8px';
+            tip.style.borderRadius = '6px';
+            tip.style.fontSize   = '10px';
+            tip.style.whiteSpace = 'nowrap';
+            tip.style.opacity    = '0';
+            tip.style.pointerEvents = 'none';
+            tip.style.transition = 'opacity 0.2s ease';
+            tip.style.zIndex     = '300';
+
+            step.addEventListener('mouseenter', () => tip.style.opacity = '1');
+            step.addEventListener('mouseleave', () => tip.style.opacity = '0');
+            step.addEventListener('click', () => { // original color for picker
+                pickr.setColor(color);
+                scrollToPicker();
+            });
+
+            step.appendChild(tip);
+            bar.appendChild(step);
+        });
+    }
+
+    let gradientShown = false;
+
+    function toggleGradientBar() {
+        const bar     = document.getElementById('gradientBar');
+        const options = document.getElementById('gradientOptions');
+        gradientShown = !gradientShown;
+
+        bar.style.display     = gradientShown ? 'flex' : 'none';
+        options.style.display = gradientShown ? 'flex'  : 'none';
+
+        document.getElementById('gradientButtonText').textContent = gradientShown ? 'Hide Gradient' : 'Show Gradient';
+        if (gradientShown) updateGradientBar();
+    }
+
+    function toggleGradientMenu(type) {
+        const menu    = document.getElementById(`gradient${type}Menu`);
+        const chevron = document.getElementById(`gradient${type}Chevron`);
+        const isOpen  = menu.style.display === 'block';
+
+        document.getElementById('gradientFromMenu').style.display  = 'none';
+        document.getElementById('gradientToMenu').style.display    = 'none';
+        document.getElementById('gradientStepsMenu').style.display = 'none';
+        if (document.getElementById(`gradient${type}Chevron`))
+            document.getElementById(`gradient${type}Chevron`).style.transform = 'rotate(0deg)';
+
+        menu.style.display = isOpen ? 'none' : 'block';
+        chevron.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
+        chevron.style.transition = 'transform 0.2s ease';
+    }
+
+
+    document.addEventListener('click', (e) => {
+        if (!document.getElementById('gradientFromDropdown').contains(e.target)) {
+            document.getElementById('gradientFromMenu').style.display = 'none';
+            document.getElementById('gradientFromChevron').style.transform = 'rotate(0deg)';
+        }
+        if (!document.getElementById('gradientToDropdown').contains(e.target)) {
+            document.getElementById('gradientToMenu').style.display = 'none';
+            document.getElementById('gradientToChevron').style.transform = 'rotate(0deg)';
+        }
+        if (!document.getElementById('gradientStepsDropdown').contains(e.target)) {
+            document.getElementById('gradientStepsMenu').style.display = 'none';
+            document.getElementById('gradientStepsChevron').style.transform = 'rotate(0deg)';
+        }
+    });
+
+
+    function selectGradientSteps(steps, label) {
+        gradientSteps = steps;
+        document.getElementById('gradientStepsLabel').textContent = label;
+        document.getElementById('gradientStepsMenu').style.display = 'none';
+        document.getElementById('gradientStepsChevron').style.transform = 'rotate(0deg)';
+        updateGradientBar();
+    }
+
+
+    function clearGradient() {
+        gradientFromHex = '';
+        gradientToHex   = '';
+        gradientSteps   = 0;
+
+        document.getElementById('gradientFromLabel').textContent  = 'Colour 1';
+        document.getElementById('gradientToLabel').textContent    = 'Colour 2';
+        document.getElementById('gradientStepsLabel').textContent = 'Steps';
+        document.getElementById('gradientFromSwatch').style.background = '#878079';
+        document.getElementById('gradientToSwatch').style.background   = '#878079';
+
+        const bar = document.getElementById('gradientBar');
+        bar.replaceChildren();
+        bar.style.background = '';
+        bar.style.display    = 'none';
+        gradientShown = false;
+
+        document.getElementById('gradientButtonText').textContent = 'Show Gradient';
+        document.getElementById('gradientOptions').style.display = 'none';
+
+        updateGradientSelects();
+
+    }
+
+    function applyColorblind(hex) {
+        if (colorblindType === 'none') return hex;
+        return simulateColorblindness(hex, colorblindType);
+    }
+
+    function scrollToPicker() {
+        const pcr = document.querySelector('.pcr-app');
+            if (pcr) pcr.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
 
 
     // toggle dark and light mode
