@@ -785,6 +785,15 @@
                             <div class="select-menu" id="gradientToMenu" style="display:none;"></div>
                         </div>
 
+                        <div class="gradient-dropdown" id="gradientMidDropdown">
+                            <button class="gradient-select-color-button mode-button clear-button" id="gradientMidBtn" onclick="toggleGradientMenu('Mid')">
+                                <span id="gradientMidSwatch" class="gradient-swatch-box"></span>
+                                <span id="gradientMidLabel">Mid</span><span class="gradient-optional-badge">opt.</span>
+                                <i class="fa-solid fa-chevron-down" id="gradientMidChevron" style="font-size:9px; margin-left:auto;"></i>
+                            </button>
+                            <div class="select-menu" id="gradientMidMenu" style="display:none;"></div>
+                        </div>
+
                         <div class="gradient-dropdown" id="gradientStepsDropdown">
                             <button class="gradient-steps-button mode-button clear-button" id="gradientStepsBtn" onclick="toggleGradientMenu('Steps')">
                                 <span id="gradientStepsLabel">Steps</span>
@@ -1692,13 +1701,29 @@
     // generate colour gradients
     let gradientFromHex = '';
     let gradientToHex   = '';
+    let gradientMidHex  = '';
 
     function updateGradientSelects() {
         const fromMenu = document.getElementById('gradientFromMenu');
         const toMenu   = document.getElementById('gradientToMenu');
+        const midMenu  = document.getElementById('gradientMidMenu');
 
         fromMenu.replaceChildren();
         toMenu.replaceChildren();
+        midMenu.replaceChildren();
+
+        // None option for mid
+        const noneItem = document.createElement('div');
+        noneItem.style.padding    = '8px 12px';
+        noneItem.style.cursor     = 'pointer';
+        noneItem.style.fontFamily = 'inherit';
+        noneItem.textContent      = 'None';
+        noneItem.addEventListener('click', () => selectGradientColor('Mid', ''));
+        noneItem.addEventListener('mouseover', () => {
+            noneItem.style.backgroundColor = document.body.classList.contains('dark-light-mode') ? '#1f1b16' : '#f2efea';
+        });
+        noneItem.addEventListener('mouseout', () => noneItem.style.backgroundColor = '');
+        midMenu.appendChild(noneItem);
 
         const makeItem = (hex, index, menuType) => {
             const item = document.createElement('div');
@@ -1733,6 +1758,7 @@
             const hex = box.dataset.hex;
             fromMenu.appendChild(makeItem(hex, i, 'From'));
             toMenu.appendChild(makeItem(hex, i, 'To'));
+            midMenu.appendChild(makeItem(hex, i, 'Mid'));
         }
 
         updateGradientBar();
@@ -1746,12 +1772,19 @@
             document.getElementById('gradientFromSwatch').style.backgroundColor = hex || '#878079';
             document.getElementById('gradientFromMenu').style.display = 'none';
             document.getElementById('gradientFromChevron').style.transform = 'rotate(0deg)';
-        } else {
+        } else if (type === 'To') {
             gradientToHex = hex;
-            document.getElementById('gradientToLabel').textContent  = hex;
-            document.getElementById('gradientToSwatch').style.background =  hex || '#878079';
+            document.getElementById('gradientToLabel').textContent = hex || 'Colour 2';
+            document.getElementById('gradientToSwatch').style.backgroundColor = hex || '#878079';
             document.getElementById('gradientToMenu').style.display = 'none';
             document.getElementById('gradientToChevron').style.transform = 'rotate(0deg)';
+        } else if (type === 'Mid') {
+            gradientMidHex = hex;
+            document.getElementById('gradientMidLabel').textContent = hex || 'Mid';
+            document.getElementById('gradientMidSwatch').style.backgroundColor = hex || '#878079';
+            document.getElementById('gradientMidMenu').style.display = 'none';
+            document.getElementById('gradientMidChevron').style.transform = 'rotate(0deg)';
+            document.querySelector('.gradient-optional-badge').style.display = hex ? 'none' : 'inline';
         }
         updateGradientBar();
     }
@@ -1784,13 +1817,23 @@
         }
 
         if (gradientSteps === 0) {
-            bar.style.background = `linear-gradient(to right, ${fromSim}, ${toSim})`;
-            // bar.style.cursor = 'crosshair';
+            const gradient = gradientMidHex
+                ? `linear-gradient(to right, ${fromSim}, ${applyColorblind(gradientMidHex)}, ${toSim})`
+                : `linear-gradient(to right, ${fromSim}, ${toSim})`;
+            bar.style.background = gradient;
 
             bar.addEventListener('click', (e) => {
                 const rect  = bar.getBoundingClientRect();
                 const t     = (e.clientX - rect.left) / rect.width;
-                const color = interpolateHex(gradientFromHex, gradientToHex, t); // use original colors for picker
+                let color;
+                if (gradientMidHex) {
+                    // left half → from→mid, right half → mid→to
+                    color = t < 0.5
+                        ? interpolateHex(gradientFromHex, gradientMidHex, t * 2)
+                        : interpolateHex(gradientMidHex,  gradientToHex,  (t - 0.5) * 2);
+                } else {
+                    color = interpolateHex(gradientFromHex, gradientToHex, t);
+                }
                 pickr.setColor(color);
                 scrollToPicker();
             });
@@ -1803,7 +1846,14 @@
         const colors = [];
         for (let i = 0; i < gradientSteps; i++) {
             const t = gradientSteps === 1 ? 0.5 : i / (gradientSteps - 1);
-            colors.push(interpolateHex(gradientFromHex, gradientToHex, t));
+            if (gradientMidHex) {
+                colors.push(t <= 0.5
+                    ? interpolateHex(gradientFromHex, gradientMidHex, t * 2)
+                    : interpolateHex(gradientMidHex,  gradientToHex,  (t - 0.5) * 2)
+                );
+            } else {
+                colors.push(interpolateHex(gradientFromHex, gradientToHex, t));
+            }
         }
 
         colors.forEach((color, i) => {
@@ -1867,9 +1917,12 @@
 
         document.getElementById('gradientFromMenu').style.display  = 'none';
         document.getElementById('gradientToMenu').style.display    = 'none';
+        document.getElementById('gradientMidMenu').style.display   = 'none';
         document.getElementById('gradientStepsMenu').style.display = 'none';
-        if (document.getElementById(`gradient${type}Chevron`))
-            document.getElementById(`gradient${type}Chevron`).style.transform = 'rotate(0deg)';
+        ['From', 'To', 'Mid', 'Steps'].forEach(t => {
+            const c = document.getElementById(`gradient${t}Chevron`);
+            if (c) c.style.transform = 'rotate(0deg)';
+        });
 
         menu.style.display = isOpen ? 'none' : 'block';
         chevron.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
@@ -1885,6 +1938,10 @@
         if (!document.getElementById('gradientToDropdown').contains(e.target)) {
             document.getElementById('gradientToMenu').style.display = 'none';
             document.getElementById('gradientToChevron').style.transform = 'rotate(0deg)';
+        }
+        if (!document.getElementById('gradientMidDropdown').contains(e.target)) {
+            document.getElementById('gradientMidMenu').style.display = 'none';
+            document.getElementById('gradientMidChevron').style.transform = 'rotate(0deg)';
         }
         if (!document.getElementById('gradientStepsDropdown').contains(e.target)) {
             document.getElementById('gradientStepsMenu').style.display = 'none';
@@ -1905,14 +1962,16 @@
     function clearGradient() {
         gradientFromHex = '';
         gradientToHex   = '';
+        gradientMidHex  = '';
         gradientSteps   = 0;
 
         document.getElementById('gradientFromLabel').textContent  = 'Colour 1';
         document.getElementById('gradientToLabel').textContent    = 'Colour 2';
+        document.getElementById('gradientMidLabel').textContent = 'Mid';
         document.getElementById('gradientStepsLabel').textContent = 'Steps';
         document.getElementById('gradientFromSwatch').style.backgroundColor = '#878079';
         document.getElementById('gradientToSwatch').style.backgroundColor   = '#878079';
-        // document.getElementById('gradientMidSwatch').style.backgroundColor  = '#878079';
+        document.getElementById('gradientMidSwatch').style.backgroundColor = '#878079';
 
         const bar = document.getElementById('gradientBar');
         bar.replaceChildren();
@@ -1926,6 +1985,7 @@
         updateGradientSelects();
         document.getElementById('gradientOptions').style.display = 'none';
         document.getElementById('gradientBar').style.display     = 'none';
+        document.querySelector('.gradient-optional-badge').style.display = 'inline';
     }
 
 

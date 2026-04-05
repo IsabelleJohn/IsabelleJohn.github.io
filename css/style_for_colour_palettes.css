@@ -816,3 +816,13 @@ footer {
 .dark-light-mode #gradientBar {
     border: 2px solid #c5c1bc;
 }
+
+.gradient-optional-badge {
+    display: block;
+    text-align: center;
+    font-size: 10px;
+    opacity: 0.5;
+    margin-top: 2px;
+    font-style: italic;
+    pointer-events: none;
+}
