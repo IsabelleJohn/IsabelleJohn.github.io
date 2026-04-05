@@ -134,6 +134,7 @@ body {
 .clear-button {
     position: static;
     width: 160px;
+    min-width: 160px;
     margin-right: 0;
     margin-left: 0;
     margin-top: 5px;
@@ -143,6 +144,7 @@ body {
 .chart-button {
     position: static;
     width: auto;
+    min-width: 140px;;
     margin-right: 0;
     margin-left: 0;
     margin-top: 5px;
@@ -150,12 +152,13 @@ body {
 }
 
 .button-row {
-    margin-top: auto;         /* push BOTH buttons to bottom */
+    margin-top: auto;
     display: flex;
-    gap: 5px;                /* space between buttons */
+    gap: 5px;
     padding: 0 0px 0px 0px;
     justify-content: space-between;
     align-items: flex-start;
+    flex-wrap: wrap
 }
 
 
@@ -164,6 +167,8 @@ body {
   gap: 0px;
   margin-bottom: 10px;
   margin-top: 10px;
+  flex-wrap: wrap;
+  width: 100%;
 }
 
 
@@ -239,8 +244,10 @@ body {
 }
 
 .target-item {
-    width: 20%;
-    min-width: 70px;
+    width: calc(20% - 10px);   /* 20% of parent minus margins */
+    max-width: calc(20% - 10px);
+    min-width: 40px;
+    flex: 0 0 calc(20% - 10px); /* don't grow or shrink, just use this width */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -249,6 +256,7 @@ body {
 
 .target-box {
     width: 100%;
+    max-width: 100px;
     aspect-ratio: 1 / 1;
     background: #878079;
     border-radius: 5px;
@@ -369,10 +377,10 @@ th, td {
 }
 
 .main-content {
-    width: 60%;
-    margin-right: 40%;
+    width: 55%;
+    margin-right: 42.5%;
     box-sizing: border-box;
-    padding-left: 5%;
+    padding-left: 2.5%;
     padding-right: 5%;
     overflow-y: auto;
     flex: 1;
@@ -383,7 +391,7 @@ th, td {
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    width: 40%;
+    width: 45%;
     position: fixed;
     top: 0;
     right: 0;
@@ -689,7 +697,7 @@ footer {
     font-family: inherit;
     font-size: inherit;
     color: #1f1b16;
-    width: auto;
+    width: auto !important;
     box-sizing: border-box;
 }
 
@@ -713,6 +721,8 @@ footer {
 /* gradient menu and buttons */
 .gradient-container {
     margin-top: 20px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 #gradientBtn {
@@ -722,27 +732,32 @@ footer {
 
 .gradient-dropdown {
     position: relative;
-    display: inline-block;
+    /* display: block; */
+    display: inline;
     align-self: flex-start;
+    /* flex: 1; */
+    min-width: 0;
+    width: 100%;
 }
 
 .dark-light-mode .gradient-dropdown {
-    position: relative;
-    display: inline-block;
-    align-self: flex-start;
 }
 
 .gradient-options {
     display: flex;
-    gap: 8px;
+    gap: 10px;
     margin-bottom: 8px;
     align-items: flex-start;
     flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
 }
 
 .gradient-steps-button {
-    position:static;
-    width:80px;
+    position: static;
+    width: 100%;
+    min-width: 0;
+    max-width: 80px;
     font-size:12px;
     display:flex;
     align-items:center;
@@ -751,42 +766,26 @@ footer {
 }
 
 .dark-light-mode .gradient-steps-button {
-    position:static;
-    width:80px;
-    font-size:12px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding: 10px 12px !important;
-    color: #f2efea;
     background-color: #3f3a34;
 }
 
 .dark-light-mode .gradient-steps-button:hover {
-    position:static;
-    width:80px;
-    font-size:12px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding: 10px 12px !important;
-    color: #f2efea;
     background-color: #1f1b16;
 }
 
 .gradient-select-color-button {
     position:static;
-    width:130px;
+    width: 100%;
     font-size:12px;
     display:flex;
     align-items:center;
-    gap:6px;
+    gap: 6px;
+    min-width: 0;
 }
 
 .dark-light-mode .gradient-select-color-button {
     color: #f2efea;
     background-color: #3f3a34;
-
 }
 
 .dark-light-mode .gradient-select-color-button:hover {
@@ -825,4 +824,83 @@ footer {
     margin-top: 2px;
     font-style: italic;
     pointer-events: none;
+}
+
+
+#gradientFromDropdown,
+#gradientToDropdown,
+#gradientMidDropdown {
+    min-width: 125px;
+    max-width: 150px;
+    flex-grow: 1;
+}
+
+#gradientStepsDropdown {
+    min-width: 80px;
+    max-width: 80px;
+    flex-grow: 0;
+}
+
+.copy-icon-wrapper {
+    position: relative;
+    display: inline-block;
+    margin-top: 4px;
+}
+
+.copy-icon {
+    cursor: pointer;
+    opacity: 0.5;
+    font-size: 14px;
+    transition: opacity 0.2s ease;
+}
+
+.copy-icon:hover {
+    opacity: 1;
+}
+
+.copy-tooltip {
+    visibility: hidden;
+    position: absolute;
+    bottom: 120%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #37322c;
+    color: #f2efea;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 10px;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    z-index: 200;
+}
+
+.copy-icon-wrapper:hover .copy-tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+.dark-light-mode .copy-tooltip {
+    background: #c5c1bc;
+    color: #1f1b16;
+}
+
+/* hide hex text in target boxes when they become too small for the text o fit */
+@media (max-width: 600px) {
+    .target-text {
+        display: none;
+    }
+}
+
+@media (max-width: 900px) {
+    .color-picker-wrapper {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .color-info {
+        flex-direction: column;
+        gap: 4px;
+    }
 }
