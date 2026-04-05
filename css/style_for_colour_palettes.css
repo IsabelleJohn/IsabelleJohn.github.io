@@ -680,6 +680,7 @@ footer {
     width: auto !important;
     overflow-y: auto;
     max-height: 140px;
+    font-size: 12px;
 }
 
 .select-menu div {
