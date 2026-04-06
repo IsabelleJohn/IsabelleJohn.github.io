@@ -38,6 +38,7 @@
     <script src="js/color_picker.js"></script>
     <script src="js/color_gradient.js"></script>
     <script src="js/preview_plots.js"></script>
+    <script src="js/blob_popup.js"></script>
 
 </head>
 
@@ -57,16 +58,9 @@
         <div class="header-center">
             <span>
                 Colour
-                <i id="palette" class="fa-solid fa-palette" style="font-size:30px; cursor:pointer;"></i>
+                <i id="palette" class="fa-solid fa-palette" style="font-size:30px; cursor:pointer;" onclick="event.stopPropagation(); toggleBlob()"></i>
                 Palettes
             </span>
-
-            <!-- blob popup -->
-            <div id="popup" class="popup">
-              <div class="popup-content">
-                    <i class="fas fa-splotch" style="font-size:700px;"></i>
-              </div>
-            </div>
 
             <div class='palette-memory'>
                 <div class='memory-box' id="memory1"  onclick="handleMemoryClick(this)"></div>
@@ -91,6 +85,13 @@
                 <div class='memory-box' id="memory20" onclick="handleMemoryClick(this)"></div>
                 <div class='memory-box' id="memory21" onclick="handleMemoryClick(this)"></div>
             </div>
+        </div>
+
+        <!-- blob popup -->
+        <div id="popup" class="popup">
+          <div class="popup-content">
+                <i class="fas fa-splotch"></i>
+          </div>
         </div>
 
 
@@ -333,25 +334,10 @@
     </div> <!-- page layout -->
 
 
-<!--                             scripts                                     -->
 
+<!--                             scripts                                     -->
 <script>
 
-    // toggle blob when clicking the color palette
-    const paletteIcon = document.getElementById("palette");
-    const popup = document.getElementById("popup");
-
-    // Open popup
-    paletteIcon.addEventListener("click", (e) => {
-      popup.style.display = "block";
-      popup.style.color = document.getElementById("palette").style.color;
-      e.stopPropagation();
-    });
-
-    // Close when clicking outside the box
-    window.addEventListener("click", () => {
-      popup.style.display = "none";
-    });
 
     // tooltip for links to papers to show preview plot
     document.addEventListener('DOMContentLoaded', () => {

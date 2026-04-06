@@ -87,6 +87,4 @@ document.addEventListener("DOMContentLoaded", () => {
     pickr.on('init',   ()      => applyPickrColor(pickr.getColor()));
     pickr.on('change', (color) => applyPickrColor(color));
 
-
-
 });
