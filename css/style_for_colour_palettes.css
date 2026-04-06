@@ -428,29 +428,6 @@ h1 {
     color: #3f3a34;
 }
 
-/* .links-to-papers::after {
-    position: fixed;
-    top: var(--tooltip-top);
-    left: var(--tooltip-left);
-    transform: none;
-    content: '';
-    width: 200px;
-    height: 150px;
-    background-image: var(--tooltip-img);
-    background-size: cover;
-    background-position: center;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.2s ease;
-    z-index: 200;
-}
-
-.links-to-papers:hover::after {
-    opacity: 1;
-} */
-
 #link-tooltip {
     position: fixed;
     max-width: 300px;      /* cap the maximum size */
@@ -682,10 +659,9 @@ footer {
     border: 2px solid #37322c;
     border-radius: 10px;
     z-index: 150;
-    min-width: 160px;
     overflow: hidden;
     margin-top: 4px;
-    width: auto !important;
+    width: 100%;
     overflow-y: auto;
     max-height: 140px;
     font-size: 12px;
@@ -720,12 +696,16 @@ footer {
 
 /* gradient menu and buttons */
 .gradient-container {
-    margin-top: 20px;
+    margin-top: 30px;
     width: 100%;
     box-sizing: border-box;
+    /* border: 2px solid #37322c;
+    border-radius: 5px;
+    padding: 5px; */
 }
 
 #gradientBtn {
+    margin: 0px;
     min-width: 170px;
 }
 
@@ -885,6 +865,28 @@ footer {
     background: #c5c1bc;
     color: #1f1b16;
 }
+
+/* blob popup */
+/* Popup background */
+.popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+}
+
+/* Popup box */
+.popup-content {
+  background: transparent;
+  padding: 20px;
+  margin: auto;
+  width: auto;
+}
+
+
 
 /* hide hex text in target boxes when they become too small for the text o fit */
 @media (max-width: 600px) {

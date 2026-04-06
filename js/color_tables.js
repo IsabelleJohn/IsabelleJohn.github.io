@@ -142,7 +142,8 @@ function buildPaletteTables() {
 
         // header row
         const thead = document.createElement('tr');
-        ['', 'HEX', 'RGB', 'HSV', 'Colour Label'].forEach(text => {
+        // ['', 'HEX', 'RGB', 'HSV', 'Colour Label'].forEach(text => {
+        ['', 'HEX', 'RGB', 'HSV'].forEach(text => {
             const th = document.createElement('th');
             th.textContent = text;
             thead.appendChild(th);
@@ -197,7 +198,8 @@ function buildPaletteTables() {
             nameSpan.textContent = color.name;
             nameTd.appendChild(nameSpan);
 
-            tr.append(boxTd, hexTd, rgbTd, hsvTd, nameTd);
+            // tr.append(boxTd, hexTd, rgbTd, hsvTd, nameTd);
+            tr.append(boxTd, hexTd, rgbTd, hsvTd);
             table.appendChild(tr);
         });
 

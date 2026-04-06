@@ -41,8 +41,6 @@
 
 </head>
 
-
-
 <body>
 
     <header>
@@ -57,7 +55,18 @@
 
 
         <div class="header-center">
-            <span>Colour <i id="palette" class="fa-solid fa-palette" style="font-size:30px;"></i> Palettes</span>
+            <span>
+                Colour
+                <i id="palette" class="fa-solid fa-palette" style="font-size:30px; cursor:pointer;"></i>
+                Palettes
+            </span>
+
+            <!-- blob popup -->
+            <div id="popup" class="popup">
+              <div class="popup-content">
+                    <i class="fas fa-splotch" style="font-size:700px;"></i>
+              </div>
+            </div>
 
             <div class='palette-memory'>
                 <div class='memory-box' id="memory1"  onclick="handleMemoryClick(this)"></div>
@@ -213,11 +222,6 @@
                        <span>Clear Colours</span>
                    </button>
 
-                   <button onclick="toggleCharts()" class='mode-button chart-button' id="chartButton">
-                       <i class="fa-solid fa-chart-line"></i>
-                       <span id="chartButtonText">Show Plots</span>
-                   </button>
-
                    <!-- color blind menu -->
                    <div class="colorblind-dropdown" id="colorblindDropdown">
                        <button class="mode-button clear-button" id="colorblindBtn" onclick="toggleColorblindMenu()">
@@ -236,7 +240,6 @@
                        </div>
                    </div>
                 </div>
-
 
                 <!-- gradient things -->
                 <div class="gradient-container">
@@ -271,7 +274,7 @@
                         <div class="gradient-dropdown" id="gradientMidDropdown">
                             <button class="gradient-select-color-button mode-button clear-button" id="gradientMidBtn" onclick="toggleGradientMenu('Mid')">
                                 <span id="gradientMidSwatch" class="gradient-swatch-box"></span>
-                                <span id="gradientMidLabel">Mid</span><span class="gradient-optional-badge">opt.</span>
+                                <span id="gradientMidLabel">Mid</span><span class="gradient-optional-badge">optional</span>
                                 <i class="fa-solid fa-chevron-down" id="gradientMidChevron" style="font-size:9px; margin-left:auto;"></i>
                             </button>
                             <div class="select-menu" id="gradientMidMenu" style="display:none;"></div>
@@ -307,7 +310,14 @@
                 </div>
 
                 <!-- the preview charts -->
-                <div id="chartContainer" style="display:none; margin:40px auto 0 auto; width:100%; max-width:600px;">
+                <div class="button-row" style="margin-top:30px;">
+                    <button onclick="toggleCharts()" class='mode-button chart-button' id="chartButton">
+                        <i class="fa-solid fa-chart-line"></i>
+                        <span id="chartButtonText">Show Plots</span>
+                    </button>
+                </div>
+
+                <div id="chartContainer" style="display:none; margin:20px auto 0 auto; width:100%; max-width:600px;">
                    <canvas class='chart-canvas' id="lineChart"></canvas>
                    <br>
                    <canvas class='chart-canvas' id="barChart"></canvas>
@@ -326,6 +336,22 @@
 <!--                             scripts                                     -->
 
 <script>
+
+    // toggle blob when clicking the color palette
+    const paletteIcon = document.getElementById("palette");
+    const popup = document.getElementById("popup");
+
+    // Open popup
+    paletteIcon.addEventListener("click", (e) => {
+      popup.style.display = "block";
+      popup.style.color = document.getElementById("palette").style.color;
+      e.stopPropagation();
+    });
+
+    // Close when clicking outside the box
+    window.addEventListener("click", () => {
+      popup.style.display = "none";
+    });
 
     // tooltip for links to papers to show preview plot
     document.addEventListener('DOMContentLoaded', () => {
